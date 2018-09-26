@@ -1,15 +1,22 @@
 ﻿@page "/page1"
+@page "/page1/{ID}"
+
 @using Microsoft.AspNetCore.Blazor.Services
 @inject IUriHelper UriHelper
 
-<button onclick=@GoToPage2 >Page2</button>
+@if (!string.IsNullOrWhiteSpace(ID))
+{
+    <h1>Counter @ID</h1>
+}
+<button onclick=@IncrementCounter>Increment Counter</button>
 
 @functions
 {
+  [Parameter] string ID { get; set; }
 
-  void GoToPage2()
+  void IncrementCounter()
   {
-      UriHelper.NavigateTo("Page2");    
+    UriHelper.NavigateTo<Page2>(ID);
   }
 
 }

@@ -1,15 +1,41 @@
 ﻿@page "/page2"
+@page "/page2/{ID}"
+
 @using Microsoft.AspNetCore.Blazor.Services
 @inject IUriHelper UriHelper
 
-<button onclick=@GoToPage1>Page1</button>
+<h1>New Counter @newID</h1>
+
+<button onclick=@Save>OK</button>
+<button onclick=@Cancel>Cancel</button>
 
 @functions
 {
+[Parameter] string ID { get; set; }
+private int newID { get; set; }
 
-  void GoToPage1()
-  {
-      UriHelper.NavigateTo("Page1");
-  }
+protected override void OnParametersSet()
+{
+    base.OnParametersSet();
+    if (int.TryParse(ID, out int result))
+    {
+        newID = (result + 1);
+    }
+    else
+    {
+        newID = 1;
+    }
+    //StateHasChanged();
+
+}
+void Save()
+{
+    UriHelper.NavigateTo<Page1>(newID.ToString());
+}
+
+void Cancel()
+{
+    UriHelper.NavigateTo<Page1>(ID);
+}
 
 }
