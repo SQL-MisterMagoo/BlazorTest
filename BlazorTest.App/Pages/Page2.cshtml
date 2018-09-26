@@ -1,0 +1,15 @@
+﻿@page "/page2"
+@using Microsoft.AspNetCore.Blazor.Services
+@inject IUriHelper UriHelper
+
+<button onclick=@GoToPage1>Page1</button>
+
+@functions
+{
+
+  void GoToPage1()
+  {
+      UriHelper.NavigateTo("Page1");
+  }
+
+}
