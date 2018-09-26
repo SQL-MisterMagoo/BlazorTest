@@ -15,6 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Pages\Clocks.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Pages\Page2.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
