@@ -2,7 +2,14 @@
 Time is precious, so let's collect it...
 
 <hr />
+@foreach (TimeZoneInfo timeZoneInfo in TimeZoneInfo.GetSystemTimeZones())
+      {
+      <Ticker 
+        Title=@(timeZoneInfo.IsDaylightSavingTime(DateTime.UtcNow) ?
+                         timeZoneInfo.DaylightName : timeZoneInfo.StandardName) 
+        OffsetMinutes="@timeZoneInfo.GetUtcOffset(DateTime.UtcNow).TotalMinutes"/>
+      }
 
-<Ticker Title="New York" Offset="-6" /><Ticker Title="London" Offset="1" /><Ticker Title="Paris" Offset="2" />
 
 <a href="https://twitter.com/i/status/1044981520233107456">4004 of these...</a>
+
