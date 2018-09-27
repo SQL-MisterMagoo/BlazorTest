@@ -121,3 +121,7 @@ app {
         display: block;
     }
 }
+
+.svgthing {
+    position: absolute;
+}
