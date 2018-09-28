@@ -1,15 +1,12 @@
 ﻿@page "/clocks"
-Time is precious, so let's collect it...
+Time is precious, so let's watch some...
 
+<a href="https://twitter.com/i/status/1044981520233107456">see 4004 of these...</a>
 <hr />
 @foreach (TimeZoneInfo timeZoneInfo in TimeZoneInfo.GetSystemTimeZones())
-      {
-      <Ticker 
-        Title=@(timeZoneInfo.IsDaylightSavingTime(DateTime.UtcNow) ?
-                         timeZoneInfo.DaylightName : timeZoneInfo.StandardName) 
-        OffsetMinutes="@timeZoneInfo.GetUtcOffset(DateTime.UtcNow).TotalMinutes"/>
-      }
+{
+    <Ticker ShowIcon="false" AutoTitle="true" TimeZoneId="@timeZoneInfo.Id" Width="80" Height="80"/>
+}
 
 
-<a href="https://twitter.com/i/status/1044981520233107456">4004 of these...</a>
 

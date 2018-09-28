@@ -9,14 +9,15 @@
     <h1>Counter @ID</h1>
 }
 <button onclick=@IncrementCounter>Increment Counter</button>
+<Ticker ShowIcon="false" AutoTitle="true" Width="80" Height="80" />
 
 @functions
 {
-  [Parameter] string ID { get; set; }
+[Parameter] string ID { get; set; }
 
-  void IncrementCounter()
-  {
+void IncrementCounter()
+{
     UriHelper.NavigateTo<Page2>(ID);
-  }
+}
 
 }
