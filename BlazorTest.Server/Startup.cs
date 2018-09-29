@@ -1,8 +1,11 @@
+using BlazorTest.Server.Models;
 using Microsoft.AspNetCore.Blazor.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Linq;
 using System.Net.Mime;
 
@@ -25,12 +28,17 @@ namespace BlazorTest.Server
 										WasmMediaTypeNames.Application.Wasm,
 					});
 			});
+
+			services.AddIdentity<BlazorApplicationUser, IdentityRole<Guid>>()
+				.AddEntityFrameworkStores<ApplicationDataContext>()
+				.AddDefaultTokenProviders();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
 			app.UseResponseCompression();
+			app.UseAuthentication();
 
 			if (env.IsDevelopment())
 			{
