@@ -2,9 +2,9 @@
 using System;
 using System.Threading.Tasks;
 
-namespace BlazorClock.Model
+namespace BlazorClock
 {
-	public class TickerModel : BlazorComponent
+	public class ClockModel : BlazorComponent
 	{
 		[Parameter] internal string Title { get; set; }
 		[Parameter] internal double OffsetHours { get; set; }
@@ -21,7 +21,7 @@ namespace BlazorClock.Model
 		internal double minuteRotation;
 		internal double secondRotation;
 
-		private Task ticker;
+		private Task ClockTask;
 		private TimeZoneInfo timeZone;
 
 		protected override void OnInit()
@@ -45,21 +45,22 @@ namespace BlazorClock.Model
 			}
 			if (Width == 0) Width = 50;
 			if (Height == 0) Height = 50;
-			if (string.IsNullOrWhiteSpace(ClockId)) ClockId = Guid.NewGuid().ToString().ToLowerInvariant();
-			ticker = RunTicker();
+			if (string.IsNullOrWhiteSpace(ClockId)) ClockId = $"C{Guid.NewGuid().ToString().Replace("-","").Substring(0,10)}";
+			ClockTask = RunClock();
 		}
 
-		private async Task RunTicker()
+		private async Task RunClock()
 		{
+			await Task.Delay(40);
 			while (true)
 			{
-				await Task.Delay(1000);
 				DateTime utcNow = DateTime.UtcNow;
 				if (AutoTitle) Title = timeZone.IsDaylightSavingTime(utcNow) ? timeZone.DaylightName : timeZone.StandardName;
 				DateTime dateTime = utcNow.Add(timeZone.GetUtcOffset(utcNow));
 				Data = dateTime.ToLongTimeString();
 				if (!ShowIcon) UpdateSvg(dateTime);
 				StateHasChanged();
+				await Task.Delay(1000);
 			}
 		}
 
@@ -72,9 +73,9 @@ namespace BlazorClock.Model
 			hourRotation = (hr * 360 / 12) + (min * (360 / 60) / 12);
 			minuteRotation = (min * 360 / 60) + (sec * (360 / 60) / 60);
 			secondRotation = sec * 360 / 60;
-			blazorTicker.UpdateStyle($"#{ClockId} #second", "--rotation", $"{secondRotation}deg");
-			blazorTicker.UpdateStyle($"#{ClockId} #minute", "--rotation", $"{minuteRotation}deg");
-			blazorTicker.UpdateStyle($"#{ClockId} #hour", "--rotation", $"{hourRotation}deg");
+			BlazorClockInterop.UpdateStyle($"#{ClockId} #second", "--rotation", $"{secondRotation}deg");
+			BlazorClockInterop.UpdateStyle($"#{ClockId} #minute", "--rotation", $"{minuteRotation}deg");
+			BlazorClockInterop.UpdateStyle($"#{ClockId} #hour", "--rotation", $"{hourRotation}deg");
 		}
 	}
 }

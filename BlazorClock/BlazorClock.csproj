@@ -24,18 +24,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="content\blazorTicker.js" />
+    <None Remove="content\blazorClock.js" />
     <None Remove="content\styles.css" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Ticker.cshtml">
+    <Content Update="Clock.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="content\blazorTicker.js">
+    <EmbeddedResource Update="content\blazorClock.js">
       <LogicalName>blazor:js:%(RecursiveDir)%(Filename)%(Extension)</LogicalName>
     </EmbeddedResource>
   </ItemGroup>

@@ -3,13 +3,13 @@ using System.Threading.Tasks;
 
 namespace BlazorClock
 {
-	public class blazorTicker
+	public class BlazorClockInterop
 	{
 		public static Task<bool> UpdateStyle(string id, string property, string value)
 		{
-			// Implemented in blazorTicker.js
+			// Implemented in blazorClock.js
 			return JSRuntime.Current.InvokeAsync<bool>(
-					"blazorTicker.setCssProperty", id, property, value);
+					"blazorClock.setCssProperty", id, property, value);
 		}
 	}
 }

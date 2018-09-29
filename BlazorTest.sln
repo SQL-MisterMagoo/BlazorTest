@@ -15,26 +15,33 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorLogin", "BlazorLogin\
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		BlazorClock|Any CPU = BlazorClock|Any CPU
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C2C073B8-B1BD-4C56-AC4D-BECDBC1E17CB}.BlazorClock|Any CPU.ActiveCfg = Debug|Any CPU
 		{C2C073B8-B1BD-4C56-AC4D-BECDBC1E17CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C2C073B8-B1BD-4C56-AC4D-BECDBC1E17CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2C073B8-B1BD-4C56-AC4D-BECDBC1E17CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2C073B8-B1BD-4C56-AC4D-BECDBC1E17CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C27A329-DDD4-4F91-96A1-DD5135EC14ED}.BlazorClock|Any CPU.ActiveCfg = Debug|Any CPU
 		{6C27A329-DDD4-4F91-96A1-DD5135EC14ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6C27A329-DDD4-4F91-96A1-DD5135EC14ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C27A329-DDD4-4F91-96A1-DD5135EC14ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C27A329-DDD4-4F91-96A1-DD5135EC14ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EDFA8EA-EDFD-4F70-8022-E0C185D618DD}.BlazorClock|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EDFA8EA-EDFD-4F70-8022-E0C185D618DD}.BlazorClock|Any CPU.Build.0 = Debug|Any CPU
 		{0EDFA8EA-EDFD-4F70-8022-E0C185D618DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0EDFA8EA-EDFD-4F70-8022-E0C185D618DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EDFA8EA-EDFD-4F70-8022-E0C185D618DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EDFA8EA-EDFD-4F70-8022-E0C185D618DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECE39ED7-B52B-4206-A111-B0D20B467F20}.BlazorClock|Any CPU.ActiveCfg = Debug|Any CPU
 		{ECE39ED7-B52B-4206-A111-B0D20B467F20}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ECE39ED7-B52B-4206-A111-B0D20B467F20}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECE39ED7-B52B-4206-A111-B0D20B467F20}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECE39ED7-B52B-4206-A111-B0D20B467F20}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49BE2874-C3F7-4362-BBBE-B5B8C422A04B}.BlazorClock|Any CPU.ActiveCfg = Debug|Any CPU
 		{49BE2874-C3F7-4362-BBBE-B5B8C422A04B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{49BE2874-C3F7-4362-BBBE-B5B8C422A04B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49BE2874-C3F7-4362-BBBE-B5B8C422A04B}.Release|Any CPU.ActiveCfg = Release|Any CPU

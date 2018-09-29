@@ -6,7 +6,7 @@ Time is precious, so let's watch some...
 <hr />
 @foreach (TimeZoneInfo timeZoneInfo in TimeZoneInfo.GetSystemTimeZones())
 {
-    <Ticker Width="300" Height="50" ShowIcon="false" AutoTitle="true" TimeZoneId="@timeZoneInfo.Id" ClockId="@(timeZoneInfo.Id.Replace(" ","").Replace("(","").Replace(")",""))"/>
+    <Clock Width="300" Height="50" ShowIcon="false" AutoTitle="true" TimeZoneId="@timeZoneInfo.Id" />
 }
 
 
