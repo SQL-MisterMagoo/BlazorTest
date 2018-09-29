@@ -14,6 +14,7 @@ namespace BlazorClock.Model
 		[Parameter] internal bool ShowIcon { get; set; }
 		[Parameter] internal double Width { get; set; }
 		[Parameter] internal double Height { get; set; }
+		[Parameter] internal string ClockId { get; set; }
 
 		internal string Data;
 		internal double hourRotation;
@@ -42,8 +43,9 @@ namespace BlazorClock.Model
 			{
 				timeZone = TimeZoneInfo.CreateCustomTimeZone(Title ?? "Clock", new TimeSpan((int)OffsetHours, (int)OffsetMinutes, 0), Title ?? "Clock", Title ?? "Clock");
 			}
-			if (Width == 0) Width = 600;
-			if (Height == 0) Height = 600;
+			if (Width == 0) Width = 50;
+			if (Height == 0) Height = 50;
+			if (string.IsNullOrWhiteSpace(ClockId)) ClockId = Guid.NewGuid().ToString().ToLowerInvariant();
 			ticker = RunTicker();
 		}
 
@@ -70,6 +72,9 @@ namespace BlazorClock.Model
 			hourRotation = (hr * 360 / 12) + (min * (360 / 60) / 12);
 			minuteRotation = (min * 360 / 60) + (sec * (360 / 60) / 60);
 			secondRotation = sec * 360 / 60;
+			blazorTicker.UpdateStyle($"#{ClockId} #second", "--rotation", $"{secondRotation}deg");
+			blazorTicker.UpdateStyle($"#{ClockId} #minute", "--rotation", $"{minuteRotation}deg");
+			blazorTicker.UpdateStyle($"#{ClockId} #hour", "--rotation", $"{hourRotation}deg");
 		}
 	}
 }

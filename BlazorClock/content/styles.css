@@ -1,13 +1,24 @@
-﻿.main {
+﻿
+.clockmain {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    align-content: center;
     align-items: center;
+    --rotation: 0deg;
 }
 
 .clockbox,
 #clock {
     height: 100%;
 }
+
+.clockbox {
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+}
+
 .circle {
     fill: none;
     stroke: #000;
@@ -59,4 +70,16 @@
 #second {
     transform-origin: 300px 300px;
     transition: transform .5s ease-in-out;
+}
+
+#hour {
+    transform: rotate(var(--rotation));
+}
+
+#minute {
+    transform: rotate(var(--rotation));
+}
+
+#second {
+    transform: rotate(var(--rotation));
 }
