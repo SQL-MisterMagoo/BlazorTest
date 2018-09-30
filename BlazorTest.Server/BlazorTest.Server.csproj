@@ -23,6 +23,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,7 +32,8 @@
 
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Migrations\" />
+    <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

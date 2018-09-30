@@ -1,9 +1,11 @@
+using BlazorTest.Server.Areas.Identity.Data;
 using BlazorTest.Server.Models;
 using Microsoft.AspNetCore.Blazor.Server;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
@@ -29,22 +31,21 @@ namespace BlazorTest.Server
 					});
 			});
 
-			services.AddIdentity<BlazorApplicationUser, IdentityRole<Guid>>()
-				.AddEntityFrameworkStores<ApplicationDataContext>()
-				.AddDefaultTokenProviders();
+			services.AddTransient<BlazorTestServerUser>();
+
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
 			app.UseResponseCompression();
-			app.UseAuthentication();
-
+			
+			
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
 			}
-
+			app.UseAuthentication();
 			// Use component registrations and static files from the app project.
 			app.UseServerSideBlazor<App.Startup>();
 		}
