@@ -1,4 +1,8 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
+﻿@using Microsoft.AspNetCore.Identity
+@using BlazorTest.Server.Areas.Identity.Data
+@using System.Security.Claims
+@inject SignInManager<BlazorTestServerUser> SignInManager
+<div class="top-row pl-4 navbar navbar-dark">
     <a class="navbar-brand" href="">BlazorTest</a>
     <button class="navbar-toggler" onclick=@ToggleNavMenu>
         <span class="navbar-toggler-icon"></span>
@@ -17,11 +21,14 @@
                 <span class="oi oi-plus" aria-hidden="true"></span> Counter
             </NavLink>
         </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </li>
+        @if (User != null && SignInManager.IsSignedIn(User))
+        {
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="fetchdata">
+                    <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+                </NavLink>
+            </li>
+        }
         <li class="nav-item px-3">
             <NavLink class="nav-link" href="page1">
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Counter Test
@@ -41,10 +48,27 @@
 </div>
 
 @functions {
-    bool collapseNavMenu = true;
+bool collapseNavMenu = true;
+ClaimsPrincipal User;
 
-    void ToggleNavMenu()
+protected override void OnInit()
+{
+    base.OnInit();
+
+    try
     {
-        collapseNavMenu = !collapseNavMenu;
+        User = SignInManager.Context.User;
+    }
+    catch (Exception)
+    {
     }
 }
+
+void ToggleNavMenu()
+{
+    collapseNavMenu = !collapseNavMenu;
+}
+}
+
+
+

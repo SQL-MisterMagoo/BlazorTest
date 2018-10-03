@@ -13,6 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0-preview2-35157" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0-preview2-35157" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.6.0-preview1-final" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.6.0-preview1-final" PrivateAssets="all" />
   </ItemGroup>
@@ -23,6 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Components\_LoginPartial.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
     <Content Update="Pages\Clocks.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
@@ -32,10 +37,6 @@
     <Content Update="Pages\Page2.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Components\" />
   </ItemGroup>
 
 </Project>
