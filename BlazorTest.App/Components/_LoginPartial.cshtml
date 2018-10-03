@@ -3,44 +3,36 @@
 @using Microsoft.AspNetCore.Blazor.Services
 @using System.Security.Claims
 @using Microsoft.Extensions.Options
+@using Microsoft.AspNetCore.Authentication.Cookies
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor httpContextAccessor
 @inject SignInManager<BlazorTestServerUser> SignInManager
 @inject UserManager<BlazorTestServerUser> UserManager
 
 @if (User != null && SignInManager.IsSignedIn(User))
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            <a asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-        </li>
-        <li>
-            <button class="btn btn-link navbar-btn navbar-link" onclick="@Logout">Logout</button>
-        </li>
-    </ul>
+    <a class="ml-md-auto btn btn-primary" asp-area="Identity" asp-page="/Account/Manage/Index" href="/Identity/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+    <button class="btn ml-md-auto" onclick="@Logout">Logout</button>
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="Identity" asp-page="/Account/Register">Register</a></li>
-        <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
-    </ul>
+    <a class="ml-md-auto btn btn-primary" asp-area="Identity" asp-page="/Account/Register" href="/Identity/Account/Register">Register</a>
+    <a class="ml-md-auto btn btn-primary" asp-area="Identity" href="/Identity/Account/Login?returnUrl=~/blz">Login</a>
 }
 
 @functions
 {
-  [Inject] BlazorTestServerUser user { get; set; }
   [Inject] IUriHelper uriHelper { get; set; }
-  [Inject] IOptions<IdentityOptions> optionsAccessor { get; set; }
-
 
   ClaimsPrincipal User;
 
   protected override void OnInit()
   {
       base.OnInit();
-      var cpf = new UserClaimsPrincipalFactory<BlazorTestServerUser>(UserManager,optionsAccessor);
+
       try
       {
-          User = cpf.CreateAsync(user)?.Result;
+          User = httpContextAccessor.HttpContext.User;
       }
       catch (Exception)
       {
@@ -48,6 +40,6 @@ else
   }
   void Logout()
   {
-      uriHelper.NavigateTo("/Logout");
+      uriHelper.NavigateTo("/Identity/Account/Logout?returnUrl=/blz");
   }
 }

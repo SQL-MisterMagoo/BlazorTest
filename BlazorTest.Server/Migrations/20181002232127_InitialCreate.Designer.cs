@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorTest.Server.Migrations
 {
     [DbContext(typeof(BlazorTestServerContext))]
-    [Migration("20180929234923_CreateIdentitySchema")]
-    partial class CreateIdentitySchema
+    [Migration("20181002232127_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
