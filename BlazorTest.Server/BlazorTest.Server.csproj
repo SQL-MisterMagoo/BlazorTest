@@ -16,7 +16,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="2.2.0-preview2-35157" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="0.6.0-preview1-final" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Server" Version="0.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0-preview2-35157" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0-preview2-35157" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0-preview2-35157" />

@@ -13,21 +13,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="GenFu" Version="1.4.22" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.2.0-preview2-35157" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0-preview2-35157" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0-preview2-35157" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.6.0-preview1-final" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.6.0-preview1-final" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.6.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.6.0" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorClock\BlazorClock.csproj" />
     <ProjectReference Include="..\BlazorFlying\BlazorFlying.csproj" />
+    <ProjectReference Include="..\BlazorTree\BlazorTree.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Components\_LoginPartial.cshtml">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
     <Content Update="Pages\Clocks.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

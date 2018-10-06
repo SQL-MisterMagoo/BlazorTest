@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorFlying", "BlazorFlyin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorLogin", "BlazorLogin\BlazorLogin.csproj", "{49BE2874-C3F7-4362-BBBE-B5B8C422A04B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorTree", "BlazorTree\BlazorTree.csproj", "{3E13C918-59A8-4441-BE30-7876AC44BBF3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		BlazorClock|Any CPU = BlazorClock|Any CPU
@@ -46,6 +48,12 @@ Global
 		{49BE2874-C3F7-4362-BBBE-B5B8C422A04B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49BE2874-C3F7-4362-BBBE-B5B8C422A04B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49BE2874-C3F7-4362-BBBE-B5B8C422A04B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E13C918-59A8-4441-BE30-7876AC44BBF3}.BlazorClock|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E13C918-59A8-4441-BE30-7876AC44BBF3}.BlazorClock|Any CPU.Build.0 = Debug|Any CPU
+		{3E13C918-59A8-4441-BE30-7876AC44BBF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E13C918-59A8-4441-BE30-7876AC44BBF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E13C918-59A8-4441-BE30-7876AC44BBF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E13C918-59A8-4441-BE30-7876AC44BBF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

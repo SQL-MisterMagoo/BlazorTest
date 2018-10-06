@@ -3,27 +3,25 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:65529",
-      "sslPort": 44388
+      "applicationUrl": "http://localhost:58753/",
+      "sslPort": 0
     }
   },
   "profiles": {
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "blz",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "BlazorTest.Server": {
+    "BlazorTree": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "blz",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:65530",
+      "applicationUrl": "http://localhost:58754/"
     }
   }
 }

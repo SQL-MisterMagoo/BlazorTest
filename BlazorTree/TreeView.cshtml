@@ -1,0 +1,34 @@
+﻿@inherits BlazorComponent
+@typeparam IItem
+@foreach (var item in Dependents)
+{
+    item.Depth = Depth;
+    bool hasChildren = (item.Dependents != null && item.Dependents.Any());
+    var children = item.Dependents as IEnumerable<INodeItem<IItem>>;
+    IItem contentItem = (IItem)item;
+    if (hasChildren)
+    {
+        <div class="tv tv-node">
+            <span>@(new string(TreeLine[0], Depth))</span>
+            @OpenContent(contentItem)
+            <TreeView Dependents="children" OpenContent="@OpenContent" ClosedContent="@ClosedContent" Depth="@(Depth + 1)" TreeLine="@TreeLine">
+            </TreeView>
+        </div>
+    }
+    else
+    {
+        <div class="tv tv-node">
+            <span>@(new string(TreeLine[0], Depth))</span>
+            @ClosedContent(contentItem)
+        </div>
+    }
+}
+
+@functions
+{
+[Parameter] protected IEnumerable<INodeItem<IItem>> Dependents { get; set; }
+[Parameter] protected RenderFragment<IItem> OpenContent { get; set; }
+[Parameter] protected RenderFragment<IItem> ClosedContent { get; set; }
+[Parameter] protected int Depth { get; set; }
+[Parameter] protected string TreeLine { get; set; }
+}
