@@ -7,7 +7,7 @@
         bool hasChildren = (item.Dependents != null && item.Dependents.Any());
         var children = item.Dependents as IEnumerable<INodeItem<IItem>>;
         IItem contentItem = (IItem)item;
-        if (hasChildren)
+        if (hasChildren && item.State == NodeState.Expanded)
         {
             <li class="tv-node">
                 @OpenContent(contentItem)

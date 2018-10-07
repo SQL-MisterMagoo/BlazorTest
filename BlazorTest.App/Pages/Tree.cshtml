@@ -1,0 +1,51 @@
+﻿@page "/treeview"
+@using BlazorTree
+
+<h2>These are your friends now...</h2>
+
+<TreeView Dependents="@People" Context="person">
+    <ClosedContent>
+        <span class="oi oi-plus" onclick="@{()=>OnClick(person)}"> @(person.Firstname) @(person.Lastname) (@(person.Age)) </span>
+    </ClosedContent>
+    <OpenContent>
+        <span class="oi oi-minus" onclick="@{()=>OnClick(person)}"> @(person.Firstname) @(person.Lastname) (@(person.Age)) </span>
+    </OpenContent>
+</TreeView>
+
+@functions
+{
+  IEnumerable<Person> People;
+  Random count;
+  protected override void OnInit()
+  {
+      base.OnInit();
+      count = new Random();
+      Person head = new Person() { Depth = 0 };
+      AddDependents(head);
+      People = head.Dependents;
+  }
+  public class Person : INodeItem<Person>
+  {
+      public string Lastname { get; set; }
+      public string Firstname { get; set; }
+      public int Age { get; set; }
+      public IEnumerable<Person> Dependents { get; set; }
+      public int Depth { get; set; }
+      public NodeState State { get; set; }
+  }
+  void OnClick(Person person)
+  {
+      person.State = person.State == NodeState.Collapsed ? NodeState.Expanded : NodeState.Collapsed;
+  }
+  void AddDependents(Person person)
+  {
+      if (person.Depth > 7) return;
+      person.Dependents = A.ListOf<Person>(count.Next(1, 5));
+      foreach (Person person2 in person.Dependents)
+      {
+          person2.Depth = person.Depth + 1;
+          AddDependents(person2);
+      }
+
+  }
+}

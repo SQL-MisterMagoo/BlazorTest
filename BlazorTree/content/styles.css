@@ -1,7 +1,8 @@
 ﻿.tv, .tv ul {
     margin: 0;
     padding: 0;
-    list-style: none
+    list-style: none;
+    transition: all ease-in-out 0.5s;
 }
 
     .tv ul {
@@ -28,7 +29,6 @@
         margin: 0;
         padding: 0 1em;
         line-height: 2em;
-        color: #369;
         font-weight: 700;
         position: relative
     }
@@ -70,3 +70,4 @@
     padding: 0px 0px 0px 0px;
     outline: 0;
 }
+

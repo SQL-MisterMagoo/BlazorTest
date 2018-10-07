@@ -9,5 +9,11 @@ namespace BlazorTree
 	{
 		IEnumerable<T> Dependents { get; set; }
 		int Depth { get; set; }
+		NodeState State { get; set; }
+	}
+	public enum NodeState
+	{
+		Collapsed,
+		Expanded
 	}
 }
