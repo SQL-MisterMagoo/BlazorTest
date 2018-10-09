@@ -25,6 +25,7 @@
     <ProjectReference Include="..\BlazorClock\BlazorClock.csproj" />
     <ProjectReference Include="..\BlazorFlying\BlazorFlying.csproj" />
     <ProjectReference Include="..\BlazorTree\BlazorTree.csproj" />
+    <ProjectReference Include="..\Bletris\Bletris.csproj" />
   </ItemGroup>
 
   <ItemGroup>

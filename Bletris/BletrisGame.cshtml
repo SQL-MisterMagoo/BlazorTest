@@ -1,0 +1,25 @@
+﻿@inherits BletrisModel
+<div class="bletris-game">
+    @if (Pieces != null)
+    {
+        foreach (var item in Pieces)
+        {
+            <BletrisPiece Url="@item.Url" IsActive="true" Piece="@item" />
+        }
+    }
+    <div class="score-panel">
+        <h1>Bletris</h1>
+        <div>&copy; Mister Magoo 2018</div>
+        <h2>Next Piece</h2>
+        <BletrisPiece Url="@NextPiece" IsActive="false" />
+    </div>
+</div>
+
+@functions
+{ 
+  public override void Refresh()
+  {
+      StateHasChanged();
+  }
+}
+

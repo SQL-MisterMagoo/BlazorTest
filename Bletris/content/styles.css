@@ -1,0 +1,35 @@
+﻿.bletris-game {
+    position: absolute;
+    top: 5em;
+    bottom: 1em;
+    margin-right: 1em;
+    display: grid;
+    grid-template-columns: repeat(9,32px) 2fr;
+    grid-template-rows: repeat(19,32px);
+    grid-column-gap: 0;
+    border: 2px dashed red;
+    background-color: rgba(180, 49, 49, 0.1);
+    background-image: url('dotnet-bot-pot.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+    .bletris-game .score-panel {
+        grid-column: 10 / 10;
+        grid-row: 1 / 20;
+        margin: 1em;
+        background-color: rgba(180, 49, 49, 0.1);
+        border-color: rgba(180, 49, 49, 0.5);
+        border-width: 2px;
+        border-style: solid;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        color: white;
+        text-align: center;
+    }
+
+    .bletris-game .bletris-piece {
+        max-width: 128px;
+        max-height: 128px;        
+    }
