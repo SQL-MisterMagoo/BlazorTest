@@ -31,10 +31,13 @@ namespace Bletris
 		[Parameter] protected Uri Tetris_S { get; set; }
 		[Parameter] protected Uri Tetris_T { get; set; }
 		[Parameter] protected Uri Tetris_Z { get; set; }
+		[Parameter] protected int Delay { get; set; }
+
 		public int Score { get; private set; }
 		internal List<Piece> Pieces { get; private set; }
 		Random r = new Random();
 		Task engine;
+		public string BtnValue="Pause";
 
 		public BletrisModel()
 		{
@@ -50,6 +53,7 @@ namespace Bletris
 		protected override void OnInit()
 		{
 			engine = RunGame();
+			if (Delay < 50) Delay = 200;
 		}
 
 		private async Task RunGame()
@@ -59,12 +63,20 @@ namespace Bletris
 
 			do
 			{
-				Pieces.Add(new Piece(r.Next(1, 9))
+				if (!IsPaused)
 				{
-					Active = true
-				});
-				Refresh();
-				while (Pieces.Any(p => p.Active))
+					Pieces.Add(new Piece(Math.Max(NextPieceId,1))
+					{
+						Active = true,
+					});
+					Score += 50;
+					Refresh();
+					while (Pieces.Any(p => p.Active))
+					{
+						await Task.Delay(500);
+					}
+				}
+				else
 				{
 					await Task.Delay(500);
 				}
@@ -77,7 +89,8 @@ namespace Bletris
 		{
 			get
 			{
-				switch (r.Next(1, 7))
+				NextPieceId = r.Next(1, 7);
+				switch (NextPieceId)
 				{
 					case 1:
 						return Tetris_I.AbsoluteUri;
@@ -96,5 +109,32 @@ namespace Bletris
 				}
 			}
 		}
+
+		public bool IsPaused { get; private set; }
+		public int NextPieceId { get; private set; }
+
+		public virtual void PauseGame(UIFocusEventArgs args)
+		{
+			IsPaused = true;
+		}
+
+		public virtual void ResumeGame(UIFocusEventArgs args)
+		{
+			IsPaused = false;
+		}
+
+		public virtual void BtnPause(UIMouseEventArgs args)
+		{
+			if (BtnValue=="Pause")
+			{
+				BletrisInterop.SetFocus("bletris_delay");
+				IsPaused = true;
+				BtnValue = "Resume";
+			} else
+			{
+				BtnValue = "Pause";
+			}
+		}
 	}
+
 }

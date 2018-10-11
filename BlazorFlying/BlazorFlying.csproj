@@ -9,6 +9,13 @@
     </RestoreAdditionalProjectSources>
     <LangVersion>7.3</LangVersion>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
+    <Authors>Mister Magoo</Authors>
+    <Company>MM</Company>
+    <Description>A Blazor Component that renders a flying bird</Description>
+    <Copyright>Completely Free For Non-Profit</Copyright>
+    <PackageProjectUrl>https://github.com/SQL-MisterMagoo/BlazorTest</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/SQL-MisterMagoo/BlazorTest</RepositoryUrl>
+    <PackageTags>Blazor,Flying,Bird,Component</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

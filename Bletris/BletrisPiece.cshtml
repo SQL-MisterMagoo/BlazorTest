@@ -1,7 +1,7 @@
 ﻿@inherits BlazorComponent
 @if (Piece == null)
 {
-    <img class="bletris-piece" src="@Url" />
+    <img class="bletris-piece" src="@Url"/>
 }
 else
 {
@@ -18,110 +18,114 @@ else
 {
   //TODO: move all this gubbins to a separate file/class and tidy up
 
-[Parameter] protected string Url { get; set; }
-[Parameter] protected int Number { get; set; }
-[Parameter] protected bool IsActive { get; set; }
-[Parameter] protected Piece Piece { get; set; }
-[Parameter] protected int Delay { get; set; }
+  [Parameter] protected string Url { get; set; }
+  [Parameter] protected int Number { get; set; }
+  [Parameter] protected bool IsActive { get; set; }
+  [Parameter] protected Piece Piece { get; set; }
+  [Parameter] protected int Delay { get; set; }
+  [Parameter] protected bool IsPaused { get; set; }
 
-int Height { get; set; }
+  int Height { get; set; }
 
-string Transform
-{
-    get
-    {
-        switch (Rotation)
-        {
-            case 0:
-                return "";
-            case 90:
-                return "rotate(90deg) translate(16px,16px)";
-            case 180:
-                return "rotate(180deg)";
-            case 270:
-                return "rotate(270deg) translate(-16px,-16px)";
-            default:
-                return "";
-        }
-    }
-}
-string Id;
-int Rotation;
-Task engine;
+  string Transform
+  {
+      get
+      {
+          switch (Rotation)
+          {
+              case 0:
+                  return "";
+              case 90:
+                  return "rotate(90deg) translate(16px,16px)";
+              case 180:
+                  return "rotate(180deg)";
+              case 270:
+                  return "rotate(270deg) translate(-16px,-16px)";
+              default:
+                  return "";
+          }
+      }
+  }
+  string Id;
+  int Rotation;
+  Task engine;
 
-protected override void OnInit()
-{
-    Id = $"BL{DateTime.Now.Ticks}";
-    if (Delay == 0)
-        Delay = 1000;
-    Height = Piece?.Size.y * 32 ?? 64;
-    if (IsActive)
-        engine = Engine();
-}
+  protected override void OnInit()
+  {
+      Id = $"BL{DateTime.Now.Ticks}";
+      if (Delay == 0)
+          Delay = 1000;
+      Height = Piece?.Size.y * 32 ?? 64;
+      if (IsActive)
+          engine = Engine();
+  }
 
-async Task Engine()
-{
-    while (IsActive && Piece != null)
-    {
-        await Task.Delay(Delay);
-        Piece.Position = (Piece.Position.x, Piece.Position.y + 1);
-        StateHasChanged();
-        if (Piece.Position.y >= 20 - Piece.Size.y)
-        {
-            Piece.Active = false;
-            IsActive = false;
-        }
-    }
-}
+  async Task Engine()
+  {
+      while (IsActive && Piece != null)
+      {
+          await Task.Delay(Delay);
+          if (!IsPaused)
+          {
+              Piece.Position = (Piece.Position.x, Piece.Position.y + 1);
+              StateHasChanged();
+              if (Piece.Position.y >= 20 - Piece.Size.y)
+              {
+                  Piece.Active = false;
+                  IsActive = false;
+              }
+          }
+      }
+  }
 
-protected override async Task OnAfterRenderAsync()
-{
-    if (IsActive)
-    {
-        await BletrisInterop.SetFocus(Id);
-    }
-}
+  protected override async Task OnAfterRenderAsync()
+  {
+      if (IsActive && !IsPaused)
+      {
+          await BletrisInterop.SetFocus(Id);
+      }
+  }
 
-async Task<bool> KeyHandler(UIKeyboardEventArgs args)
-{
-    await Task.Run(() =>
-    {
-        int dx = 0, dy = 0;
-        switch (args.Key)
-        {
-            case "ArrowLeft":
-            case "A":
-            case "a":
-                if (Piece.Position.x > 1)
-                    dx = -1;
-                break;
-            case "ArrowRight":
-            case "D":
-            case "d":
-                if (Piece.Position.x <= 9 - Piece.Size.x)
-                    dx = 1;
-                break;
-            case "ArrowDown":
-            case "S":
-            case "s":
-                Delay = 100;
-                break;
-            case "ArrowUp":
-            case "W":
-            case "w":
-                Rotation += 90;
-                if (Rotation == 360)
-                    Rotation = 0;
-                Piece.Size = (Piece.Size.y, Piece.Size.x);
-                break;
-            default:
-                Console.WriteLine($"Key {args.Key} Code {args.Code}");
-                break;
-        };
-        Piece.Position = (Piece.Position.x + dx, Piece.Position.y + dy);
-    });
-    return false;
-}
+  async Task<bool> KeyHandler(UIKeyboardEventArgs args)
+  {
+      await Task.Run(() =>
+      {
+          int dx = 0, dy = 0;
+          switch (args.Key)
+          {
+              case "ArrowLeft":
+              case "A":
+              case "a":
+                  if (Piece.Position.x > 1)
+                      dx = -1;
+                  break;
+              case "ArrowRight":
+              case "D":
+              case "d":
+                  if (Piece.Position.x <= 9 - Piece.Size.x)
+                      dx = 1;
+                  break;
+              case "ArrowDown":
+              case "S":
+              case "s":
+                  Delay = 100;
+                  break;
+              case "ArrowUp":
+              case "W":
+              case "w":
+                  Rotation += 90;
+                  if (Rotation == 360)
+                      Rotation = 0;
+                  Piece.Size = (Piece.Size.y, Piece.Size.x);
+                  break;
+              default:
+                  Console.WriteLine($"Key {args.Key} Code {args.Code}");
+                  break;
+          };
+          Piece.Position = (Piece.Position.x + dx, Piece.Position.y + dy);
+      });
+      return false;
+  }
 
 }
 
