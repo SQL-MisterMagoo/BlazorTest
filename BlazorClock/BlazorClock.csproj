@@ -9,6 +9,14 @@
     </RestoreAdditionalProjectSources>
     <LangVersion>7.3</LangVersion>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Authors>Mister Magoo</Authors>
+    <Company>MM</Company>
+    <Description>A Blazor Component that renders a simple clock.</Description>
+    <Copyright>Completely Free For Non-Profit</Copyright>
+    <PackageProjectUrl>https://github.com/SQL-MisterMagoo/BlazorTest</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/SQL-MisterMagoo/BlazorTest</RepositoryUrl>
+    <PackageTags>Blazor,Clock,Component</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
