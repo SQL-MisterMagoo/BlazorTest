@@ -5,7 +5,7 @@
         {
             foreach (var item in Pieces)
             {
-                <BletrisPiece Url="@item.Url" IsActive="true" Piece="@item" Delay="@Delay" IsPaused="@IsPaused" />
+                <BletrisPiece IsActive="true" Piece="@item" Number="@item.Number" Delay="@Delay" IsPaused="@IsPaused" />
             }
         }
         <div class="score-panel">
@@ -13,7 +13,7 @@
             <div>&copy; Mister Magoo 2018</div>
             <h2>Next Piece</h2>
             <div style="height:96px;width:96px;display:grid;align-content:stretch;">
-                <BletrisPiece Url="@NextPiece" IsActive="false" />
+                <BletrisPiece Number="@NextPieceId" IsActive="false" />
             </div>
             Delay :<input id="bletris_delay" type="number" bind="@Delay" step="100" onfocusin="@PauseGame" onfocusout="@ResumeGame" />
             <button class="btn btn-primary" onclick="@BtnPause">@BtnValue</button>

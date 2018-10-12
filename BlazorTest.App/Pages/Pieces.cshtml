@@ -1,0 +1,60 @@
+﻿@page "/pieces"
+
+<img src="/blz/images/RaboC.png" />
+
+<div>
+    @foreach (Tetris tetris in Tetrii)
+    {
+      <span>@tetris.Name</span>
+      <svg id="@($"Bletris_{tetris.Name}")" width="@tetris.Width" height="@tetris.Height" viewBox="0 0 @tetris.Width @tetris.Height">
+          @foreach (var item in tetris.Geos)
+          {
+              <rect stroke-width="1" stroke="#000000" id="bletrisbox" height="32" width="32" fill="@tetris.Colour" x="@(item.x * 32)" y="@(item.y * 32)" ></rect>
+          }
+      </svg>
+    }
+</div>
+
+@functions {
+
+  class Tetris
+  {
+      string _name;
+      List<(int x, int y)> _geos;
+      string _colour;
+      int _width;
+      int _height;
+      int _rotation;
+
+      public string Name => _name;
+      public List<(int x, int y)> Geos => _geos;
+      public string Colour => _colour;
+      public int Width => _width;
+      public int Height => _height;
+      public int Rotation => _rotation;
+
+      public Tetris(string name, string colour, List<(int x, int y)> geos)
+      {
+          _name = name;
+          _colour = colour;
+          _geos = geos;
+          _width = 32 * (1+Geos.Max(g => g.x));
+          _height = 32 * (1+Geos.Max(g => g.y));
+          _rotation = 0;
+      }
+  }
+
+  List<Tetris> Tetrii { get; set; }
+
+  protected override void OnInit()
+  {
+      Tetrii = new List<Tetris>()
+        {
+            new Tetris("I", "cyan", new List<(int x, int y)>() { (0,0),(1,0),(2,0),(3,0) } ),
+            new Tetris("S", "lightgreen", new List<(int x, int y)>() { (1,0),(2,0),(0,1),(1,1) } ),
+            new Tetris("Z", "red", new List<(int x, int y)>() { (0,0),(1,0),(1,1),(2,1) } ),
+        };
+      StateHasChanged();
+  }
+
+}
