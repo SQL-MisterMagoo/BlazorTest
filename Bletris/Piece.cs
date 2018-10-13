@@ -15,7 +15,7 @@ namespace Bletris
 		public Piece(int number)
 		{
 			PieceNumber = number;
-			Position = (r.Next(1, 10 - Size.x), 1);
+			Position = (6, 1);
 		}
 
 		string PieceName(int number)

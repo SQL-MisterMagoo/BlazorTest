@@ -56,10 +56,10 @@ namespace Bletris
 						Active = true,
 					});
 					Score += 50;
-					Refresh();
 					while (Pieces.Any(p => p.Active))
 					{
-						await Task.Delay(500);
+						Refresh();
+						await Task.Delay(5);
 					}
 				}
 				else
@@ -107,6 +107,7 @@ namespace Bletris
 				BtnValue = "Pause";
 			}
 		}
+
 	}
 
 }

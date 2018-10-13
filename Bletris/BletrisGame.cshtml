@@ -5,26 +5,42 @@
         {
             foreach (var item in Pieces)
             {
-                <BletrisPiece IsActive="true" Piece="@item" Number="@item.Number" Delay="@Delay" IsPaused="@IsPaused" />
+                if (item.Active)
+                {
+                    <BletrisPiece IsActive="@item.Active" Piece="@item" Number="@item.Number" Delay="@Delay" IsPaused="@IsPaused" ref="ActivePiece" />
+                }
+                else
+                {
+                    <BletrisPiece IsActive="@item.Active" Piece="@item" Number="@item.Number" Delay="@Delay" IsPaused="@IsPaused" />
+                }
             }
         }
         <div class="score-panel">
             <h1>Bletris</h1>
             <div>&copy; Mister Magoo 2018</div>
             <h2>Next Piece</h2>
-            <div style="height:96px;width:96px;display:grid;align-content:stretch;">
+            <div>
                 <BletrisPiece Number="@NextPieceId" IsActive="false" />
             </div>
             Delay :<input id="bletris_delay" type="number" bind="@Delay" step="100" onfocusin="@PauseGame" onfocusout="@ResumeGame" />
             <button class="btn btn-primary" onclick="@BtnPause">@BtnValue</button>
+            <span>Posx=@ActivePiece?.PositionX</span>
+            <span>Posx=@ActivePiece?.PositionY</span>
+            <span>PieceX=@ActivePiece?.GridX</span>
+            <span>PieceY=@ActivePiece?.GridY</span>
+            <span>Width=@ActivePiece?.Width</span>
+            <span>Height=@ActivePiece?.Height</span>
         </div>
     </div>
 </div>
 @functions
 {
+BletrisPiece ActivePiece;
+
 public override void Refresh()
 {
     StateHasChanged();
 }
+
 }
 
