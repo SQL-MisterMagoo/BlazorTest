@@ -26,8 +26,14 @@ namespace Bletris
 		*/
 		[Parameter] protected int Delay { get; set; }
 
+		public int NextPieceId { get; set; }
+		public bool IsPaused { get; set; }
+
 		public int Score { get; private set; }
 		internal List<Piece> Pieces { get; private set; }
+		internal BletrisPiece ActivePiece;
+		internal Piece NextPieceRef { get; private set; }
+
 		Random r = new Random();
 		Task engine;
 		public string BtnValue="Pause";
@@ -38,8 +44,8 @@ namespace Bletris
 
 		protected override void OnInit()
 		{
-			engine = RunGame();
 			if (Delay < 50) Delay = 200;
+			engine = Task.Factory.StartNew(RunGame, TaskCreationOptions.LongRunning);
 		}
 
 		private async Task RunGame()
@@ -51,15 +57,17 @@ namespace Bletris
 			{
 				if (!IsPaused)
 				{
-					Pieces.Add(new Piece(Math.Max(NextPiece,1))
+					lock (Pieces)
 					{
-						Active = true,
-					});
-					Score += 50;
+						Pieces.Add(new Piece(Math.Max(NextPiece, 1))
+						{
+							Active = true,
+						});
+					}
+					Refresh();
 					while (Pieces.Any(p => p.Active))
 					{
-						Refresh();
-						await Task.Delay(5);
+						await Task.Delay(1000);
 					}
 				}
 				else
@@ -69,21 +77,15 @@ namespace Bletris
 			} while (!Pieces.Any(p => p.Position.y == 1 && p.Active == false));
 		}
 
-		public abstract void Refresh();
-
 		public int NextPiece
 		{
 			get
 			{
 				int pieceid = NextPieceId;
 				NextPieceId = r.Next(1, 7);
-				Refresh();
 				return pieceid;
 			}
 		}
-
-		public bool IsPaused { get; private set; }
-		public int NextPieceId { get; private set; }
 
 		public virtual void PauseGame(UIFocusEventArgs args)
 		{
@@ -108,6 +110,19 @@ namespace Bletris
 			}
 		}
 
+		protected void PieceDeActivate(Piece piece)
+		{
+			piece.Active = false;
+			lock (Pieces)
+			{
+				Pieces.Find(x => x == piece).Active = false;
+			}
+		}
+
+		protected void Refresh()
+		{
+			StateHasChanged();
+		}
 	}
 
 }

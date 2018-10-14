@@ -7,11 +7,11 @@
             {
                 if (item.Active)
                 {
-                    <BletrisPiece IsActive="@item.Active" Piece="@item" Number="@item.Number" Delay="@Delay" IsPaused="@IsPaused" ref="ActivePiece" />
+                    <BletrisPiece Refresh="@Refresh" DeActivate="@PieceDeActivate" Piece="@item" Number="@item.Number" Delay="@Delay" IsPaused="@IsPaused" ref="ActivePiece" />
                 }
                 else
                 {
-                    <BletrisPiece IsActive="@item.Active" Piece="@item" Number="@item.Number" Delay="@Delay" IsPaused="@IsPaused" />
+                    <BletrisPiece Number="@item.Number" Piece="@item" />
                 }
             }
         }
@@ -20,27 +20,19 @@
             <div>&copy; Mister Magoo 2018</div>
             <h2>Next Piece</h2>
             <div>
-                <BletrisPiece Number="@NextPieceId" IsActive="false" />
+                <BletrisPiece Number="@NextPieceId"  />
             </div>
             Delay :<input id="bletris_delay" type="number" bind="@Delay" step="100" onfocusin="@PauseGame" onfocusout="@ResumeGame" />
             <button class="btn btn-primary" onclick="@BtnPause">@BtnValue</button>
-            <span>Posx=@ActivePiece?.PositionX</span>
-            <span>Posx=@ActivePiece?.PositionY</span>
-            <span>PieceX=@ActivePiece?.GridX</span>
-            <span>PieceY=@ActivePiece?.GridY</span>
-            <span>Width=@ActivePiece?.Width</span>
-            <span>Height=@ActivePiece?.Height</span>
+            <span>Posx=@(ActivePiece?.PositionX ?? 0)</span>
+            <span>Posx=@(ActivePiece?.PositionY ?? 0)</span>
+            <span>PieceX=@(ActivePiece?.GridX ?? 0)</span>
+            <span>PieceY=@(ActivePiece?.GridY ?? 0)</span>
+            <span>Width=@(ActivePiece?.Width ?? 0)</span>
+            <span>Height=@(ActivePiece?.Height ?? 0)</span>
+            <span>Pieces=@(Pieces?.Count ?? 0)</span>
+            <span>Time=@DateTime.Now.TimeOfDay.ToString()</span>
         </div>
     </div>
 </div>
-@functions
-{
-BletrisPiece ActivePiece;
-
-public override void Refresh()
-{
-    StateHasChanged();
-}
-
-}
 

@@ -10,7 +10,7 @@ namespace Bletris
 		public bool Active { get; set; }
 		public int Number { get; set; }
 		public int PieceNumber { set { Number = value; Name = PieceName(value); Size = PieceSize(value); } }
-		Random r = new Random();
+		public int Rotation { get; set; }
 
 		public Piece(int number)
 		{
