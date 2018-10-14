@@ -12,20 +12,22 @@ namespace Bletris
 	{
 
 		[Parameter] protected int Number { get; set; }
-		[Parameter] protected bool IsActive { get; set; }
 		[Parameter] protected Piece Piece { get; set; }
 		[Parameter] protected int Delay { get; set; }
 		[Parameter] protected bool IsPaused { get; set; }
+		[Parameter] protected int LastRow { get; set; }
+		[Parameter] protected Action<Piece> DeActivate { get; set; }
+		[Parameter] protected Action Refresh { get; set; }
 
-		public int PositionX => Piece.Position.x;
-		public int PositionY => Piece.Position.y;
-		public int GridX => tetris.GridX;
-		public int GridY => tetris.GridY;
-		public int Width => tetris.GridWidth;
-		public int Height => tetris.GridHeight;
+		public bool IsActive => Piece?.Active ?? false;
+		public int PositionX => Piece?.Position.x ?? 0;
+		public int PositionY => Piece?.Position.y ?? 0;
+		public int GridX => tetris?.GridX ?? 0;
+		public int GridY => tetris?.GridY ?? 0;
+		public int Width => tetris?.GridWidth ?? 0;
+		public int Height => tetris?.GridHeight ?? 0;
 
 		internal string Id;
-		internal int Rotation;
 		internal Task engine;
 		public Tetris tetris;
 
@@ -36,12 +38,34 @@ namespace Bletris
 			if (Delay == 0)
 				Delay = 1000;
 
-			tetris = Tetris.FromNumber(Number, Rotation);
+			if (LastRow == 0)
+				LastRow = 20;
+
+			tetris = Tetris.FromNumber(Number, Piece?.Rotation ?? 0);
 
 			if (IsActive)
-				engine = Engine();
+			{
+				engine = Task.Factory.StartNew(Engine, TaskCreationOptions.LongRunning);
+			}
+			else
+			{
+				Task.Delay(4);
+			}
 		}
 
+		protected override void OnParametersSet()
+		{
+			base.OnParametersSet();
+			try
+			{
+				if (Piece == null)
+				{
+					tetris = Tetris.FromNumber(Number, Piece?.Rotation ?? 0);
+					StateHasChanged();
+				}
+			}
+			catch { }
+		}
 		async Task Engine()
 		{
 			while (IsActive && Piece != null)
@@ -52,11 +76,12 @@ namespace Bletris
 					lock (Piece)
 					{
 						Piece.Position = (Piece.Position.x, Piece.Position.y + 1);
-
-						if (Piece.Position.y >= 20 - tetris.GridHeight)
+						StateHasChanged();
+						Refresh?.Invoke(); // not required for gameplay - just debugging
+						if (Piece.Position.y >= LastRow - tetris.GridHeight)
 						{
 							Piece.Active = false;
-							IsActive = false;
+							break;
 						}
 					}
 				}
@@ -91,7 +116,7 @@ namespace Bletris
 					case "ArrowDown":
 					case "S":
 					case "s":
-						Delay = 10;
+						Delay = 100;
 						break;
 					case "ArrowUp":
 					case "W":
@@ -104,10 +129,10 @@ namespace Bletris
 				};
 				lock (Piece)
 				{
-					//if (Piece.Position.x + dx + tetris.GridX < 1 || Piece.Position.x + dx + tetris.GridWidth > 10)
-					//{
-					//	dx = 0;
-					//}
+					if (Piece.Position.x + dx + tetris.GridX < 3 || Piece.Position.x + dx + tetris.GridWidth > 12)
+					{
+						dx = 0;
+					}
 					Piece.Position = (Piece.Position.x + dx, Piece.Position.y);
 				}
 			});
@@ -116,8 +141,24 @@ namespace Bletris
 		void Rotate(int rotation)
 		{
 			if (rotation == 0) return;
-			Rotation = (Rotation + 90) % 360;
-			tetris = Tetris.FromNumber(Number, Rotation);
+			int newRotation = (Piece.Rotation + 90) % 360;
+			Tetris newTetris = Tetris.FromNumber(Number, newRotation);
+			int dx = 0;
+			lock (Piece)
+			{
+				if (Piece.Position.x + newTetris.GridX < 3)
+				{
+					dx = 3 - (Piece.Position.x + newTetris.GridX);
+				}
+				else if (Piece.Position.x + newTetris.GridWidth > 12)
+				{
+					dx = 12 - (Piece.Position.x + newTetris.GridX);
+				}
+				Piece.Rotation = newRotation;
+				Piece.Position = (Piece.Position.x + dx, Piece.Position.y);
+			}
+			tetris = newTetris;
+			StateHasChanged();
 		}
 	}
 }
