@@ -24,7 +24,7 @@ namespace Bletris
 		 *	High Scores
 		 *	Fluxor ?
 		*/
-		[Parameter] protected int Delay { get; set; }
+		[Parameter] protected int InitialDelay { get; set; }
 
 		public int NextPieceId { get; set; }
 		public bool IsPaused { get; set; }
@@ -33,6 +33,7 @@ namespace Bletris
 		internal List<Piece> Pieces { get; private set; }
 		internal BletrisPiece ActivePiece;
 		internal Piece NextPieceRef { get; private set; }
+		internal List<Piece.Point> UsedPoints { get; private set; }
 
 		Random r = new Random();
 		Task engine;
@@ -44,8 +45,8 @@ namespace Bletris
 
 		protected override void OnInit()
 		{
-			if (Delay < 50) Delay = 200;
-			engine = Task.Factory.StartNew(RunGame, TaskCreationOptions.LongRunning);
+			if (InitialDelay < 50) InitialDelay = 200;
+			engine = RunGame();
 		}
 
 		private async Task RunGame()
@@ -53,28 +54,41 @@ namespace Bletris
 			Score = 0;
 			Pieces = new List<Piece>();
 
-			do
+			try
 			{
-				if (!IsPaused)
+				do
 				{
-					lock (Pieces)
+					if (!IsPaused)
 					{
-						Pieces.Add(new Piece(Math.Max(NextPiece, 1))
+						//lock (Pieces)
 						{
-							Active = true,
-						});
+							Pieces.Add(new Piece(Math.Max(NextPiece, 1))
+							{
+								Active = true,
+								Delay = InitialDelay,
+								Map = UsedPoints
+							});
+						}
+						Refresh();
+						while (Pieces.Any(p => p.Active))
+						{
+							await Task.Delay(100);
+						}
 					}
-					Refresh();
-					while (Pieces.Any(p => p.Active))
+					else
 					{
-						await Task.Delay(1000);
+						await Task.Delay(100);
 					}
-				}
-				else
-				{
-					await Task.Delay(500);
-				}
-			} while (!Pieces.Any(p => p.Position.y == 1 && p.Active == false));
+				} while (!Pieces.Any(p => p.Position.y == 1 && p.Active == false));
+
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine();
+				Console.WriteLine("******** GAME LOOP ERROR **********");
+				Console.WriteLine(ex);
+				throw;
+			}
 		}
 
 		public int NextPiece
@@ -112,16 +126,29 @@ namespace Bletris
 
 		protected void PieceDeActivate(Piece piece)
 		{
-			piece.Active = false;
-			lock (Pieces)
-			{
-				Pieces.Find(x => x == piece).Active = false;
-			}
+			Score += 50;
+			UpdateMap();
+			Refresh();
 		}
 
 		protected void Refresh()
 		{
 			StateHasChanged();
+		}
+
+		void UpdateMap()
+		{
+			var points = new List<Piece.Point>();
+			Pieces.ForEach(p => 
+			{
+				if (!p.Active)
+				{
+					points.AddRange(p.Tetris.Geos.Select(g => new Piece.Point(g.x + p.Position.x, g.y + p.Position.y)));
+				}
+			});
+			UsedPoints = points.Distinct().ToList();
+			UsedPoints.OrderBy(p => p.y*10 + p.x).ToList().ForEach(p => Console.WriteLine($"Map: {p.x},{p.y}"));
+
 		}
 	}
 
