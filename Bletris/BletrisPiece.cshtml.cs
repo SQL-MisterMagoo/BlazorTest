@@ -13,7 +13,6 @@ namespace Bletris
 
 		[Parameter] protected int Number { get; set; }
 		[Parameter] protected Piece Piece { get; set; }
-		[Parameter] protected int Delay { get; set; }
 		[Parameter] protected bool IsPaused { get; set; }
 		[Parameter] protected int LastRow { get; set; }
 		[Parameter] protected Action<Piece> DeActivate { get; set; }
@@ -22,30 +21,24 @@ namespace Bletris
 		public bool IsActive => Piece?.Active ?? false;
 		public int PositionX => Piece?.Position.x ?? 0;
 		public int PositionY => Piece?.Position.y ?? 0;
-		public int GridX => tetris?.GridX ?? 0;
-		public int GridY => tetris?.GridY ?? 0;
-		public int Width => tetris?.GridWidth ?? 0;
-		public int Height => tetris?.GridHeight ?? 0;
+		public int GridX => Piece?.Tetris?.GridX ?? 0;
+		public int GridY => Piece?.Tetris?.GridY ?? 0;
+		public int Width => Piece?.Tetris?.GridWidth ?? 0;
+		public int Height => Piece?.Tetris?.GridHeight ?? 0;
 
 		internal string Id;
 		internal Task engine;
-		public Tetris tetris;
 
 		protected override void OnInit()
 		{
 			Id = $"BL{DateTime.Now.Ticks}";
 
-			if (Delay == 0)
-				Delay = 1000;
-
 			if (LastRow == 0)
 				LastRow = 20;
 
-			tetris = Tetris.FromNumber(Number, Piece?.Rotation ?? 0);
-
 			if (IsActive)
 			{
-				engine = Task.Factory.StartNew(Engine, TaskCreationOptions.LongRunning);
+				engine = Engine();
 			}
 			else
 			{
@@ -60,31 +53,40 @@ namespace Bletris
 			{
 				if (Piece == null)
 				{
-					tetris = Tetris.FromNumber(Number, Piece?.Rotation ?? 0);
+					Piece = new Piece(Number) { Active = false };
 					StateHasChanged();
 				}
 			}
 			catch { }
 		}
+
 		async Task Engine()
 		{
-			while (IsActive && Piece != null)
+			try
 			{
-				await Task.Delay(Delay);
-				if (!IsPaused)
+				while (IsActive && Piece != null)
 				{
-					lock (Piece)
+					await Task.Delay(Piece.Delay);
+					if (!IsPaused)
 					{
-						Piece.Position = (Piece.Position.x, Piece.Position.y + 1);
-						StateHasChanged();
-						Refresh?.Invoke(); // not required for gameplay - just debugging
-						if (Piece.Position.y >= LastRow - tetris.GridHeight)
+						await Piece.SetPosition(Piece.Position.x, Piece.Position.y + 1,LastRow);
+						if (Piece.Position.y + Piece.Tetris.GridHeight >= LastRow || !Piece.Active)
 						{
+							Console.WriteLine($"Piece has reached Row {Piece.Position.y + Piece.Tetris.GridHeight}");
 							Piece.Active = false;
-							break;
+							DeActivate?.Invoke(Piece);
 						}
+						Refresh?.Invoke();
 					}
 				}
+
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine();
+				Console.WriteLine("******** ENGINE ERROR **********");
+				Console.WriteLine(ex);
+				throw;
 			}
 		}
 
@@ -98,7 +100,7 @@ namespace Bletris
 
 		protected async Task<bool> KeyHandler(UIKeyboardEventArgs args)
 		{
-			await Task.Run(() =>
+			try
 			{
 				int dx = 0;
 				switch (args.Key)
@@ -116,49 +118,80 @@ namespace Bletris
 					case "ArrowDown":
 					case "S":
 					case "s":
-						Delay = 100;
+						Piece.Delay = 100;
 						break;
 					case "ArrowUp":
 					case "W":
 					case "w":
-						Rotate(1);
+						await Rotate(1);
 						break;
 					default:
 						Console.WriteLine($"Key {args.Key} Code {args.Code}");
 						break;
 				};
-				lock (Piece)
+				//lock (Piece)
 				{
-					if (Piece.Position.x + dx + tetris.GridX < 3 || Piece.Position.x + dx + tetris.GridWidth > 12)
-					{
-						dx = 0;
-					}
-					Piece.Position = (Piece.Position.x + dx, Piece.Position.y);
+					//if (Piece.Position.x + dx + Piece.Tetris.GridX < 2 || Piece.Position.x + dx + Piece.Tetris.GridWidth > 12)
+					//{
+					//	dx = 0;
+					//}
+					await Piece.SetPosition(Piece.Position.x + dx, Piece.Position.y,LastRow);
 				}
-			});
+
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine();
+				Console.WriteLine("******** MOVEMENT ERROR **********");
+				Console.WriteLine(ex);
+				throw;
+			}
 			return false;
 		}
-		void Rotate(int rotation)
+
+		async Task Rotate(int rotation)
 		{
-			if (rotation == 0) return;
-			int newRotation = (Piece.Rotation + 90) % 360;
-			Tetris newTetris = Tetris.FromNumber(Number, newRotation);
-			int dx = 0;
-			lock (Piece)
+			try
 			{
+				if (rotation == 0 || !Piece.Active) return;
+				Console.Write($"Starting Rotation {rotation}");
+
+				int newRotation = (Piece.Rotation + 90) % 360;
+				Console.Write($":{newRotation}deg");
+
+				Tetris newTetris = Tetris.FromNumber(Number, newRotation);
+				Console.Write($":Piece Pos X {Piece.Position.x}:Grid X {newTetris.GridX}: Grid H {newTetris.GridHeight}");
+
+				int dx = 0;
+
 				if (Piece.Position.x + newTetris.GridX < 3)
 				{
 					dx = 3 - (Piece.Position.x + newTetris.GridX);
 				}
-				else if (Piece.Position.x + newTetris.GridWidth > 12)
+				else if (Piece.Position.x + newTetris.GridWidth > 13)
 				{
-					dx = 12 - (Piece.Position.x + newTetris.GridX);
+					dx = 13 - (Piece.Position.x + newTetris.GridX);
 				}
+				if (Piece.Position.x + newTetris.GridHeight >= LastRow)
+				{
+					Console.WriteLine($"rotation not possible : Line {Piece.Position.x + newTetris.GridHeight}");
+				}
+				Console.Write($":dx {dx}");
+
 				Piece.Rotation = newRotation;
-				Piece.Position = (Piece.Position.x + dx, Piece.Position.y);
+				await Piece.SetTetris(newTetris);
+				await Piece.SetPosition(Piece.Position.x + dx, Piece.Position.y, LastRow);
+
+				Console.WriteLine();
+
 			}
-			tetris = newTetris;
-			StateHasChanged();
+			catch (Exception ex)
+			{
+				Console.WriteLine();
+				Console.WriteLine("******** ROTATION ERROR **********");
+				Console.WriteLine(ex);
+				throw;
+			}
 		}
 	}
 }

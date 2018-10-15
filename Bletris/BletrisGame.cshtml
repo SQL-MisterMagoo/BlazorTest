@@ -7,7 +7,7 @@
             {
                 if (item.Active)
                 {
-                    <BletrisPiece Refresh="@Refresh" DeActivate="@PieceDeActivate" Piece="@item" Number="@item.Number" Delay="@Delay" IsPaused="@IsPaused" ref="ActivePiece" />
+                    <BletrisPiece Refresh="@Refresh" DeActivate="@PieceDeActivate" Piece="@item" Number="@item.Number" IsPaused="@IsPaused" ref="ActivePiece" />
                 }
                 else
                 {
@@ -17,12 +17,13 @@
         }
         <div class="score-panel">
             <h1>Bletris</h1>
+            <h2>Score @Score</h2>
             <div>&copy; Mister Magoo 2018</div>
             <h2>Next Piece</h2>
             <div>
                 <BletrisPiece Number="@NextPieceId"  />
             </div>
-            Delay :<input id="bletris_delay" type="number" bind="@Delay" step="100" onfocusin="@PauseGame" onfocusout="@ResumeGame" />
+            Delay :<input id="bletris_delay" type="number" bind="@InitialDelay" step="100" onfocusin="@PauseGame" onfocusout="@ResumeGame" />
             <button class="btn btn-primary" onclick="@BtnPause">@BtnValue</button>
             <span>Posx=@(ActivePiece?.PositionX ?? 0)</span>
             <span>Posx=@(ActivePiece?.PositionY ?? 0)</span>

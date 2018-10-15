@@ -1,8 +1,8 @@
 ﻿.bletris-game {
     position: absolute;
     display: grid;
-    grid-template-columns: repeat(12,32px) 204px;
-    grid-template-rows: repeat(23,32px);
+    grid-template-columns: repeat(14,32px) 204px;
+    grid-template-rows: repeat(20,32px);
     grid-column-gap: 0;
     border: 2px dashed red;
     background-color: rgba(180, 49, 49, 0.1);
@@ -12,8 +12,8 @@
 }
 
     .bletris-game .score-panel {
-        grid-column: 13 / 13;
-        grid-row: 1 / 24;
+        grid-column: 15 / 15;
+        grid-row: 1 / 21;
         background-color: rgba(180, 49, 49, 0.5);
         border-color: rgba(180, 49, 49, 0.5);
         border-width: 2px;

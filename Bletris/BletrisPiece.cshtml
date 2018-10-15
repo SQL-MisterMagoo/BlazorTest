@@ -4,27 +4,27 @@
 @if (Piece == null)
 {
     <svg id="@Id"
-         width="@tetris.Width"
-         height="@tetris.Height"
-         viewBox="0 0 @tetris.Width @tetris.Height">
-        @foreach (var item in tetris.Geos)
+         width="@Piece.Tetris.Width"
+         height="@Piece.Tetris.Height"
+         viewBox="0 0 @Piece.Tetris.Width @Piece.Tetris.Height">
+        @foreach (var item in Piece.Tetris.Geos)
         {
-            <rect stroke-width="1" stroke="#000000" id="bletrisbox" height="32" width="32" fill="@tetris.Colour" x="@(item.x * 32)" y="@(item.y * 32)"></rect>
+            <rect stroke-width="1" stroke="#000000" id="bletrisbox" height="32" width="32" fill="@Piece.Tetris.Colour" x="@(item.x * 32)" y="@(item.y * 32)"></rect>
         }
     </svg>
 }
 else
 {
     <svg id="@Id"
-         width="@tetris.Width"
-         height="@tetris.Height"
-         viewBox="0 0 @tetris.Width @tetris.Height"
+         width="@Piece.Tetris.Width"
+         height="@Piece.Tetris.Height"
+         viewBox="0 0 @Piece.Tetris.Width @Piece.Tetris.Height"
          style="grid-area: @Piece.Position.y / @Piece.Position.x ;"
          tabindex="-1"
          onkeypress="@KeyHandler">
-        @foreach (var item in tetris.Geos)
+        @foreach (var item in Piece.Tetris.Geos)
         {
-            <rect stroke-width="1" stroke="#000000" id="bletrisbox" height="32" width="32" fill="@tetris.Colour" x="@(item.x * 32)" y="@(item.y * 32)"></rect>
+            <rect stroke-width="1" stroke="#000000" id="bletrisbox" height="32" width="32" fill="@Piece.Tetris.Colour" x="@(item.x * 32)" y="@(item.y * 32)"></rect>
         }
     </svg>
 }
