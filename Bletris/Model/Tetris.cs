@@ -7,37 +7,28 @@ namespace Bletris.Model
 {
 	public class Tetris
 	{
-		string _name;
-		List<(int x, int y)> _geos;
-		private int _gridHeight;
-		private int _gridX;
-		private int _gridY;
-		private int _gridWidth;
-		string _colour;
-		int _width;
-		int _height;
-
-		public string Name => _name;
-		public List<(int x, int y)> Geos => _geos;
-		public string Colour => _colour;
-		public int Width => _width;
-		public int Height => _height;
-		public int GridWidth => _gridWidth;
-		public int GridHeight => _gridHeight;
-		public int GridX => _gridX;
-		public int GridY => _gridY;
+		public string Name { get; }
+		public List<(int x, int y)> Geos { get; }
+		public string Colour { get; private set; }
+		public int Width { get; }
+		public int Height { get; }
+		public int GridWidth { get; }
+		public int GridHeight { get; }
+		public int GridX { get; }
+		public int GridY { get; }
+		public string Colour1 { get => Colour; set => Colour = value; }
 
 		public Tetris(string name, string colour, List<(int x, int y)> geos)
 		{
-			_name = name;
-			_colour = colour;
-			_geos = geos;
-			_gridWidth = 1+Geos.Max(g => g.x);
-			_gridHeight = 1+Geos.Max(g => g.y);
-			_gridX = Geos.Min(g => g.x);
-			_gridY = Geos.Min(g => g.y);
-			_width = 32 * _gridWidth;
-			_height = 32 * _gridHeight;
+			Name = name;
+			Colour = colour;
+			Geos = geos;
+			GridWidth = 1 + Geos.Max(g => g.x);
+			GridHeight = 1 + Geos.Max(g => g.y);
+			GridX = Geos.Min(g => g.x);
+			GridY = Geos.Min(g => g.y);
+			Width = 32 * GridWidth;
+			Height = 32 * GridHeight;
 		}
 
 		public static Tetris FromName(string name, int rotation)
@@ -127,7 +118,7 @@ namespace Bletris.Model
 			switch (number)
 			{
 				case 1:
-					return Tetris.FromName("I",rotation);
+					return Tetris.FromName("I", rotation);
 				case 2:
 					return Tetris.FromName("J", rotation);
 				case 3:
@@ -144,5 +135,40 @@ namespace Bletris.Model
 			}
 		}
 
+		public static class WallKick
+		{
+			public static List<(int x, int y)> GetTests(string name, int from, int to)
+			{
+				if (name == "J" || name == "L" || name == "S" || name == "T" || name == "Z")
+				{
+					switch (10 * from + to)
+					{
+						case 1: return new List<(int x, int y)>() { (0, 0), (-1, 0), (-1, 1), (0, -2), (-1, -2) };
+						case 10: return new List<(int x, int y)>() { (0, 0), (1, 0), (1, -1), (0, 2), (1, 2) };
+						case 12: return new List<(int x, int y)>() { (0, 0), (1, 0), (1, -1), (0, 2), (1, 2) };
+						case 21: return new List<(int x, int y)>() { (0, 0), (-1, 0), (-1, 1), (0, -2), (-1, -2) };
+						case 23: return new List<(int x, int y)>() { (0, 0), (1, 0), (1, 1), (0, -2), (1, -2) };
+						case 32: return new List<(int x, int y)>() { (0, 0), (-1, 0), (-1, -1), (0, 2), (-1, 2) };
+						case 30: return new List<(int x, int y)>() { (0, 0), (-1, 0), (-1, -1), (0, 2), (-1, 2) };
+						case 3: return new List<(int x, int y)>() { (0, 0), (1, 0), (1, 1), (0, -2), (1, -2) };
+					}
+				}
+				else if (name=="I")
+				{
+					switch (10 * from + to)
+					{
+						case 1: return new List<(int x, int y)>() { (0, 0), (-2, 0), (1, 0), (-2, -1), (1, 2) };
+						case 10: return new List<(int x, int y)>() { (0, 0), (2, 0), (-1, 0), (2, 1), (-1, -2) };
+						case 12: return new List<(int x, int y)>() { (0, 0), (-1, 0), (2, 0), (-1, 2), (2, -1) };
+						case 21: return new List<(int x, int y)>() { (0, 0), (1, 0), (-2, 0), (1, -2), (-2, 1) };
+						case 23: return new List<(int x, int y)>() { (0, 0), (2, 0), (-1, 0), (2, 1), (-1, -2) };
+						case 32: return new List<(int x, int y)>() { (0, 0), (-2, 0), (1, 0), (-2, -1), (1, 2) };
+						case 30: return new List<(int x, int y)>() { (0, 0), (1, 0), (-2, 0), (1, -2), (-2, 1) };
+						case 3: return new List<(int x, int y)>() { (0, 0), (-1, 0), (2, 0), (-1, 2), (2, -1) };
+					}
+				}
+				return null;
+			}
+		}
 	}
 }
