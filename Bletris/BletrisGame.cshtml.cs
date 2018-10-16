@@ -47,6 +47,7 @@ namespace Bletris
 		{
 			if (InitialDelay < 50) InitialDelay = 200;
 			engine = RunGame();
+			UsedPoints = new List<Piece.Point>();
 		}
 
 		private async Task RunGame()
@@ -125,8 +126,8 @@ namespace Bletris
 
 		protected void PieceDeActivate(Piece piece)
 		{
-			Score += 50;
-			UpdateMap();
+			UpdateMap(piece);
+			ScorePoints();
 			Refresh();
 		}
 
@@ -135,19 +136,44 @@ namespace Bletris
 			StateHasChanged();
 		}
 
-		void UpdateMap()
+		void UpdateMap(Piece piece)
 		{
 			var points = new List<Piece.Point>();
-			Pieces.ForEach(p => 
+			if (!piece.Active)
 			{
-				if (!p.Active)
-				{
-					points.AddRange(p.Tetris.Geos.Select(g => new Piece.Point(g.x + p.Position.x, g.y + p.Position.y)));
-				}
-			});
-			UsedPoints = points.Distinct().ToList();
+				UsedPoints.AddRange(piece.Tetris.Geos.Select(g => new Piece.Point(g.x + piece.Position.x, g.y + piece.Position.y,piece.Tetris.Colour)));
+			}
 			UsedPoints.OrderBy(p => p.y*10 + p.x).ToList().ForEach(p => Console.WriteLine($"Map: {p.x},{p.y}"));
+		}
 
+		async Task ScorePoints()
+		{
+			//40 * (n + 1)	100 * (n + 1)	300 * (n + 1)	1200 * (n + 1)
+			// n= Level
+			int lineCount = 0;
+			List<int> lines = new List<int>();
+			//Go down the lines
+			for (int i = 1; i < 21; i++)
+			{
+				int hitCount = UsedPoints.Where(x => x.y == i).Count();
+				if (hitCount == 10) //Number of columns
+				{
+					lines.Add(i);
+					UsedPoints = UsedPoints.Select(p => new Piece.Point(p.x, p.y, p.Colour, p.y == i ? "dying" : "")).ToList();
+				}
+			}
+			StateHasChanged();
+			await Task.Delay(650);
+			UsedPoints.RemoveAll(p => p.Class == "dying");
+			foreach (var item in lines)
+			{
+					UsedPoints = UsedPoints.Select(p => new Piece.Point(p.x, p.y + (p.y < item ? 1 : 0), p.Colour)).ToList();
+			}
+			lineCount = lines.Count;
+			if (lineCount > 0)
+			{
+				Score += lineCount == 1 ? 40 : lineCount == 2 ? 100 : lineCount == 3 ? 300 : 1200;
+			}
 		}
 	}
 
