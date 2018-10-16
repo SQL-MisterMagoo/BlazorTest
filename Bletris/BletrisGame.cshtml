@@ -28,14 +28,14 @@
             </div>
             Delay :<input id="bletris_delay" type="number" bind="@InitialDelay" step="100" onfocusin="@PauseGame" onfocusout="@ResumeGame" />
             <button class="btn btn-primary" onclick="@BtnPause">@BtnValue</button>
-            <span>Posx=@(ActivePiece?.PositionX ?? 0)</span>
+            @*<span>Posx=@(ActivePiece?.PositionX ?? 0)</span>
             <span>Posx=@(ActivePiece?.PositionY ?? 0)</span>
             <span>PieceX=@(ActivePiece?.GridX ?? 0)</span>
             <span>PieceY=@(ActivePiece?.GridY ?? 0)</span>
             <span>Width=@(ActivePiece?.Width ?? 0)</span>
             <span>Height=@(ActivePiece?.Height ?? 0)</span>
             <span>Pieces=@(Pieces?.Count ?? 0)</span>
-            <span>Time=@DateTime.Now.TimeOfDay.ToString()</span>
+            <span>Time=@DateTime.Now.TimeOfDay.ToString()</span>*@
         </div>
     </div>
 </div>
