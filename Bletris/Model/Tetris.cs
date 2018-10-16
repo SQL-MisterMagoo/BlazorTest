@@ -67,7 +67,7 @@ namespace Bletris.Model
 						case 90:
 							return new Tetris("L", "orange", new List<(int x, int y)>() { (1, 0), (2, 2), (1, 1), (1, 2) });
 						case 180:
-							return new Tetris("L", "orange", new List<(int x, int y)>() { (2, 0), (0, 1), (1, 1), (2, 1) });
+							return new Tetris("L", "orange", new List<(int x, int y)>() { (0, 2), (0, 1), (1, 1), (2, 1) });
 						default:
 							return new Tetris("L", "orange", new List<(int x, int y)>() { (1, 0), (0, 0), (1, 1), (1, 2) });
 					}
