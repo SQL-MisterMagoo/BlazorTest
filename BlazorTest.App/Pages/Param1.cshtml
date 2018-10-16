@@ -1,5 +1,5 @@
-﻿@page "/page1"
-@page "/page1/{ID}"
+﻿@page "/param1"
+@page "/param1/{ID}"
 
 @using Microsoft.AspNetCore.Blazor.Services
 @inject IUriHelper UriHelper
@@ -11,7 +11,7 @@
 <button onclick=@IncrementCounter>Increment Counter</button>
 <a href="https://www.google.co.uk?q=Blazor" target="_blank">Blazor Search</a>
 
-<Clock ClockId="Page1Clock1" ShowIcon="false" AutoTitle="true" Width="300" Height="80" />
+<Clock ClockId="Param1Clock1" ShowIcon="false" AutoTitle="true" Width="300" Height="80" />
 
 @functions
 {
@@ -19,7 +19,7 @@
 
 void IncrementCounter()
 {
-    UriHelper.NavigateTo<Page2>(ID);
+    UriHelper.NavigateTo<Param2>(ID);
 }
 
 }

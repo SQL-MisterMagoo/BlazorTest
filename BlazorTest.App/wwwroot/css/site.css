@@ -78,6 +78,7 @@ app {
 
 .content {
     padding-top: 1.1rem;
+    transition: all ease-in-out 0.5s;
 }
 
 .navbar-toggler {
@@ -125,3 +126,24 @@ app {
 .svgthing {
     position: absolute;
 }
+
+.dialog {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    height: 3em;
+    padding: 0;
+    border: 0;
+    background-color: rgba(100,100,100,0.8);
+    color: white;
+    font-size: xx-large;
+    justify-content: center;
+    align-items: center;
+}
+
+    .dialog a {
+        color: white;
+    }

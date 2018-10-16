@@ -36,7 +36,7 @@
     <Content Update="Pages\Animate.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-    <Content Update="Pages\Page2.cshtml">
+    <Content Update="Pages\Param2.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
   </ItemGroup>

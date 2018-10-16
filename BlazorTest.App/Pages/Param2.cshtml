@@ -1,5 +1,5 @@
-﻿@page "/page2"
-@page "/page2/{ID}"
+﻿@page "/param2"
+@page "/param2/{ID}"
 
 @using Microsoft.AspNetCore.Blazor.Services
 @inject IUriHelper UriHelper
@@ -30,12 +30,12 @@ protected override void OnParametersSet()
 }
 void Save()
 {
-    UriHelper.NavigateTo<Page1>(newID.ToString());
+    UriHelper.NavigateTo<Param1>(newID.ToString());
 }
 
 void Cancel()
 {
-    UriHelper.NavigateTo<Page1>(ID);
+    UriHelper.NavigateTo<Param1>(ID);
 }
 
 }
