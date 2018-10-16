@@ -1,7 +1,7 @@
 ﻿@inherits BletrisPieceModel
 @using Bletris.Model
 
-@if (Piece == null)
+@if (DisplayOnly)
 {
     <svg id="@Id"
          width="@Piece.Tetris.Width"

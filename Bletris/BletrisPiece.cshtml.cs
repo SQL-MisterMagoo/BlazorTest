@@ -17,6 +17,7 @@ namespace Bletris
 		[Parameter] protected int LastRow { get; set; }
 		[Parameter] protected Action<Piece> DeActivate { get; set; }
 		[Parameter] protected Action Refresh { get; set; }
+		[Parameter] protected bool DisplayOnly { get; set; }
 
 		public bool IsActive => Piece?.Active ?? false;
 		public int PositionX => Piece?.Position.x ?? 0;
@@ -51,7 +52,7 @@ namespace Bletris
 			base.OnParametersSet();
 			try
 			{
-				if (Piece == null)
+				if (DisplayOnly)
 				{
 					Piece = new Piece(Number) { Active = false };
 					StateHasChanged();

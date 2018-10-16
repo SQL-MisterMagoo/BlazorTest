@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Bletris
 {
-	public abstract class BletrisModel : BlazorComponent
+	public abstract class BletrisGameModel : BlazorComponent
 	{
 		/*
 		 * TODO: 
@@ -31,15 +31,15 @@ namespace Bletris
 
 		public int Score { get; private set; }
 		internal List<Piece> Pieces { get; private set; }
-		internal BletrisPiece ActivePiece;
-		internal Piece NextPieceRef { get; private set; }
+		internal BletrisPiece ActivePiece { get; set; }
+		internal BletrisPiece NextPieceRef { get; set; }
 		internal List<Piece.Point> UsedPoints { get; private set; }
 
 		Random r = new Random();
 		Task engine;
 		public string BtnValue="Pause";
 
-		public BletrisModel()
+		public BletrisGameModel()
 		{
 		}
 

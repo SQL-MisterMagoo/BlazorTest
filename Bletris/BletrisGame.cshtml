@@ -1,4 +1,4 @@
-﻿@inherits BletrisModel
+﻿@inherits BletrisGameModel
 <div>
     <div class="bletris-game">
         @if (Pieces != null)
@@ -21,7 +21,7 @@
             <div>&copy; Mister Magoo 2018</div>
             <h2>Next Piece</h2>
             <div>
-                <BletrisPiece Number="@NextPieceId" ref="NextPieceRef" />
+                <BletrisPiece Number="@NextPieceId" ref="NextPieceRef" DisplayOnly="true" />
             </div>
             Delay :<input id="bletris_delay" type="number" bind="@InitialDelay" step="100" onfocusin="@PauseGame" onfocusout="@ResumeGame" />
             <button class="btn btn-primary" onclick="@BtnPause">@BtnValue</button>
