@@ -60,7 +60,6 @@ namespace Bletris
 				{
 					if (!IsPaused)
 					{
-						//lock (Pieces)
 						{
 							Pieces.Add(new Piece(Math.Max(NextPiece, 1))
 							{
