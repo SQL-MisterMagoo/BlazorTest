@@ -69,7 +69,7 @@ namespace Bletris
 					await Task.Delay(Piece.Delay);
 					if (!IsPaused)
 					{
-						await Piece.SetPosition(Piece.Position.x, Piece.Position.y + 1,LastRow);
+						await Piece.SetPosition(Piece.Position.x, Piece.Position.y + 1, LastRow);
 						if (Piece.Position.y + Piece.Tetris.GridHeight >= LastRow || !Piece.Active)
 						{
 							Console.WriteLine($"Piece has reached Row {Piece.Position.y + Piece.Tetris.GridHeight}");
@@ -129,14 +129,7 @@ namespace Bletris
 						Console.WriteLine($"Key {args.Key} Code {args.Code}");
 						break;
 				};
-				//lock (Piece)
-				{
-					//if (Piece.Position.x + dx + Piece.Tetris.GridX < 2 || Piece.Position.x + dx + Piece.Tetris.GridWidth > 12)
-					//{
-					//	dx = 0;
-					//}
-					await Piece.SetPosition(Piece.Position.x + dx, Piece.Position.y,LastRow);
-				}
+				await Piece.SetPosition(Piece.Position.x + dx, Piece.Position.y, LastRow);
 
 			}
 			catch (Exception ex)
