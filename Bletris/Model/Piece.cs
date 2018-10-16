@@ -7,22 +7,8 @@ using System.Threading.Tasks;
 
 namespace Bletris
 {
-	public class Piece
+	public partial class Piece
 	{
-		public struct Point
-		{
-			public int x;
-			public int y;
-			public string Colour;
-			public string Class;
-			public Point(int px, int py, string clr = "", string cls = "")
-			{
-				x = px;
-				y = py;
-				Colour = clr;
-				Class = cls;
-			}
-		}
 		public string Name { get; set; }
 		public Point Position { get { return _position; } }
 		public bool Active { get; set; }
