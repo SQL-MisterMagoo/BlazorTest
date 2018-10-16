@@ -28,9 +28,23 @@
 
     .bletris-game .bletris-piece {
         max-width: 128px;
-        max-height: 128px;        
+        max-height: 128px;
     }
 
     .bletris-game .score-panel input {
-        width:100%;
+        width: 100%;
     }
+
+@keyframes dying-animation {
+    from {
+        fill: red;
+    }
+
+    to {
+        fill: yellow;
+    }
+}
+.dying > #bletrisbox {
+    animation-name: dying-animation;
+    animation-duration: 0.5s;
+}

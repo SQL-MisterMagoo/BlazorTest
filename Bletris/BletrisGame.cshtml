@@ -9,10 +9,13 @@
                 {
                     <BletrisPiece Refresh="@Refresh" DeActivate="@PieceDeActivate" Piece="@item" Number="@item.Number" IsPaused="@IsPaused" ref="ActivePiece" />
                 }
-                else
-                {
-                    <BletrisPiece Number="@item.Number" Piece="@item" />
-                }
+            }
+        }
+        @if (UsedPoints != null)
+        {
+            foreach (var item in UsedPoints)
+            {
+                <BletrisPoint Point="item"/>
             }
         }
         <div class="score-panel">
