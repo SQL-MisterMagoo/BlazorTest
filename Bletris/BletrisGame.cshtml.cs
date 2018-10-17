@@ -37,10 +37,13 @@ namespace Bletris
 
 		Random r = new Random();
 		Task engine;
-		public string BtnValue="Pause";
+		public string BtnValue="Start";
+		internal string LastKeyPress;
 
 		public BletrisGameModel()
 		{
+			IsPaused = true;
+			BtnValue = "Start";
 		}
 
 		protected override void OnInit()
@@ -113,13 +116,13 @@ namespace Bletris
 
 		public virtual void BtnPause(UIMouseEventArgs args)
 		{
-			if (BtnValue=="Pause")
+			if (IsPaused==false)
 			{
-				BletrisInterop.SetFocus("bletris_delay");
 				IsPaused = true;
 				BtnValue = "Resume";
 			} else
 			{
+				IsPaused = false;
 				BtnValue = "Pause";
 			}
 		}
@@ -174,6 +177,12 @@ namespace Bletris
 			{
 				Score += lineCount == 1 ? 40 : lineCount == 2 ? 100 : lineCount == 3 ? 300 : 1200;
 			}
+		}
+
+		internal async Task KeyPressed(UIKeyboardEventArgs args)
+		{
+			LastKeyPress = args.Code;
+			await ActivePiece.ProcessKeyEvent(args);
 		}
 	}
 

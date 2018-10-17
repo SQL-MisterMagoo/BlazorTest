@@ -91,12 +91,10 @@ namespace Bletris
 			}
 		}
 
-		protected override async Task OnAfterRenderAsync()
+		public async Task<bool> ProcessKeyEvent(UIKeyboardEventArgs args)
 		{
-			if (IsActive && !IsPaused)
-			{
-				await BletrisInterop.SetFocus(Id);
-			}
+			await KeyHandler(args);
+			return true;
 		}
 
 		protected async Task<bool> KeyHandler(UIKeyboardEventArgs args)
