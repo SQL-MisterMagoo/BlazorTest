@@ -35,7 +35,7 @@ namespace Bletris
 		Task engine;
 		public string BtnValue="Start";
 		internal static int HighScore ;
-
+		private int ThisDelay;
 		internal string LastKeyPress;
 
 		public BletrisGameModel()
@@ -47,6 +47,7 @@ namespace Bletris
 		protected override void OnInit()
 		{
 			if (InitialDelay < 50) InitialDelay = 200;
+			ThisDelay = InitialDelay;
 			engine = RunGame();
 			UsedPoints = new List<Point>();
 			IsGameOver = false;
@@ -68,9 +69,10 @@ namespace Bletris
 							Pieces.Add(new Piece(Math.Max(NextPiece, 1))
 							{
 								Active = true,
-								Delay = InitialDelay,
+								Delay = Math.Max(ThisDelay,200),
 								Map = UsedPoints
 							});
+							InitialDelay = Math.Max(ThisDelay - 10, 200);
 						}
 						Refresh();
 						while (Pieces.Any(p => p.Active))
@@ -127,6 +129,7 @@ namespace Bletris
 		{
 			if (IsGameOver)
 			{
+				ThisDelay = InitialDelay;
 				engine = RunGame();
 				UsedPoints.Clear();
 				Pieces.Clear();
