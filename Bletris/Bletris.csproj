@@ -16,7 +16,7 @@
     <PackageProjectUrl>https://github.com/SQL-MisterMagoo/BlazorTest</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SQL-MisterMagoo/BlazorTest</RepositoryUrl>
     <PackageTags>Blazor,Bletris,Tetris,Component</PackageTags>
-    <Version>0.1.4</Version>
+    <Version>0.1.5</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 

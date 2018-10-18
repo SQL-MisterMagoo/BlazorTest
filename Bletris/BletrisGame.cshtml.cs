@@ -12,12 +12,6 @@ namespace Bletris
 	{
 		/*
 		 * TODO: 
-		 *	Tidy up / refactor
-		 *	Scoring
-		 *	Speed up
-		 *	Collision detection
-		 *	Remove completed lines
-		 *	Implement Next Piece properly
 		 *	Find copyright free game music?
 		 *	Game Over
 		 *	New Game
@@ -34,10 +28,14 @@ namespace Bletris
 		internal BletrisPiece ActivePiece { get; set; }
 		internal BletrisPiece NextPieceRef { get; set; }
 		internal List<Point> UsedPoints { get; private set; }
+		internal string GameOver { get; private set; }
 
+		private bool IsGameOver;
 		Random r = new Random();
 		Task engine;
 		public string BtnValue="Start";
+		internal static int HighScore ;
+
 		internal string LastKeyPress;
 
 		public BletrisGameModel()
@@ -51,6 +49,8 @@ namespace Bletris
 			if (InitialDelay < 50) InitialDelay = 200;
 			engine = RunGame();
 			UsedPoints = new List<Point>();
+			IsGameOver = false;
+			int _ = NextPiece;
 		}
 
 		private async Task RunGame()
@@ -83,7 +83,7 @@ namespace Bletris
 						await Task.Delay(100);
 					}
 				} while (!Pieces.Any(p => p.Position.y == 1 && p.Active == false));
-
+				SetGameOver();
 			}
 			catch (Exception ex)
 			{
@@ -92,6 +92,15 @@ namespace Bletris
 				Console.WriteLine(ex);
 				throw;
 			}
+		}
+
+		private void SetGameOver()
+		{
+			HighScore = Math.Max(Score, HighScore);
+			BtnValue = "Start";
+			GameOver = "bletris-game-over";
+			IsGameOver = true;
+			Refresh();
 		}
 
 		public int NextPiece
@@ -116,6 +125,17 @@ namespace Bletris
 
 		public virtual void BtnPause(UIMouseEventArgs args)
 		{
+			if (IsGameOver)
+			{
+				engine = RunGame();
+				UsedPoints.Clear();
+				Pieces.Clear();
+				IsGameOver = false;
+				GameOver = "";
+				IsPaused = false;
+				BtnValue = "Pause";
+				return;
+			}
 			if (IsPaused==false)
 			{
 				IsPaused = true;

@@ -35,7 +35,7 @@
         width: 100%;
     }
 
-@keyframes dying-animation {
+@keyframes bletris-dying-animation {
     from {
         fill: red;
     }
@@ -45,6 +45,37 @@
     }
 }
 .dying > #bletrisbox {
-    animation-name: dying-animation;
+    animation-name: bletris-dying-animation;
     animation-duration: 0.5s;
 }
+
+
+@keyframes bletris-game-over {
+    from {
+        transform: rotate3d(1,0,0,0deg);
+    }
+
+    to {
+        transform: rotate3d(1,0,0,360deg);
+    }
+}
+
+.bletris-game-over {
+    background-color: rgba(0,0,0,0.7);
+}
+
+    .bletris-game-over::before {
+        position: absolute;
+        content: "Game Over";
+        top: 0;
+        left: 0;
+        right: 204px;
+        bottom: 0;
+        padding-top: 20%;
+        text-align: center;
+        font-size: 8em;
+        color: aquamarine;
+        text-shadow: 0px 0px 10px red;
+        text-transform: uppercase;
+        animation: bletris-game-over 2.0s linear infinite;
+    }

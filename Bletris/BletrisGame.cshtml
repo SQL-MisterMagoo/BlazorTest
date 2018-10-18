@@ -1,6 +1,6 @@
 ﻿@inherits BletrisGameModel
 <div>
-    <div class="bletris-game" onkeydown="@KeyPressed">
+    <div class="bletris-game @GameOver" onkeydown="@KeyPressed">
         @if (Pieces != null)
         {
             foreach (var item in Pieces)
@@ -20,23 +20,15 @@
         }
         <div class="score-panel">
             <h1>Bletris</h1>
-            <h2>Score @Score</h2>
             <div>&copy; Mister Magoo 2018</div>
+            <h2>Score @Score</h2>
+            <h3>High @HighScore</h3>
             <h2>Next Piece</h2>
             <div>
                 <BletrisPiece Number="@NextPieceId" ref="NextPieceRef" DisplayOnly="true" />
             </div>
             Delay :<input id="bletris_delay" type="number" bind="@InitialDelay" step="100" onfocusin="@PauseGame" />
             <button class="btn btn-primary" onclick="@BtnPause" autofocus>@BtnValue</button>
-            <span>KeyPress: @LastKeyPress</span>
-            @*<span>Posx=@(ActivePiece?.PositionX ?? 0)</span>
-            <span>Posx=@(ActivePiece?.PositionY ?? 0)</span>
-            <span>PieceX=@(ActivePiece?.GridX ?? 0)</span>
-            <span>PieceY=@(ActivePiece?.GridY ?? 0)</span>
-            <span>Width=@(ActivePiece?.Width ?? 0)</span>
-            <span>Height=@(ActivePiece?.Height ?? 0)</span>
-            <span>Pieces=@(Pieces?.Count ?? 0)</span>
-            <span>Time=@DateTime.Now.TimeOfDay.ToString()</span>*@
         </div>
     </div>
 </div>
