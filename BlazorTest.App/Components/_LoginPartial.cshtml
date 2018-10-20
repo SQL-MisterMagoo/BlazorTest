@@ -16,8 +16,8 @@
 }
 else
 {
-    <a class="ml-md-auto btn btn-primary" asp-area="Identity" asp-page="/Account/Register" href="/Identity/Account/Register?returnUrl=~/blz">Register</a>
-    <a class="ml-md-auto btn btn-primary" asp-area="Identity" href="/Identity/Account/Login?returnUrl=~/blz">Login</a>
+    <a class="ml-md-auto btn btn-primary" asp-area="Identity" asp-page="/Account/Register" href="/Identity/Account/Register?returnUrl=~@PathBase">Register</a>
+    <a class="ml-md-auto btn btn-primary" asp-area="Identity" href="/Identity/Account/Login?returnUrl=~@PathBase">Login</a>
 }
 
 @functions
@@ -25,6 +25,7 @@ else
   [Inject] IUriHelper uriHelper { get; set; }
 
   ClaimsPrincipal User;
+  string PathBase;
 
   protected override void OnInit()
   {
@@ -32,6 +33,7 @@ else
 
       try
       {
+          PathBase = httpContextAccessor.HttpContext.Request.PathBase;
           User = httpContextAccessor.HttpContext.User;
       }
       catch (Exception)
@@ -40,6 +42,6 @@ else
   }
   void Logout()
   {
-      uriHelper.NavigateTo("/Identity/Account/Logout?returnUrl=/blz");
+      uriHelper.NavigateTo($"/Identity/Account/Logout?returnUrl=~{PathBase}");
   }
 }
