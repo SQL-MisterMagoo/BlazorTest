@@ -1,0 +1,16 @@
+﻿<form onsubmit="@OnSubmit">
+    <div class="form-group">
+        <label>Name : @Name</label>
+        <input type="text" bind="@Name" class="form-control" />
+    </div>
+</form>
+
+@functions
+{
+string @Name;
+
+void OnSubmit(UIEventArgs args)
+{
+    // Do some processing here to save the data or whatever
+}
+}
