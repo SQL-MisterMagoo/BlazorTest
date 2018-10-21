@@ -20,12 +20,14 @@
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.6.0" PrivateAssets="all" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorClock\BlazorClock.csproj" />
     <ProjectReference Include="..\BlazorFlying\BlazorFlying.csproj" />
     <ProjectReference Include="..\BlazorForm\BlazorForm.csproj" />
+    <ProjectReference Include="..\BlazorTraffic\BlazorTraffic.csproj" />
     <ProjectReference Include="..\BlazorTree\BlazorTree.csproj" />
     <ProjectReference Include="..\Bletris\Bletris.csproj" />
   </ItemGroup>

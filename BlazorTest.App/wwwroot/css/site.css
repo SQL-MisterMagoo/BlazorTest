@@ -147,3 +147,23 @@ app {
     .dialog a {
         color: white;
     }
+
+
+.footer {
+    position: absolute;
+    bottom: 0.2em;
+    right: 0.2em;
+    left: 0.2em;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+}
+
+    .footer > span {
+        margin-left: 1em;
+        background-color: rgba(0,0,40,0.2);
+    }

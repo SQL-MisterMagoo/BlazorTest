@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bletris", "Bletris\Bletris.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorForm", "BlazorForm\BlazorForm.csproj", "{E67FC720-FA5F-4B6B-9269-2C20B636A0AC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorTraffic", "BlazorTraffic\BlazorTraffic.csproj", "{89222540-D230-4518-BE71-1E038A28206F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		BlazorClock|Any CPU = BlazorClock|Any CPU
@@ -70,6 +72,12 @@ Global
 		{E67FC720-FA5F-4B6B-9269-2C20B636A0AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E67FC720-FA5F-4B6B-9269-2C20B636A0AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E67FC720-FA5F-4B6B-9269-2C20B636A0AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89222540-D230-4518-BE71-1E038A28206F}.BlazorClock|Any CPU.ActiveCfg = Debug|Any CPU
+		{89222540-D230-4518-BE71-1E038A28206F}.BlazorClock|Any CPU.Build.0 = Debug|Any CPU
+		{89222540-D230-4518-BE71-1E038A28206F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89222540-D230-4518-BE71-1E038A28206F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89222540-D230-4518-BE71-1E038A28206F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89222540-D230-4518-BE71-1E038A28206F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

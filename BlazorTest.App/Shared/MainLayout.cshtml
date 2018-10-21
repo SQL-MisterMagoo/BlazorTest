@@ -8,9 +8,16 @@
     <div class="top-row px-4">
         <Clock AutoTitle="true" ShowIcon="true" />
         <_LoginPartial />
-        <a href="https://blazor.net" target="_blank" class="ml-md-auto">About</a>
     </div>
     <div class="content px-4">
         @Body
     </div>
+</div>
+<div class="footer">
+    <Traffic>
+        <Parts Context="traffic">
+            <span>Traffic : @traffic.Bytes.ToString("N0") Bytes</span>
+            <span>Speed : @traffic.BytesPerSecond.ToString("N0") B/s</span>
+        </Parts>
+    </Traffic>
 </div>
