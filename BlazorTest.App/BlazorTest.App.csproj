@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
     <OutputType>Exe</OutputType>
     <RestoreAdditionalProjectSources>
       https://dotnet.myget.org/f/blazor-dev/api/v3/index.json;
@@ -14,13 +15,13 @@
 
   <ItemGroup>
     <PackageReference Include="GenFu" Version="1.4.22" />
-    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.2.0-preview3-35497" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0-preview3-35497" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0-preview3-35497" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.6.0" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" />
     <PackageReference Include="Microsoft.CSharp" Version="4.5.0" />
+    <PackageReference Update="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" />
   </ItemGroup>
 
   <ItemGroup>

@@ -260,3 +260,4 @@ paket-files/
 __pycache__/
 *.pyc
 /BlazorTest.Server/Properties/PublishProfiles/FolderProfile.pubxml
+/offline packages
