@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Blazor.Components;
+using Microsoft.AspNetCore.Blazor.Services;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BlazorClock
@@ -15,48 +17,114 @@ namespace BlazorClock
 		[Parameter] internal double Width { get; set; }
 		[Parameter] internal double Height { get; set; }
 		[Parameter] internal string ClockId { get; set; }
+		[Parameter] protected bool AlwaysActive { get; set; }
+
+		[Inject] private IUriHelper UriHelper { get; set; }
 
 		internal string Data;
 		internal double hourRotation;
 		internal double minuteRotation;
 		internal double secondRotation;
-
+		private CancellationTokenSource TokenSource;
 		private Task ClockTask;
-		private TimeZoneInfo timeZone;
+		private TimeZoneInfo TimeZone;
+		private string ThisURI;
+		private bool ShouldBeActiveNow;
 
 		protected override void OnInit()
 		{
+			ShouldBeActiveNow = true;
+			ThisURI = UriHelper.GetAbsoluteUri();
+			UriHelper.OnLocationChanged += UriHelper_OnLocationChanged;
+
 			if (!string.IsNullOrWhiteSpace(TimeZoneId))
 			{
 				try
 				{
-					timeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneId);
+					TimeZone = TimeZoneInfo.FindSystemTimeZoneById(TimeZoneId);
 				}
 				catch
 				{
-					timeZone = TimeZoneInfo.Local;
+					TimeZone = TimeZoneInfo.Local;
 				}
-			} else if (OffsetHours == 0 && OffsetMinutes == 0)
+			}
+			else if (OffsetHours == 0 && OffsetMinutes == 0)
 			{
-				timeZone = TimeZoneInfo.Local;
-			}  else
+				TimeZone = TimeZoneInfo.Local;
+			}
+			else
 			{
-				timeZone = TimeZoneInfo.CreateCustomTimeZone(Title ?? "Clock", new TimeSpan((int)OffsetHours, (int)OffsetMinutes, 0), Title ?? "Clock", Title ?? "Clock");
+				TimeZone = TimeZoneInfo.CreateCustomTimeZone(Title ?? "Clock", new TimeSpan((int)OffsetHours, (int)OffsetMinutes, 0), Title ?? "Clock", Title ?? "Clock");
 			}
 			if (Width == 0) Width = 50;
 			if (Height == 0) Height = 50;
-			if (string.IsNullOrWhiteSpace(ClockId)) ClockId = $"C{Guid.NewGuid().ToString().Replace("-","").Substring(0,10)}";
-			ClockTask = RunClock();
+			if (string.IsNullOrWhiteSpace(ClockId)) ClockId = $"C{Guid.NewGuid().ToString().Replace("-", "").Substring(0, 10)}";
+			TokenSource = new CancellationTokenSource();
+			ClockTask = RunClock(TokenSource.Token);
 		}
 
-		private async Task RunClock()
+		private void UriHelper_OnLocationChanged(object sender, string e)
+		{
+			if (AlwaysActive)
+			{
+				return;
+			}
+			ShouldBeActiveNow = ShouldMatch(UriHelper.GetAbsoluteUri());
+			if (ShouldBeActiveNow)
+			{				
+				ClockTask = RunClock(TokenSource.Token);
+			}
+			else
+			{
+				TokenSource.Cancel();
+			}
+		}
+
+		private bool ShouldMatch(string currentUriAbsolute)
+		{
+			if (EqualsHrefExactlyOrIfTrailingSlashAdded(currentUriAbsolute))
+			{
+				return true;
+			}
+
+			return false;
+		}
+
+		private bool EqualsHrefExactlyOrIfTrailingSlashAdded(string currentUriAbsolute)
+		{
+			if (string.Equals(currentUriAbsolute, ThisURI, StringComparison.Ordinal))
+			{
+				return true;
+			}
+
+			if (currentUriAbsolute.Length == ThisURI.Length - 1)
+			{
+				// Special case: highlight links to http://host/path/ even if you're
+				// at http://host/path (with no trailing slash)
+				//
+				// This is because the router accepts an absolute URI value of "same
+				// as base URI but without trailing slash" as equivalent to "base URI",
+				// which in turn is because it's common for servers to return the same page
+				// for http://host/vdir as they do for host://host/vdir/ as it's no
+				// good to display a blank page in that case.
+				if (ThisURI[ThisURI.Length - 1] == '/'
+						&& ThisURI.StartsWith(currentUriAbsolute, StringComparison.Ordinal))
+				{
+					return true;
+				}
+			}
+			
+			return false;
+		}
+
+		private async Task RunClock(CancellationToken cancellationToken)
 		{
 			await Task.Delay(40);
-			while (true)
+			while (!cancellationToken.IsCancellationRequested)
 			{
 				DateTime utcNow = DateTime.UtcNow;
-				if (AutoTitle) Title = timeZone.IsDaylightSavingTime(utcNow) ? timeZone.DaylightName : timeZone.StandardName;
-				DateTime dateTime = utcNow.Add(timeZone.GetUtcOffset(utcNow));
+				if (AutoTitle) Title = TimeZone.IsDaylightSavingTime(utcNow) ? TimeZone.DaylightName : TimeZone.StandardName;
+				DateTime dateTime = utcNow.Add(TimeZone.GetUtcOffset(utcNow));
 				Data = dateTime.ToLongTimeString();
 				if (!ShowIcon) UpdateSvg(dateTime);
 				StateHasChanged();
