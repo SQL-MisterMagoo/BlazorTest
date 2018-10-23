@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorClock\BlazorClock.csproj" />
+    <ProjectReference Include="..\BlazorDraggable\BlazorDraggable.csproj" />
     <ProjectReference Include="..\BlazorFlying\BlazorFlying.csproj" />
     <ProjectReference Include="..\BlazorForm\BlazorForm.csproj" />
     <ProjectReference Include="..\BlazorTraffic\BlazorTraffic.csproj" />

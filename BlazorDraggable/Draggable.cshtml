@@ -1,0 +1,13 @@
+﻿@inherits DraggableModel
+
+<div draggable="true" dropzone="move"
+	 ondragstart="@OnDragStart"
+	 ondragend="@OnDragEnd"
+	 ondragenter="@OnDragEnter"
+	 ondragleave="@OnDragLeave"
+	 ondrop="@OnDrop"
+	 class="@Class"
+	 style="@(Styles())">
+	@ChildContent(Data)
+</div>
+
