@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorClock", "BlazorClock\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorFlying", "BlazorFlying\BlazorFlying.csproj", "{ECE39ED7-B52B-4206-A111-B0D20B467F20}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorLogin", "BlazorLogin\BlazorLogin.csproj", "{49BE2874-C3F7-4362-BBBE-B5B8C422A04B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorSolidLogin", "BlazorSolidLogin\BlazorSolidLogin.csproj", "{49BE2874-C3F7-4362-BBBE-B5B8C422A04B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorTree", "BlazorTree\BlazorTree.csproj", "{3E13C918-59A8-4441-BE30-7876AC44BBF3}"
 EndProject
