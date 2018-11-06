@@ -19,7 +19,7 @@
     "BlazorTest.Server": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "blz/bletris",
+      "launchUrl": "blz",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

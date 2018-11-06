@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "defaultProvider": "unpkg",
+  "libraries": [
+    {
+      "library": "solid-auth-client@2.2.11",
+      "destination": "content/solid-auth-client/",
+      "files": [
+        "dist-lib/solid-auth-client.bundle.js",
+        "dist-lib/solid-auth-client.bundle.js.map"
+      ]
+    }
+  ]
+}
