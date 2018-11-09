@@ -45,23 +45,27 @@ namespace BlazorSolidLogin.Services
 					solidIdentity = new SolidIdentity((string)jObject["issuer"]);
 					solidIdentity.SetId((string)jObject["webId"]);
 
-					string profile = null;
+					string name = null;
 					try
 					{
-						profile = await JSRuntime.Current.InvokeAsync<string>($"solid.data[{solidIdentity.Id}].user.name", null);
-						Console.WriteLine($"Profile: {profile ?? ""}");
+						var nameResult = await JSRuntime.Current.InvokeAsync<object>("blazorSolid.getUserName", solidIdentity.Id);
+						if (nameResult != null)
+						{
+							JObject nameObject = JObject.Parse(nameResult.ToString());
 
+							name = (string)nameObject["value"];
+						}
 					}
 					catch (Exception x2)
 					{
-						Console.WriteLine("PROFILE ERROR:" + x2.GetBaseException().Message);
+						Console.WriteLine("NAME ERROR:" + x2.GetBaseException().Message);
 					}
-					if (!string.IsNullOrWhiteSpace(profile))
-					{
-						jObject = JObject.Parse(profile.ToString());
 
-						solidIdentity.SetName((string)jObject["name"] ?? "Anonymous");
-					} else
+					if (!string.IsNullOrWhiteSpace(name))
+					{
+						solidIdentity.SetName(name);
+					}
+					else
 					{
 						Uri uri = new Uri(solidIdentity.Id);
 						solidIdentity.SetName(uri.DnsSafeHost.Split('.')[0]);
