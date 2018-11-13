@@ -1,16 +1,44 @@
-﻿<form onsubmit="@OnSubmit">
-    <div class="form-group">
-        <label>Name : @Name</label>
-        <input type="text" bind="@Name" class="form-control" />
-    </div>
+﻿
+<form onsubmit="@OnSubmit">
+    <EditorFor bind-For="@user.Name" Name="@nameof(user.Name)" />
+    <EditorFor bind-For="@user.Email" Name="@nameof(user.Email)" />
+    <EditorFor bind-For="@user.Url" Name="@nameof(user.Url)" />
+    <EditorFor bind-For="@user.DateOfBirth" Name="@nameof(user.DateOfBirth)" />
+    <EditorFor bind-For="@user.RememberMe" Name="@nameof(user.RememberMe)" />
+    <button type="submit" class="btn btn-default">Submit</button>
 </form>
+@if (!string.IsNullOrWhiteSpace(user?.Name))
+{
+<div>Hi @user.Name, thanks for letting me know your details. I will @(user.RememberMe ? "" : "not") remember you.</div>
+}
 
 @functions
 {
-string @Name;
+  class Person
+  {
+      public string Name;
+      public string Email;
+      public string Url;
+      public DateTime DateOfBirth;
+      public bool RememberMe;
+  }
 
-void OnSubmit(UIEventArgs args)
-{
-    // Do some processing here to save the data or whatever
-}
+  private Person user;
+
+  protected override void OnInit()
+  {
+      user = new Person { Name = "", Email = "", Url = "", DateOfBirth = DateTime.UtcNow.AddYears(-25), RememberMe = false };
+  }
+
+  protected override void OnParametersSet()
+  {
+      base.OnParametersSet();
+      StateHasChanged();
+  }
+
+  void OnSubmit(UIEventArgs args)
+  {
+      StateHasChanged();
+  }
+
 }

@@ -31,4 +31,8 @@
     <Folder Include="content\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorEditorFor\BlazorEditorFor.csproj" />
+  </ItemGroup>
+
 </Project>
