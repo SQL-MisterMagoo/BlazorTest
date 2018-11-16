@@ -10,22 +10,48 @@
         if (hasChildren && item.State == NodeState.Expanded)
         {
             <li class="tv-node">
-                @OpenContent(contentItem)
-                <TreeView Dependents="children" OpenContent="@OpenContent" ClosedContent="@ClosedContent" Depth="@(Depth + 1)" />
+                @if (OpenSelectedContent != null && (TreeSelection?.IsSelected(contentItem) ?? false))
+                {
+                    @OpenSelectedContent(contentItem)
+                }
+                else
+                {
+                    @OpenContent(contentItem)
+                }
+                <TreeView 
+                    Dependents="children" 
+                    OpenContent="@OpenContent" 
+                    OpenSelectedContent="@OpenSelectedContent" 
+                    ClosedContent="@ClosedContent" 
+                    ClosedSelectedContent="@ClosedSelectedContent" 
+                    Depth="@(Depth + 1)" />
             </li>
         }
         else
         {
             <li class="tv-node">
-                @ClosedContent(contentItem)
+                @if (ClosedSelectedContent != null && (TreeSelection?.IsSelected(contentItem) ?? false))
+                {
+                    @ClosedSelectedContent(contentItem)
+                }
+                else
+                {
+                    @ClosedContent(contentItem)
+                }
             </li>
         }
     }
 </ul>
 @functions
 {
-[Parameter] protected IEnumerable<INodeItem<IItem>> Dependents { get; set; }
-[Parameter] protected RenderFragment<IItem> OpenContent { get; set; }
-[Parameter] protected RenderFragment<IItem> ClosedContent { get; set; }
-[Parameter] protected int Depth { get; set; }
+  [Parameter] protected IEnumerable<INodeItem<IItem>> Dependents { get; set; }
+  [Parameter] protected RenderFragment<IItem> OpenContent { get; set; }
+  [Parameter] protected RenderFragment<IItem> OpenSelectedContent { get; set; }
+  [Parameter] protected RenderFragment<IItem> ClosedContent { get; set; }
+  [Parameter] protected RenderFragment<IItem> ClosedSelectedContent { get; set; }
+  [Parameter] protected int Depth { get; set; }
+
+  // This may or may not be provided by the consumer 
+  // If it is, we will use it to decide which RenderFragment to display
+  [CascadingParameter] ITreeSelection<IItem> TreeSelection { get; set; }
 }

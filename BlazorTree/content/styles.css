@@ -75,3 +75,7 @@ by SeanWessell
     outline: 0;
 }
 
+.tv li .selected span::after {
+    content: "✔";
+    vertical-align:central;
+}
