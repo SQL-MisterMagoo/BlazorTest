@@ -15,12 +15,14 @@
     <Copyright>Completely Free For Non-Profit</Copyright>
     <PackageProjectUrl>https://github.com/SQL-MisterMagoo/BlazorTest</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SQL-MisterMagoo/BlazorTest</RepositoryUrl>
-    <PackageTags>Blazor,Tree,Treeview,Component,Templated</PackageTags>
+    <PackageTags>Blazor,Tree,Treeview,Component,Templated,CascadingValues</PackageTags>
+    <Version>1.0.2</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.7.0-preview1-final" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.7.0-preview1-final" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.7.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.7.0" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>

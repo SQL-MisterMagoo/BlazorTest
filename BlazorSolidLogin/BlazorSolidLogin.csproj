@@ -9,7 +9,7 @@
     </RestoreAdditionalProjectSources>
     <LangVersion>7.3</LangVersion>
     <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Mister Magoo</Authors>
     <Company>MM</Company>
     <Description>A Blazor Component that provides basic Solid authentication.</Description>
@@ -17,6 +17,7 @@
     <PackageProjectUrl>https://github.com/SQL-MisterMagoo/BlazorTest</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SQL-MisterMagoo/BlazorTest/BlazorSolidLogin</RepositoryUrl>
     <PackageTags>Blazor,Solid,Component</PackageTags>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -35,8 +36,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.7.0-preview1-final" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.7.0-preview1-final" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.7.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.7.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1-beta1" />
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.0-preview3-35497" />
   </ItemGroup>

@@ -17,6 +17,8 @@
     <RepositoryUrl>https://github.com/SQL-MisterMagoo/BlazorTest</RepositoryUrl>
     <PackageTags>Blazor,Draggable,Component</PackageTags>
     <PackageReleaseNotes>the event ondrop does not seem to work in Blazor, so the code that makes use of this component needs to manage which item is being dragged and which item is dropped on itself.</PackageReleaseNotes>
+    <Version>1.0.2</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,8 +29,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.7.0-preview1-final" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.7.0-preview1-final" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.7.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.7.0" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
