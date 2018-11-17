@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Blazor;
 using Microsoft.AspNetCore.Blazor.Components;
-using Microsoft.AspNetCore.Blazor.RenderTree;
 using System;
 using System.Linq;
 
@@ -23,36 +22,11 @@ namespace BlazorEditorFor
 		[Parameter] protected string LabelStyle { get; set; }
 		[Parameter] protected string Name { get; set; }
 
-		public IType For2;
-
 		protected void OnForChanged(UIChangeEventArgs args)
 		{
 			For = (IType)Convert.ChangeType(args.Value, typeof(IType));
-			For2 = For;
 			ForChanged?.Invoke(For);
 			StateHasChanged();
-		}
-
-		protected bool BindBool
-		{
-			get { return (bool)Convert.ChangeType(For, typeof(bool)); }
-			set
-			{
-				For = (IType)Convert.ChangeType(value, typeof(IType));
-				ForChanged?.Invoke(For);
-				StateHasChanged();
-			}
-		}
-
-		protected long BindLong
-		{
-			get { return (long)Convert.ChangeType(For, typeof(long)); }
-			set
-			{
-				For = (IType)Convert.ChangeType(value, typeof(IType));
-				ForChanged?.Invoke(For);
-				StateHasChanged();
-			}
 		}
 
 		protected override void OnInit()

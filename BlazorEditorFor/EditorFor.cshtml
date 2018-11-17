@@ -2,9 +2,17 @@
 @inherits BlazorEditorFor.EditorForModel<IType>
 
 <div class="@GroupClass" style="@GroupStyle">
-    <label for="@Name" class="@LabelClass" style="@LabelStyle">@Name</label>
-    <input id="@Id" name="@Name" class="@InputClass" style="@InputStyle" type="@InputType" 
-        value="@( InputType == "date" ? String.Format("{0:yyyy-MM-dd}",For) : For.ToString() )" 
-        onchange="@OnForChanged" />
+    <label for="@Name"
+           class="@LabelClass"
+           style="@LabelStyle">
+        @Name
+    </label>
+    <input id="@Id"
+           name="@Name"
+           class="@InputClass"
+           style="@InputStyle"
+           type="@InputType"
+           value="@( InputType == "date" ? String.Format("{0:yyyy-MM-dd}",For) : For.ToString() )"
+           onchange="@OnForChanged" />
 </div>
 
