@@ -1,43 +1,28 @@
 ﻿
-/* https://bootsnipp.com/snippets/ypNAe
+/* based off https://bootsnipp.com/snippets/ypNAe
 by SeanWessell
 */
-.tv, .tv ul {
-    margin: 0;
+.tv {
+    margin: 0 0 0 1em;
     padding: 0;
     list-style: none;
     transition: all ease-in-out 0.5s;
+    position: relative
 }
 
-    .tv ul {
-        margin-left: 1em;
-        position: relative
+    .tv:first-of-type {
+        margin: 0 0 0 0;
     }
 
-        .tv ul ul {
-            margin-left: .5em
-        }
-
-        .tv ul:before {
-            content: "";
-            display: block;
-            width: 0;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            border-left: 1px solid
-        }
-
-    .tv li {
+    .tv > .tv-node > .tv .tv-node {
         margin: 0;
-        padding: 0 1em;
+        padding: 0 0 0 1em;
         line-height: 2em;
         font-weight: 700;
         position: relative
     }
 
-    .tv ul li:before {
+    .tv > .tv-node > .tv > .tv-node::before {
         content: "";
         display: block;
         width: 10px;
@@ -49,33 +34,25 @@ by SeanWessell
         left: 0
     }
 
-    .tv ul li:last-child:before {
-        background: #fff;
+
+    .tv > .tv-node > .tv {
+        margin-left: 0.5em;
+    }
+
+    .tv > .tv-node > .tv::before {
+        content: "";
+        display: block;
+        width: 0;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        border-left: 1px solid
+    }
+
+    .tv > .tv-node > .tv > .tv-node:last-child::before {
+        background-color: var(--background-color, #fff);
         height: auto;
         top: 1em;
         bottom: 0
     }
-
-.indicator {
-    margin-right: 5px;
-}
-
-.tv li a {
-    text-decoration: none;
-    color: #369;
-}
-
-.tv li button, .tv li button:active, .tv li button:focus {
-    text-decoration: none;
-    color: #369;
-    border: none;
-    background: transparent;
-    margin: 0px 0px 0px 0px;
-    padding: 0px 0px 0px 0px;
-    outline: 0;
-}
-
-.tv li .selected span::after {
-    content: "✔";
-    vertical-align:central;
-}
