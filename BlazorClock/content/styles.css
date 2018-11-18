@@ -21,39 +21,39 @@
 
 .circle {
     fill: none;
-    stroke: #000;
+    stroke: var(--font-color, #000);
     stroke-width: 9;
     stroke-miterlimit: 10;
 }
 
 .mid-circle {
-    fill: #000;
+    fill: var(--font-color, #000);
 }
 
 .hour-marks {
     fill: none;
-    stroke: #000;
+    stroke: var(--font-color, #000);
     stroke-width: 9;
     stroke-miterlimit: 10;
 }
 
 .hour-arm {
     fill: none;
-    stroke: #000;
+    stroke: var(--font-color, #000);
     stroke-width: 17;
     stroke-miterlimit: 10;
 }
 
 .minute-arm {
     fill: none;
-    stroke: #000;
+    stroke: var(--font-color, #000);
     stroke-width: 11;
     stroke-miterlimit: 10;
 }
 
 .second-arm {
     fill: none;
-    stroke: #000;
+    stroke: var(--font-color, #000);
     stroke-width: 4;
     stroke-miterlimit: 10;
 }
