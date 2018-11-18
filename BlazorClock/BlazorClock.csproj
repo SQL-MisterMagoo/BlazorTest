@@ -17,7 +17,7 @@
     <PackageProjectUrl>https://github.com/SQL-MisterMagoo/BlazorTest</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SQL-MisterMagoo/BlazorTest</RepositoryUrl>
     <PackageTags>Blazor,Clock,Component</PackageTags>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
   </PropertyGroup>
 
   <ItemGroup>
