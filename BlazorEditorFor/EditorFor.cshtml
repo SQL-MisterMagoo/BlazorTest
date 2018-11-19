@@ -7,12 +7,24 @@
            style="@LabelStyle">
         @Name
     </label>
-    <input id="@Id"
-           name="@Name"
-           class="@InputClass"
-           style="@InputStyle"
-           type="@InputType"
-           value="@( InputType == "date" ? String.Format("{0:yyyy-MM-dd}",For) : For.ToString() )"
-           onchange="@OnForChanged" />
+    @if (InputType.Equals("checkbox", StringComparison.OrdinalIgnoreCase))
+    {
+        <input id="@Id"
+               name="@Name"
+               class="@InputClass"
+               style="@InputStyle"
+               type="@InputType"
+               checked="@BoundData"
+               onchange="@{(e) => BoundData = e.Value.ToString() }" />
+    }
+    else
+    {
+        <input id="@Id"
+               name="@Name"
+               class="@InputClass"
+               style="@InputStyle"
+               type="@InputType"
+               bind="@BoundData" />
+    }
 </div>
 

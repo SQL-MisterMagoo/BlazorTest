@@ -1,44 +1,98 @@
 ﻿
 <form onsubmit="@OnSubmit">
-    <EditorFor bind-For="@user.Name" Name="@nameof(user.Name)" />
-    <EditorFor bind-For="@user.Email" Name="@nameof(user.Email)" />
-    <EditorFor bind-For="@user.Url" Name="@nameof(user.Url)" />
-    <EditorFor bind-For="@user.DateOfBirth" Name="@nameof(user.DateOfBirth)" />
-    <EditorFor bind-For="@user.RememberMe" Name="@nameof(user.RememberMe)" />
+    <EditorFor DataChanged=@OnChangeName Data="@user.Name" Name="@nameof(user.Name)" />
+    <EditorFor DataChanged=@OnChangeEmail Data="@user.Email" Name="@nameof(user.Email)" />
+    <EditorFor DataChanged=@OnChangeUrl Data="@user.Url" Name="@nameof(user.Url)" />
+    <EditorFor DataChanged=@OnChangeDOB Data="@user.DateOfBirth" Name="@nameof(user.DateOfBirth)" />
+    <EditorFor DataChanged=@OnChangeRem Data="@user.RememberMe" Name="@nameof(user.RememberMe)" />
     <button type="submit" class="btn btn-default">Submit</button>
 </form>
 @if (!string.IsNullOrWhiteSpace(user?.Name))
 {
-<div>Hi @user.Name, thanks for letting me know your details. I will @(user.RememberMe ? "" : "not") remember you.</div>
+    <div>Hi @user.Name</div>
 }
+@if (!string.IsNullOrWhiteSpace(user?.Email))
+{
+    <div>If I need to contact you, I will email : @user.Email</div>
+}
+@if (!string.IsNullOrWhiteSpace(user?.Url))
+{
+    <div>I'll check out your web site : @user.Url</div>
+}
+@if (user?.DateOfBirth > DateTime.MinValue)
+{
+    @if (user.DateOfBirth == DateTime.Today)
+    {
+        <div>Happy Birthday!</div>
+    }
+    else
+    {
+        <div>I'll send you a special wish on : @user.DateOfBirth.ToShortDateString()</div>
+    }
+}
+@if (!string.IsNullOrWhiteSpace(user?.Name) || !string.IsNullOrWhiteSpace(user?.Email) || !string.IsNullOrWhiteSpace(user?.Url) || user?.DateOfBirth > DateTime.MinValue)
+{
+  <div><b><u>I will @( user.RememberMe ? "" : "not") remember you after you close the browser.</u></b></div>
+}
+
+<div>@user?.RememberMe</div>
 
 @functions
 {
-  class Person
-  {
-      public string Name;
-      public string Email;
-      public string Url;
-      public DateTime DateOfBirth;
-      public bool RememberMe;
-  }
+class Person
+{
+    public string Name;
+    public string Email;
+    public string Url;
+    public DateTime DateOfBirth;
+    public bool RememberMe;
+}
 
-  private Person user;
+private Person user;
 
-  protected override void OnInit()
-  {
-      user = new Person { Name = "", Email = "", Url = "", DateOfBirth = DateTime.UtcNow.AddYears(-25), RememberMe = false };
-  }
+protected override void OnInit()
+{
+    user = new Person { Name = "", Email = "", Url = "", DateOfBirth = DateTime.UtcNow.AddYears(-25), RememberMe = false };
+}
 
-  protected override void OnParametersSet()
-  {
-      base.OnParametersSet();
-      StateHasChanged();
-  }
+protected override void OnParametersSet()
+{
+    base.OnParametersSet();
+    StateHasChanged();
+}
 
-  void OnSubmit(UIEventArgs args)
-  {
-      StateHasChanged();
-  }
+void OnSubmit(UIEventArgs args)
+{
+    StateHasChanged();
+}
+
+void OnChangeName(string obj)
+{
+    user.Name = obj;
+    StateHasChanged();
+}
+
+void OnChangeEmail(string obj)
+{
+    user.Email = obj;
+    StateHasChanged();
+}
+
+void OnChangeUrl(string obj)
+{
+    user.Url = obj;
+    StateHasChanged();
+}
+
+void OnChangeDOB(DateTime obj)
+{
+    user.DateOfBirth = obj;
+    StateHasChanged();
+}
+void OnChangeRem(bool obj)
+{
+    user.RememberMe = obj;
+    StateHasChanged();
+}
 
 }

@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorTraffic", "BlazorTraf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorDraggable", "BlazorDraggable\BlazorDraggable.csproj", "{044435F1-6E14-44FA-82ED-85DAAC697791}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorEditorFor", "BlazorEditorFor\BlazorEditorFor.csproj", "{ECFE10FE-B5AA-44CB-9886-9B3046D17E5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorEditorFor", "BlazorEditorFor\BlazorEditorFor.csproj", "{ECFE10FE-B5AA-44CB-9886-9B3046D17E5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorBoundComponent", "BlazorBoundComponent\BlazorBoundComponent.csproj", "{5354DFB9-41F6-43B5-8A00-5FACD7F78240}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,6 +96,12 @@ Global
 		{ECFE10FE-B5AA-44CB-9886-9B3046D17E5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECFE10FE-B5AA-44CB-9886-9B3046D17E5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECFE10FE-B5AA-44CB-9886-9B3046D17E5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5354DFB9-41F6-43B5-8A00-5FACD7F78240}.BlazorClock|Any CPU.ActiveCfg = Debug|Any CPU
+		{5354DFB9-41F6-43B5-8A00-5FACD7F78240}.BlazorClock|Any CPU.Build.0 = Debug|Any CPU
+		{5354DFB9-41F6-43B5-8A00-5FACD7F78240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5354DFB9-41F6-43B5-8A00-5FACD7F78240}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5354DFB9-41F6-43B5-8A00-5FACD7F78240}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5354DFB9-41F6-43B5-8A00-5FACD7F78240}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

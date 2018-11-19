@@ -23,6 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\BlazorBoundComponent\BlazorBoundComponent.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Update="EditorFor.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

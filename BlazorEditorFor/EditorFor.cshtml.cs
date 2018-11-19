@@ -1,15 +1,14 @@
-﻿using Microsoft.AspNetCore.Blazor;
+﻿using BlazorBoundComponent;
+using Microsoft.AspNetCore.Blazor;
 using Microsoft.AspNetCore.Blazor.Components;
 using System;
 using System.Linq;
 
 namespace BlazorEditorFor
 {
-	public class EditorForModel<IType> : BlazorComponent
+	public class EditorForModel<IType> : BlazorBoundComponent<IType>
 	{
 
-		[Parameter] protected IType For { get; set; }
-		[Parameter] protected Action<IType> ForChanged { get; set; }
 		[Parameter] protected string InputType { get; set; }
 		[Parameter] protected string Id { get; set; }
 		[Parameter] protected string Class { get; set; }
@@ -21,13 +20,6 @@ namespace BlazorEditorFor
 		[Parameter] protected string InputStyle { get; set; }
 		[Parameter] protected string LabelStyle { get; set; }
 		[Parameter] protected string Name { get; set; }
-
-		protected void OnForChanged(UIChangeEventArgs args)
-		{
-			For = (IType)Convert.ChangeType(args.Value, typeof(IType));
-			ForChanged?.Invoke(For);
-			StateHasChanged();
-		}
 
 		protected override void OnInit()
 		{
@@ -52,7 +44,7 @@ namespace BlazorEditorFor
 				case "url":
 					return fieldName;
 				default:
-					switch (For)
+					switch (Data)
 					{
 						case bool value:
 							return "checkbox";
