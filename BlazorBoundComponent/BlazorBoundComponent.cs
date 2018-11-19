@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Blazor.Components;
+﻿using Microsoft.AspNetCore.Blazor;
+using Microsoft.AspNetCore.Blazor.Components;
 using System;
 
 namespace BlazorBoundComponent
@@ -8,31 +9,55 @@ namespace BlazorBoundComponent
 		// _data is the "actual" bound data
 		internal T _data;
 
-		// BoundData is a wrapper required by the runtime esp. when binding to <input> tags as they only like strings.
-		public string BoundData
+		// BoundData is a wrapper that allows us to control StateHasChanged
+		public T BoundData
 		{
 			get
 			{
-				if (_data is DateTime)
-					return String.Format("{0:yyyy-MM-dd}", _data);
-				return _data.ToString();
+				return _data;
 			}
 			set
 			{
 				try
 				{
-					Data = (T)Convert.ChangeType(value, typeof(T));
+					//This takes care of the child data and refresh
+					Data = value; 
+					//This takes care of the parent data and refresh
 					DataChanged?.Invoke(Data);
 				}
-				catch { }
+				catch (Exception ex)
+				{
+					Console.WriteLine(ex);
+				}
 			}
 		}
 
-		// Data is the externally exposed param that the caller will bind to
+		// ChangeData can be useful for binding to onchange for things that require a string, like most <input> elements
+		public void ChangeData(UIChangeEventArgs args)
+		{
+			try
+			{
+				if (_data is DateTime)
+				{
+					if (DateTime.TryParse(args.Value.ToString(), out DateTime dt))
+						BoundData = (T)Convert.ChangeType(dt, typeof(T));
+				}
+				else
+				{
+					BoundData = (T)Convert.ChangeType(args.Value.ToString(), typeof(T));
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex);
+			}
+		}
+
+		// Data is the externally exposed param that the parent will bind to
 		[Parameter] protected T Data { get { return _data; } set { _data = value; StateHasChanged(); } }
 
 		// DataChanged is the externally exposes param that 
-		// allows notifying the caller we changed their data.
+		// allows notifying the parent we changed their data.
 		[Parameter] protected Action<T> DataChanged { get; set; }
 
 	}
