@@ -7,8 +7,9 @@
     <EditorFor DataChanged=@OnChangeDOB Data="@user.DateOfBirth" Name="@nameof(user.DateOfBirth)" />
     <EditorFor DataChanged=@OnChangeFav Data="@user.FavouriteNumber" Name="@nameof(user.FavouriteNumber)" />
     <EditorFor DataChanged=@OnChangeRem Data="@user.RememberMe" Name="@nameof(user.RememberMe)" />
-    <button type="submit" class="btn btn-default">Submit</button>
+    @*<button type="submit" class="btn btn-default">Submit</button>*@
 </form>
+<hr />
 @if (!string.IsNullOrWhiteSpace(user?.Name))
 {
     <div>Hi @user.Name</div>
@@ -29,7 +30,7 @@
 {
   <div>That's crazy, @user.FavouriteNumber is my favourite number also!</div>
 }
-@if (user?.DateOfBirth > DateTime.MinValue)
+@if (user?.DateOfBirth > DateTime.MinValue )
 {
     @if (user.DateOfBirth == DateTime.Today)
     {
@@ -45,7 +46,6 @@
     <div><b><u>I will @( user.RememberMe ? "" : "not") remember you after you close the browser.</u></b></div>
 }
 
-<div>@user?.RememberMe</div>
 
 @functions
 {
@@ -64,7 +64,7 @@
 
   protected override void OnInit()
   {
-      user = new Person { Name = "", Email = "", Url = "", DateOfBirth = DateTime.UtcNow.AddYears(-25), RememberMe = false };
+      user = new Person { Name = "", Email = "", Url = "", DateOfBirth = DateTime.MinValue, RememberMe = false };
   }
 
   protected override void OnParametersSet()
