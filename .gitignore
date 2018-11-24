@@ -261,3 +261,4 @@ __pycache__/
 *.pyc
 /BlazorTest.Server/Properties/PublishProfiles/FolderProfile.pubxml
 /offline packages
+/PushPackages.ps1

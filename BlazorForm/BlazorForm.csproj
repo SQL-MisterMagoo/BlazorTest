@@ -13,7 +13,7 @@
     <PackageProjectUrl>https://github.com/SQL-MisterMagoo/BlazorTest</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SQL-MisterMagoo/BlazorTest</RepositoryUrl>
     <PackageTags>Blazor,Form,Submit,Component</PackageTags>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
@@ -25,16 +25,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="BlazorEditorFor" Version="1.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.7.0" />
     <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.7.0" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="content\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\BlazorEditorFor\BlazorEditorFor.csproj" />
   </ItemGroup>
 
 </Project>

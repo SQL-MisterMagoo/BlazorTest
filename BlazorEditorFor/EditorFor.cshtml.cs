@@ -1,5 +1,4 @@
 ﻿using BlazorBoundComponent;
-using Microsoft.AspNetCore.Blazor;
 using Microsoft.AspNetCore.Blazor.Components;
 using System;
 using System.Linq;

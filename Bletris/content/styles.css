@@ -1,10 +1,10 @@
 ﻿.bletris-game {
-    position: absolute;
+    /*position: absolute;*/
     display: grid;
     grid-template-columns: repeat(14,32px) 204px;
     grid-template-rows: repeat(20,32px);
     grid-column-gap: 0;
-    border: 2px dashed red;
+    border: 2px dashed var(--accent-color,red);
     background-color: rgba(180, 49, 49, 0.1);
     background-image: url('dotnet-bot-pot.svg');
     background-repeat: no-repeat;
@@ -46,7 +46,7 @@
 }
 .dying > #bletrisbox {
     animation-name: bletris-dying-animation;
-    animation-duration: 0.5s;
+    animation-duration: 0.4s;
 }
 
 
