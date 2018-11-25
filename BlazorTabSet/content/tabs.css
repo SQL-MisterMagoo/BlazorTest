@@ -1,0 +1,39 @@
+﻿:root {
+    --nav-tabs--grid-column: 0;
+}
+
+.nav-tabs {
+    counter-reset: --nav-tabs--grid-column;
+    display: grid;
+}
+
+    .nav-tabs .nav-link {
+        border-color: #dee2e6 #dee2e6 #fff;
+        border-bottom-color: #dee2e6;
+        background-color: #f9f9f9;
+        cursor: pointer;
+    }
+
+    .nav-tabs > .nav-tab > .nav-link.active {
+        border-top: 4px solid #e0108b !important;
+        padding-top: 5px;
+        border-bottom: 1px solid transparent;
+        background-color: white;
+    }
+
+    .nav-tabs > .nav-tab {
+        counter-increment: --nav-tabs--grid-column;
+        grid-row: 1;
+        grid-column: var(--nav-tabs--grid-column);
+        margin-bottom: -1px;
+    }
+
+    .nav-tabs > .nav-tab-content {
+        display: none;
+    }
+
+        .nav-tabs > .nav-tab-content.active {
+            grid-row: 2;
+            grid-column: 1;
+            display: block;
+        }

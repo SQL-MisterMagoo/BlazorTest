@@ -30,6 +30,7 @@
     <ProjectReference Include="..\BlazorFlying\BlazorFlying.csproj" />
     <ProjectReference Include="..\BlazorForm\BlazorForm.csproj" />
     <ProjectReference Include="..\BlazorSolidLogin\BlazorSolidLogin.csproj" />
+    <ProjectReference Include="..\BlazorTabSet\BlazorTabSet.csproj" />
     <ProjectReference Include="..\BlazorTraffic\BlazorTraffic.csproj" />
     <ProjectReference Include="..\BlazorTree\BlazorTree.csproj" />
     <ProjectReference Include="..\Bletris\Bletris.csproj" />
