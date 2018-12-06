@@ -19,8 +19,8 @@
 
   <ItemGroup>
     <PackageReference Include="BlazorBoundComponent" Version="1.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.7.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.7.0" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="0.8.0-preview1-20181121.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="0.8.0-preview1-20181121.1" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
