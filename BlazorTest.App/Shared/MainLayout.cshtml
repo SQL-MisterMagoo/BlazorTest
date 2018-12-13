@@ -6,11 +6,13 @@
 
 <div class="main">
     <div class="top-row px-4">
-        <Clock AutoTitle="true" ShowIcon="true" AlwaysActive="true"/>
+        <Clock AutoTitle="true" ShowIcon="true" AlwaysActive="true" />
         <_LoginPartial />
     </div>
     <div class="content px-4">
-        @Body
+        <CascadingValue Name="GlobalDialog" Value="this">
+            @Body
+        </CascadingValue>
     </div>
 </div>
 <div class="footer">
@@ -21,3 +23,16 @@
         </Parts>
     </Traffic>
 </div>
+
+@if (_dialog)
+{
+    <div class="dialog" onclick="@((args)=>ShowDialog(false))"><a target="_blank" href="https://github.com/sql-mistermagoo/blazortest">Would you like to subscribe to my Github?</a> </div>
+}
+@functions {
+  bool _dialog;
+  public void ShowDialog(bool value)
+  {
+      _dialog = value;
+      StateHasChanged();
+  }
+}

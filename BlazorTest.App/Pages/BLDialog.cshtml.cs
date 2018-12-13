@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Blazor;
 using Microsoft.AspNetCore.Blazor.Components;
+using Microsoft.AspNetCore.Blazor.Layouts;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,9 +12,9 @@ namespace BlazorTest.App.Pages
 {
 	public class BLDialogModel : BlazorComponent
 	{
-		Timer timer;
+		[CascadingParameter(Name ="GlobalDialog")] dynamic MainLayout { get; set; }
 
-		public bool ShowDialog { get; private set; }
+		Timer timer;
 
 		protected override void OnInit()
 		{
@@ -24,17 +25,21 @@ namespace BlazorTest.App.Pages
 		}
 
 		private void AnnoyPeople(object sender, ElapsedEventArgs e)
-		{
+		{			
 			timer.Stop();
-			ShowDialog = true;
-			StateHasChanged();
+			timer.Elapsed -= AnnoyPeople;
+			MainLayout?.ShowDialog(true);
+			timer.Elapsed += OnClick;
+			timer.Start();
 		}
 
-		internal void OnClick(UIMouseEventArgs args)
+		internal void OnClick(object sender, ElapsedEventArgs e)
 		{
+			timer.Stop();
+			timer.Elapsed -= OnClick;
+			MainLayout?.ShowDialog(false);
+			timer.Elapsed += AnnoyPeople;
 			timer.Start();
-			ShowDialog = false;
-			StateHasChanged();
 		}
 	}
 }
