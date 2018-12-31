@@ -1,0 +1,5 @@
+<Project>
+ <PropertyGroup>
+  <AspNetVersions>[2.1.*,2.2.0)</AspNetVersions>
+ </PropertyGroup>
+</Project>

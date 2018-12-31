@@ -27,7 +27,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorEditorFor", "BlazorEd
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorBoundComponent", "BlazorBoundComponent\BlazorBoundComponent.csproj", "{5354DFB9-41F6-43B5-8A00-5FACD7F78240}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorTabSet", "BlazorTabSet\BlazorTabSet.csproj", "{0ACEEC63-AB4C-4472-923C-0404C75951E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorTabSet", "BlazorTabSet\BlazorTabSet.csproj", "{0ACEEC63-AB4C-4472-923C-0404C75951E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{61442AB8-9C7A-4319-9C67-885A077FAC51}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
