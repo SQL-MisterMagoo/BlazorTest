@@ -1,6 +1,6 @@
 using System;
 
-namespace BlazorTest.App.Services
+namespace BlazorTestApp.Services
 {
 	public class WeatherForecast
 	{

@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Blazor.Components;
+﻿
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Threading.Tasks;
 
 namespace BlazorFlying.Model
 {
-	public class FlyingModel : BlazorComponent
+	public class FlyingModel : ComponentBase
 	{
 		[Parameter]
 		internal string Image { get; set; }

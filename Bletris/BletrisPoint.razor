@@ -1,0 +1,10 @@
+﻿@using Bletris
+@inherits BletrisPointModel
+    <svg id="@Id"
+         width="32"
+         height="32"
+         class="bletris-point @Point.Class"
+         style="grid-area: @Point.y / @Point.x ;"
+         viewBox="0 0 32 32">
+         <rect stroke-width="1" stroke="#000000" id="bletrisbox" height="32" width="32" fill="@Point.Colour" x="0" y="0"></rect>
+    </svg>

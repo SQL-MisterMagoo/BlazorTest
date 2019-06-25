@@ -1,0 +1,95 @@
+﻿@page "/drag"
+@using BlazorDraggable
+
+
+@if (items == null)
+{
+	<div>Loading...</div>
+}
+else
+{
+	@foreach (var item in items)
+	{
+		<Draggable ID="@(Math.Abs(item.GetHashCode()).ToString())"
+							 IsDragItem=@(item.Equals(dragItem))
+							 DragItemClass="btn btn-primary draggable-dragging"
+							 DragType="move"
+							 DropType="move"
+							 DropTargetClass="btn btn-primary draggable-dropzone"
+							 Debug="true"
+							 DataItem=@item
+							 OnDragStart="@DragStarted"
+							 OnDragEnd="@DragEnd"
+							 OnDragDrop="@DragDrop"
+							 OnDragEnter="@DragEnter"
+							 OnDragLeave="@DragLeave">
+			<DragContent Context="dragctx">
+				<strong>@item</strong>
+			</DragContent>
+		</Draggable>
+
+		@*<Draggable Class='@(item.Equals(dragItem) ? "btn btn-primary draggable-dragging" : item.Equals(dropItem) ? "btn btn-primary draggable-dropzone" : "btn btn-primary")'
+								 Data="@item"
+								 Context="CItem"
+								 DragStarted="@DragStarted"
+								 DragEnter="@DragEnter"
+								 DragLeave="@DragLeave"
+								 DragEnd="@DragEnd">
+				<strong>@CItem</strong>
+			</Draggable>*@
+	}
+}
+
+@functions {
+		List<string> items;
+		string dragItem; // Item currently being dragged
+		string dropItem; // Item being dropped on
+
+		protected override void OnInit()
+		{
+			dropItem = "";
+			dragItem = "";
+
+			items = new List<string>() { "Tabs Are Best", "Spaces Rule!", "Who Cares?" };
+		}
+
+
+		void DragStarted(UIDragEventArgs args, string Data)
+		{
+			Console.WriteLine($"Start {Data} ");
+			dragItem = Data;
+			StateHasChanged();
+		}
+
+		void DragEnter(UIDragEventArgs args, string Data)
+		{
+			dropItem = Data;
+			StateHasChanged();
+		}
+
+		void DragLeave(UIDragEventArgs args, string Data)
+		{
+			StateHasChanged();
+		}
+
+		void DragEnd(UIDragEventArgs args, string Data)
+		{
+			if (dropItem != "")
+			{
+				DragDrop(default,dropItem);
+			}
+			dropItem = "";
+			dragItem = "";
+			StateHasChanged();
+
+		}
+
+		void DragDrop(UIDragEventArgs args, string Data)
+		{
+			int first = items.FindIndex(s => s.Equals(dragItem));
+			items.RemoveAt(first);
+			int second = items.FindIndex(s => s.Equals(dropItem as string));
+			items.Insert(second, dragItem);
+			StateHasChanged();
+		}
+}

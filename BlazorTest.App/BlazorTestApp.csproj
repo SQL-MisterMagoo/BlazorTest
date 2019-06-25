@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <LangVersion>7.3</LangVersion>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <Version>$(ReleaseVersion)</Version>
+    <AssemblyName>BlazorTestApp</AssemblyName>
+    <RootNamespace>BlazorTestApp</RootNamespace>
+    <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GenFu" Version="1.5.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview6.19307.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.0.0-preview6.19307.2" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="3.0.0-alpha1-35012" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.6.0-preview6.19303.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0-preview6.19304.10" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.0.0-preview-18579-0056" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BlazorBoundComponent\BlazorBoundComponent.csproj" />
+    <ProjectReference Include="..\BlazorClock\BlazorClock.csproj" />
+    <ProjectReference Include="..\BlazorDraggable\BlazorDraggable.csproj" />
+    <ProjectReference Include="..\BlazorEditorFor\BlazorEditorFor.csproj" />
+    <ProjectReference Include="..\BlazorFlying\BlazorFlying.csproj" />
+    <ProjectReference Include="..\BlazorForm\BlazorForm.csproj" />
+    <ProjectReference Include="..\BlazorSolidLogin\BlazorSolidLogin.csproj" />
+    <ProjectReference Include="..\BlazorTabSet\BlazorTabSet.csproj" />
+    <ProjectReference Include="..\BlazorTraffic\BlazorTraffic.csproj" />
+    <ProjectReference Include="..\BlazorTree\BlazorTree.csproj" />
+    <ProjectReference Include="..\Bletris\Bletris.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Blazor.Services;
+﻿using Microsoft.AspNetCore.Components;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace BlazorTest.App.Extensions
+namespace BlazorTestApp.Extensions
 {
-	public static class MyExtensions
+    public static class MyExtensions
 	{
 		public static void NavigateTo<T>(this IUriHelper uriHelper, string childPath="")
 		{

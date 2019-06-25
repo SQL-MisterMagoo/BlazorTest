@@ -14,8 +14,11 @@ namespace BlazorSolidLogin.Services
 		private SolidIdentity solidIdentity;
 		ILoginIdentity ILoginNotifier.Identity => solidIdentity;
 
-		public SolidIdentityService()
+        public IJSRuntime JSRuntime { get; }
+
+        public SolidIdentityService(IJSRuntime runtime)
 		{
+            JSRuntime = runtime;
 		}
 
 		public Task UserLoggedIn()
@@ -35,7 +38,7 @@ namespace BlazorSolidLogin.Services
 			solidIdentity = null;
 			try
 			{
-				var result = await JSRuntime.Current.InvokeAsync<object>("solid.auth.currentSession", null);
+				var result = await JSRuntime.InvokeAsync<object>("solid.auth.currentSession", null);
 				Console.WriteLine($"Result: {result ?? ""}");
 
 				if (result != null)
@@ -48,7 +51,7 @@ namespace BlazorSolidLogin.Services
 					string name = null;
 					try
 					{
-						var nameResult = await JSRuntime.Current.InvokeAsync<object>("blazorSolid.getUserName", solidIdentity.Id);
+						var nameResult = await JSRuntime.InvokeAsync<object>("blazorSolid.getUserName", solidIdentity.Id);
 						if (nameResult != null)
 						{
 							JObject nameObject = JObject.Parse(nameResult.ToString());
@@ -86,7 +89,7 @@ namespace BlazorSolidLogin.Services
 		public async Task InitiateLogin(string loginServer, string callbackUrl)
 		{
 			Options options = new Options { CallbackUri = callbackUrl };
-			var result = await JSRuntime.Current.InvokeAsync<object>("solid.auth.login", new object[] { loginServer, options });
+			var result = await JSRuntime.InvokeAsync<object>("solid.auth.login", new object[] { loginServer, options });
 		}
 
 	}
