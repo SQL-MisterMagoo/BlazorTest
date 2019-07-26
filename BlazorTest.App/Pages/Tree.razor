@@ -8,25 +8,25 @@
 <CascadingValue Value=@TreeSelection>
     <TreeView Dependents="@People" Context="person">
         <ClosedContent>
-            <span class="oi oi-plus" @onclick="@{()=>OnClick(person)}"> @(person.Firstname) @(person.Lastname) (@(person.Age)) </span>
-            <span @onclick="@{() => { TreeSelection.Select(person, false); StateHasChanged(); }}" title="Click to like" style="opacity: 0.2; cursor:pointer">🖤</span>
+            <span class="oi oi-plus" @onclick="()=>OnClick(person)"> @(person.Firstname) @(person.Lastname) (@(person.Age)) </span>
+            <span @onclick="() => { TreeSelection.Select(person, false); StateHasChanged(); }" title="Click to like" style="opacity: 0.2; cursor:pointer">🖤</span>
         </ClosedContent>
         <ClosedSelectedContent>
-            <span class="oi oi-plus" @onclick="@{() => OnClick(person)}"> @(person.Firstname) @(person.Lastname) (@(person.Age)) </span>
-            <span @onclick="@{() => { TreeSelection.Select(person, false); StateHasChanged(); }}" title="Click to un-like" style="cursor:pointer">💚</span>
+            <span class="oi oi-plus" @onclick="() => OnClick(person)"> @(person.Firstname) @(person.Lastname) (@(person.Age)) </span>
+            <span @onclick="() => { TreeSelection.Select(person, false); StateHasChanged(); }" title="Click to un-like" style="cursor:pointer">💚</span>
         </ClosedSelectedContent>
         <OpenContent>
-            <span class="oi oi-minus" @onclick="@{()=>OnClick(person)}"> @(person.Firstname) @(person.Lastname) (@(person.Age)) </span>
-            <span @onclick="@{() => { TreeSelection.Select(person, false); StateHasChanged(); }}" title="Click to like" style="opacity: 0.2; cursor:pointer">🖤</span>
+            <span class="oi oi-minus" @onclick="()=>OnClick(person)"> @(person.Firstname) @(person.Lastname) (@(person.Age)) </span>
+            <span @onclick="() => { TreeSelection.Select(person, false); StateHasChanged(); }" title="Click to like" style="opacity: 0.2; cursor:pointer">🖤</span>
         </OpenContent>
         <OpenSelectedContent>
-            <span class="oi oi-minus" @onclick="@{() => OnClick(person)}"> @(person.Firstname) @(person.Lastname) (@(person.Age)) </span>
-            <span @onclick="@{() =>  { TreeSelection.Select(person, false); StateHasChanged(); }}" title="Click to un-like" style="cursor:pointer">💚</span>
+            <span class="oi oi-minus" @onclick="() => OnClick(person)"> @(person.Firstname) @(person.Lastname) (@(person.Age)) </span>
+            <span @onclick="() =>  { TreeSelection.Select(person, false); StateHasChanged(); }" title="Click to un-like" style="cursor:pointer">💚</span>
         </OpenSelectedContent>
     </TreeView>
 </CascadingValue>
 
-@functions
+@code
 {
   List<Person> People;
   TreeSelection<Person> TreeSelection;

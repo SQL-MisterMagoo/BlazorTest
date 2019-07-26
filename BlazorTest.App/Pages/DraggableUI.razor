@@ -11,6 +11,7 @@ else
 	@foreach (var item in items)
 	{
 		<Draggable ID="@(Math.Abs(item.GetHashCode()).ToString())"
+                   DraggableClass="btn btn-secondary"
 							 IsDragItem=@(item.Equals(dragItem))
 							 DragItemClass="btn btn-primary draggable-dragging"
 							 DragType="move"
