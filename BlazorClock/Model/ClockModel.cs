@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Blazor.Components;
-using Microsoft.AspNetCore.Blazor.Services;
+﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Routing;
+using Microsoft.JSInterop;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace BlazorClock
 {
-	public class ClockModel : BlazorComponent
+	public class ClockModel : ComponentBase
 	{
 		[Parameter] internal string Title { get; set; }
 		[Parameter] internal double OffsetHours { get; set; }
@@ -20,6 +21,7 @@ namespace BlazorClock
 		[Parameter] protected bool AlwaysActive { get; set; }
 
 		[Inject] private IUriHelper UriHelper { get; set; }
+        [Inject] private IJSRuntime JSRuntime { get; set; }
 
 		internal string Data;
 		internal double hourRotation;
@@ -63,7 +65,7 @@ namespace BlazorClock
 			ClockTask = RunClock(TokenSource.Token);
 		}
 
-		private void UriHelper_OnLocationChanged(object sender, string e)
+		private void UriHelper_OnLocationChanged(object sender, LocationChangedEventArgs e)
 		{
 			if (AlwaysActive)
 			{
@@ -141,9 +143,9 @@ namespace BlazorClock
 			hourRotation = (hr * 360 / 12) + (min * (360 / 60) / 12);
 			minuteRotation = (min * 360 / 60) + (sec * (360 / 60) / 60);
 			secondRotation = sec * 360 / 60;
-			BlazorClockInterop.UpdateStyle($"#{ClockId} #second", "--rotation", $"{secondRotation}deg");
-			BlazorClockInterop.UpdateStyle($"#{ClockId} #minute", "--rotation", $"{minuteRotation}deg");
-			BlazorClockInterop.UpdateStyle($"#{ClockId} #hour", "--rotation", $"{hourRotation}deg");
+			JSRuntime.UpdateStyle($"#{ClockId} #second", "--rotation", $"{secondRotation}deg");
+			JSRuntime.UpdateStyle($"#{ClockId} #minute", "--rotation", $"{minuteRotation}deg");
+			JSRuntime.UpdateStyle($"#{ClockId} #hour", "--rotation", $"{hourRotation}deg");
 		}
 	}
 }

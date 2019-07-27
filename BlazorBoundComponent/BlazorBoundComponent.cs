@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Blazor;
-using Microsoft.AspNetCore.Blazor.Components;
+﻿using Microsoft.AspNetCore.Components;
 using System;
 
 namespace BlazorBoundComponent
 {
-	public class BlazorBoundComponent<T> : BlazorComponent
+	public class BlazorBoundComponent<T> : ComponentBase
 	{
 		// _data is the "actual" bound data
 		internal T _data;

@@ -1,0 +1,121 @@
+﻿
+<form @onsubmit="@OnSubmit">
+    <EditorFor DataChanged=@OnChangeName Data="@user.Name" Name="@nameof(user.Name)" />
+    <EditorFor DataChanged=@OnChangeEmail Data="@user.Email" Name="@nameof(user.Email)" />
+    <EditorFor DataChanged=@OnChangePassword Data="@user.Password" Name="@nameof(user.Password)" />
+    <EditorFor DataChanged=@OnChangeUrl Data="@user.Url" Name="@nameof(user.Url)" />
+    <EditorFor DataChanged=@OnChangeDOB Data="@user.DateOfBirth" Name="@nameof(user.DateOfBirth)" />
+    <EditorFor DataChanged=@OnChangeFav Data="@user.FavouriteNumber" Name="@nameof(user.FavouriteNumber)" />
+    <EditorFor DataChanged=@OnChangeRem Data="@user.RememberMe" Name="@nameof(user.RememberMe)" />
+    @*<button type="submit" class="btn btn-default">Submit</button>*@
+</form>
+<hr />
+@if (!string.IsNullOrWhiteSpace(user?.Name))
+{
+    <div>Hi @user.Name</div>
+}
+@if (!string.IsNullOrWhiteSpace(user?.Email))
+{
+    <div>If I need to contact you, I will email : @user.Email</div>
+}
+@if (!string.IsNullOrWhiteSpace(user?.Password))
+{
+    <div>That is a terrible password, so I will show it : @user.Password</div>
+}
+@if (!string.IsNullOrWhiteSpace(user?.Url))
+{
+    <div>I'll check out your web site : @user.Url</div>
+}
+@if (user?.FavouriteNumber>0)
+{
+  <div>That's crazy, @user.FavouriteNumber is my favourite number also!</div>
+}
+@if (user?.DateOfBirth > DateTime.MinValue )
+{
+    @if (user.DateOfBirth == DateTime.Today)
+    {
+        <div>Happy Birthday!</div>
+    }
+    else
+    {
+        <div>I'll send you a special wish on : @user.DateOfBirth.ToShortDateString()</div>
+    }
+}
+@if (!string.IsNullOrWhiteSpace(user?.Name) || !string.IsNullOrWhiteSpace(user?.Email) || !string.IsNullOrWhiteSpace(user?.Url) || user?.DateOfBirth > DateTime.MinValue)
+{
+    <div><b><u>I will @( user.RememberMe ? "" : "not") remember you after you close the browser.</u></b></div>
+}
+
+
+@functions
+{
+  class Person
+  {
+      public string Name;
+      public string Email;
+      public string Url;
+      public DateTime DateOfBirth;
+      public bool RememberMe;
+      public string Password;
+      public int FavouriteNumber;
+  }
+
+  private Person user;
+
+  protected override void OnInit()
+  {
+      user = new Person { Name = "", Email = "", Url = "", DateOfBirth = DateTime.MinValue, RememberMe = false };
+  }
+
+  protected override void OnParametersSet()
+  {
+      base.OnParametersSet();
+      StateHasChanged();
+  }
+
+  void OnSubmit(UIEventArgs args)
+  {
+      StateHasChanged();
+  }
+
+  void OnChangeName(string obj)
+  {
+      user.Name = obj;
+      StateHasChanged();
+  }
+
+  void OnChangeEmail(string obj)
+  {
+      user.Email = obj;
+      StateHasChanged();
+  }
+
+  void OnChangeUrl(string obj)
+  {
+      user.Url = obj;
+      StateHasChanged();
+  }
+
+  void OnChangePassword(string obj)
+  {
+      user.Password = obj;
+      StateHasChanged();
+  }
+
+  void OnChangeDOB(DateTime obj)
+  {
+      user.DateOfBirth = obj;
+      StateHasChanged();
+  }
+  void OnChangeRem(bool obj)
+  {
+      user.RememberMe = obj;
+      StateHasChanged();
+  }
+
+  void OnChangeFav(int obj)
+  {
+      user.FavouriteNumber = obj;
+      StateHasChanged();
+  }
+}

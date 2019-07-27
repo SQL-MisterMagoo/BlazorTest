@@ -1,11 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <OutputType>Library</OutputType>
     <IsPackable>true</IsPackable>
-    <BlazorLinkOnBuild>false</BlazorLinkOnBuild>
+    <RestoreAdditionalProjectSources>
+      https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json;
+      https://dotnet.myget.org/F/blazor-dev/api/v3/index.json;
+    </RestoreAdditionalProjectSources>
     <LangVersion>7.3</LangVersion>
+    <RazorLangVersion>3.0</RazorLangVersion>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+
     <Authors>Mister Magoo</Authors>
     <Company>MM</Company>
     <Description>A Blazor Component that renders a form that doesn't refresh the page</Description>
@@ -13,25 +18,19 @@
     <PackageProjectUrl>https://github.com/SQL-MisterMagoo/BlazorTest</PackageProjectUrl>
     <RepositoryUrl>https://github.com/SQL-MisterMagoo/BlazorTest</RepositoryUrl>
     <PackageTags>Blazor,Form,Submit,Component</PackageTags>
-    <Version>1.0.3</Version>
+    <Version>$(ReleaseVersion)</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
-
   <ItemGroup>
     <!-- .js/.css files will be referenced via <script>/<link> tags; other content files will just be included in the app's 'dist' directory without any tags referencing them -->
     <EmbeddedResource Include="content\**\*.js" LogicalName="blazor:js:%(RecursiveDir)%(Filename)%(Extension)" />
     <EmbeddedResource Include="content\**\*.css" LogicalName="blazor:css:%(RecursiveDir)%(Filename)%(Extension)" />
     <EmbeddedResource Include="content\**" Exclude="**\*.js;**\*.css" LogicalName="blazor:file:%(RecursiveDir)%(Filename)%(Extension)" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="BlazorEditorFor" Version="1.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Browser" Version="$(BlazorVersion)" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="$(BlazorVersion)" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Browser" Version="3.0.0-preview7.19365.7" />
   </ItemGroup>
-
   <ItemGroup>
-    <Folder Include="content\" />
+    <ProjectReference Include="..\BlazorEditorFor\BlazorEditorFor.csproj" />
   </ItemGroup>
-
 </Project>

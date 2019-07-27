@@ -1,26 +1,32 @@
 using BlazorSolidLogin.Services;
-using Microsoft.AspNetCore.Blazor.Builder;
+using BlazorTest.Server.Areas.Identity.Data;
+using Microsoft.AspNetCore.Components.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Linq;
+using Microsoft.JSInterop;
 
-namespace BlazorTest.App
+namespace BlazorTestApp
 {
-	public class Startup
-	{
-		public void ConfigureServices(IServiceCollection services)
-		{
-			services.AddTransient<ILoginNotifier>((a)=> new SolidIdentityService());
-			
-			//services.ToList().ForEach(s => Console.WriteLine($"Service: {s.ServiceType.Name} - {s.Lifetime.ToString()}"));
+    public class Startup
+    {
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddScoped<UserManager<BlazorTestServerUser>, UserManager<BlazorTestServerUser>>();
+            services.AddScoped<SignInManager<BlazorTestServerUser>, SignInManager<BlazorTestServerUser>>();
+            services.AddTransient<ILoginNotifier>((a) =>
+            {
+                var JSRuntime = a.GetRequiredService<IJSRuntime>();
+                return new SolidIdentityService(JSRuntime);
+            });
 
-		}
+            //services.ToList().ForEach(s => Console.WriteLine($"Service: {s.ServiceType.Name} - {s.Lifetime.ToString()}"));
 
-		public void Configure(IBlazorApplicationBuilder app)
-		{
-			app.AddComponent<App>("app");
-			
-		}
-	}
+        }
+
+        public void Configure(IComponentsApplicationBuilder app)
+        {
+            app.AddComponent<Title>("title");
+            app.AddComponent<App>("app");
+        }
+    }
 }

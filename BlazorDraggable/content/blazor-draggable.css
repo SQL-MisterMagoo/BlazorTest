@@ -1,4 +1,7 @@
-﻿
+﻿.draggable-idle {
+    pointer-events: none;
+}
+
 .draggable-dragging {
     opacity: 0.4;
     cursor: move;

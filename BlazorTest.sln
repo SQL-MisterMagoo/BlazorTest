@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28010.2036
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28917.182
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorTest.Server", "BlazorTest.Server\BlazorTest.Server.csproj", "{C2C073B8-B1BD-4C56-AC4D-BECDBC1E17CB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorTest.App", "BlazorTest.App\BlazorTest.App.csproj", "{6C27A329-DDD4-4F91-96A1-DD5135EC14ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorTestApp", "BlazorTest.App\BlazorTestApp.csproj", "{6C27A329-DDD4-4F91-96A1-DD5135EC14ED}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorClock", "BlazorClock\BlazorClock.csproj", "{0EDFA8EA-EDFD-4F70-8022-E0C185D618DD}"
 EndProject
@@ -30,9 +30,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorTabSet", "BlazorTabSet\BlazorTabSet.csproj", "{0ACEEC63-AB4C-4472-923C-0404C75951E4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{61442AB8-9C7A-4319-9C67-885A077FAC51}"
-	ProjectSection(SolutionItems) = preProject
-		Directory.Build.props = Directory.Build.props
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

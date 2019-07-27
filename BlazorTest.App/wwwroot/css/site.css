@@ -4,6 +4,10 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+input, a, button, li {
+    pointer-events:auto;
+}
+
 app {
     position: relative;
     display: flex;
