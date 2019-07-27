@@ -1,4 +1,7 @@
-﻿
+﻿.draggable-idle {
+    pointer-events: none;
+}
+
 .draggable-dragging {
     opacity: 0.4;
     cursor: move;
@@ -7,5 +10,4 @@
 .draggable-dropzone {
     box-shadow: 5px 5px rgba(10,10,200,0.1), -5px -5px rgba(10,10,200,0.1), -5px 5px rgba(10,10,200,0.1), 5px -5px rgba(10,10,200,0.1);
     cursor: move;
-    pointer-events: none;
 }

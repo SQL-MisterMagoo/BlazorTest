@@ -18,6 +18,10 @@ namespace BlazorDraggable
         /// </summary>
         [Parameter] protected TItem DataItem { get; set; }
         /// <summary>
+        /// The item currently being dragged
+        /// </summary>
+        [Parameter] protected TItem DragItem { get; set; }
+        /// <summary>
         /// HTML5 drag type allowed for this item - required - default is "move"
         /// </summary>
         [Parameter] protected string DragType { get; set; } = "move";
@@ -25,6 +29,10 @@ namespace BlazorDraggable
         /// What type of drop to allow - default to "move"
         ///</summary>
         [Parameter] protected string DropType { get; set; } = "move";
+        /// <summary>
+        /// CSS Class added while another item is being dragged
+        /// </summary>
+        [Parameter] protected string IdleClass { get; set; } = " draggable-idle";
         /// <summary>
         /// CSS class for the draggable item - optional
         /// </summary>
@@ -61,7 +69,7 @@ namespace BlazorDraggable
         [Parameter] protected Action<UIDragEventArgs, TItem> OnDragLeave { get; set; }
         [Parameter] protected Action<UIDragEventArgs, TItem> OnDragOver { get; set; }
 
-        string ClassList => (!IsDragItem ? DraggableClass ?? "" : DragItemClass ?? "") + (IsDropTarget ? DropTargetClass ?? "" : "");
+        string ClassList => (!IsDragItem ? (DraggableClass ?? "") : DragItemClass ?? "") + ((IsDropTarget && (DragItem is object)) ? DropTargetClass ?? "" : "");
 
         void MyDragStart(UIDragEventArgs args)
         {

@@ -11,19 +11,21 @@ else
 	@foreach (var item in items)
 	{
 		<Draggable ID="@(Math.Abs(item.GetHashCode()).ToString())"
-                   DraggableClass="btn btn-secondary"
-							 IsDragItem=@(item.Equals(dragItem))
-							 DragItemClass="btn btn-primary draggable-dragging"
-							 DragType="move"
-							 DropType="move"
-							 DropTargetClass="btn btn-primary draggable-dropzone"
-							 Debug="true"
-							 DataItem=@item
-							 OnDragStart="@DragStarted"
-							 OnDragEnd="@DragEnd"
-							 OnDragDrop="@DragDrop"
-							 OnDragEnter="@DragEnter"
-							 OnDragLeave="@DragLeave">
+                DraggableClass="btn btn-secondary"
+				IsDragItem=@(item.Equals(dragItem))
+                DragItem="dragItem"
+				DragItemClass="btn btn-primary draggable-dragging"
+				DragType="move"
+				DropType="move"
+				DropTargetClass="btn btn-primary draggable-dropzone"
+				Debug="true"
+				DataItem=@item
+				OnDragStart="@DragStarted"
+				OnDragEnd="@DragEnd"
+				OnDragDrop="@DragDrop"
+				OnDragOver="@DragEnter"
+				OnDragLeave="@DragLeave"
+                @key="item">
 			<DragContent Context="dragctx">
 				<strong>@item</strong>
 			</DragContent>
@@ -41,15 +43,15 @@ else
 	}
 }
 
-@functions {
+@code {
 		List<string> items;
 		string dragItem; // Item currently being dragged
 		string dropItem; // Item being dropped on
 
 		protected override void OnInit()
 		{
-			dropItem = "";
-			dragItem = "";
+			dropItem = null;
+			dragItem = null;
 
 			items = new List<string>() { "Tabs Are Best", "Spaces Rule!", "Who Cares?" };
 		}
@@ -75,12 +77,12 @@ else
 
 		void DragEnd(UIDragEventArgs args, string Data)
 		{
-			if (dropItem != "")
+			if (!string.IsNullOrWhiteSpace(dropItem ))
 			{
 				DragDrop(default,dropItem);
 			}
-			dropItem = "";
-			dragItem = "";
+			dropItem = null;
+			dragItem = null;
 			StateHasChanged();
 
 		}

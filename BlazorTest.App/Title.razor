@@ -1,0 +1,10 @@
+﻿@code
+{
+    [Inject] protected IUriHelper UriHelper { get; set; }
+    string Titles() => UriHelper.GetAbsoluteUri().Split('?')[0].Split('/').Last();
+    protected override void OnInit()
+    {
+        base.OnInit();
+        UriHelper.OnLocationChanged += (s, e) => StateHasChanged();
+    }
+}Blazor Test - @Titles()
