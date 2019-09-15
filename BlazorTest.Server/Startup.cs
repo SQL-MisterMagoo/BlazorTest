@@ -42,7 +42,7 @@ namespace BlazorTest.Server
 				options.MinimumSameSitePolicy = SameSiteMode.None;
 			});
 			
-			services.AddAuthentication( ).AddMicrosoftAccount(microsoftOptions =>
+			services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
 			{
 				microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ApplicationId"];
 				microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:Password"];

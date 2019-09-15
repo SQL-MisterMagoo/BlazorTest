@@ -11,7 +11,7 @@
 @if (User != null && SignInManager.IsSignedIn(User))
 {
     <a class="ml-md-auto btn btn-primary" asp-area="Identity" asp-page="/Account/Manage/Index" href="/Identity/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-    <button class="btn ml-md-auto" @onclick="@Logout">Logout</button>
+    <button class="btn ml-md-auto" @onclick="Logout">Logout</button>
 }
 else
 {
@@ -26,9 +26,9 @@ else
   ClaimsPrincipal User;
   string PathBase;
 
-  protected override void OnInit()
+  protected override void OnInitialized()
   {
-      base.OnInit();
+      base.OnInitialized();
 
       try
       {
@@ -41,6 +41,6 @@ else
   }
   void Logout()
   {
-      uriHelper.NavigateTo($"/Identity/Account/Logout?returnUrl=~{PathBase}");
+      NavigationManager.NavigateTo($"/Identity/Account/Logout?returnUrl=~{PathBase}");
   }
 }

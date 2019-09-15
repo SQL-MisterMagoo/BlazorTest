@@ -9,7 +9,7 @@ Time is precious, so let's watch some...
 {
 	foreach (TimeZoneInfo timeZoneInfo in TimeZoneInfo.GetSystemTimeZones())
 	{
-		<Clock Width="300" Height="50" ShowIcon="false" AutoTitle="true" TimeZoneId="@timeZoneInfo.Id" />
+		<Clock Width="300" Height="50" ShowIcon="false" AutoTitle="true" TimeZoneId="timeZoneInfo.Id" />
 	}
 }
 else

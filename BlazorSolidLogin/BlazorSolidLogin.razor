@@ -5,14 +5,14 @@
 {
     <div class="form-group">
         <label for="WebId">WebId</label>
-        <input class="form-control" type="url" @bind-value="@LoginServer" @bind-value:event="onchange" placeholder="https://yourusername.inrupt.net/profile/card#me"/>
-        <button @onclick="@LoginClick">Log In</button>
+        <input class="form-control" type="url" @bind-value="LoginServer" @bind-value:event="onchange" placeholder="https://yourusername.inrupt.net/profile/card#me"/>
+        <button @onclick="LoginClick">Log In</button>
     </div>
 }
 else
 {
     <div>
         <label>Welcome @Name</label>
-        <button @onclick="@LogoutClick">Log Out</button>
+        <button @onclick="LogoutClick">Log Out</button>
     </div>
 }

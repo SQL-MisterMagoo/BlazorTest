@@ -11,8 +11,8 @@
 </div>*@
 
 @functions {
-  [Parameter] protected RenderFragment ChildContent { get; set; }
-  [Parameter] protected RenderFragment TabTemplate { get; set; }
+  [Parameter] public RenderFragment ChildContent { get; set; }
+  [Parameter] public RenderFragment TabTemplate { get; set; }
 
   public ITab ActiveTab { get; private set; }
 

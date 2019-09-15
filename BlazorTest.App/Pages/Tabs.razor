@@ -20,7 +20,7 @@
             <h4>Third tab</h4>
 
             <label>
-                <input type="checkbox" value=@showSecondTab @onchange=@showSecondTabChanged />
+                <input type="checkbox" value=@showSecondTab @onchange=showSecondTabChanged />
                 Toggle second tab
             </label>
         </Tab>
@@ -31,7 +31,7 @@
 {
   static bool showSecondTab;
 
-  void showSecondTabChanged(UIChangeEventArgs args)
+  void showSecondTabChanged(ChangeEventArgs args)
   {
       showSecondTab = (bool)args.Value;
       StateHasChanged();

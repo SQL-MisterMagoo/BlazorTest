@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BlazorSolidLogin.Services;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Components.Web;
 
 namespace BlazorSolidLogin
 {
@@ -20,7 +21,7 @@ namespace BlazorSolidLogin
 		internal string Name { get; set; }
 		internal string LoginServer = "";
 
-		protected override async Task OnInitAsync()
+		protected override async Task OnInitializedAsync()
 		{
 			Console.WriteLine("Login Init");
 			_session.LoginStateChanged += LoginChanged;
@@ -35,7 +36,7 @@ namespace BlazorSolidLogin
 			StateHasChanged();
 		}
 
-		protected async Task LoginClick(UIMouseEventArgs args)
+		protected async Task LoginClick(MouseEventArgs args)
 		{
 			Console.WriteLine("Login Clicked");
 			HttpRequest request = httpContextAccessor.HttpContext.Request;
@@ -43,7 +44,7 @@ namespace BlazorSolidLogin
 			await _session?.InitiateLogin(LoginServer, callbackUrl);
 		}
 
-		protected async Task LogoutClick(UIMouseEventArgs args)
+		protected async Task LogoutClick(MouseEventArgs args)
 		{
 			await JSRuntime.InvokeAsync<object>("solid.auth.logout", new object[] {  });
 			_session?.UserLoggedOut();

@@ -1,7 +1,7 @@
 ﻿@page "/param1"
 @page "/param1/{ID}"
 @using BlazorClock
-@inject IUriHelper UriHelper
+@inject NavigationManager NavigationManager
 
 @if (!string.IsNullOrWhiteSpace(ID))
 {
@@ -14,11 +14,11 @@
 
 @functions
 {
-[Parameter] string ID { get; set; }
+[Parameter] public string ID { get; set; }
 
 void IncrementCounter()
 {
-    UriHelper.NavigateTo<Param2>(ID);
+    NavigationManager.NavigateTo<Param2>(ID);
 }
 
 }

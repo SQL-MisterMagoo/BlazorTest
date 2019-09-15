@@ -12,7 +12,7 @@ namespace BlazorTestApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserManager<BlazorTestServerUser>, UserManager<BlazorTestServerUser>>();
-            services.AddScoped<SignInManager<BlazorTestServerUser>, SignInManager<BlazorTestServerUser>>();
+            //services.AddScoped<SignInManager<BlazorTestServerUser>, SignInManager<BlazorTestServerUser>>();
             services.AddTransient<ILoginNotifier>((a) =>
             {
                 var JSRuntime = a.GetRequiredService<IJSRuntime>();

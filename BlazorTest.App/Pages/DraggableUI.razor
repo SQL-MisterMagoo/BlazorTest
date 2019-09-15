@@ -10,7 +10,7 @@ else
 {
 	@foreach (var item in items)
 	{
-		<Draggable ID="@(Math.Abs(item.GetHashCode()).ToString())"
+		<Draggable ID="(Math.Abs(item.GetHashCode()).ToString())"
                 DraggableClass="btn btn-secondary"
 				IsDragItem=@(item.Equals(dragItem))
                 DragItem="dragItem"
@@ -20,11 +20,11 @@ else
 				DropTargetClass="btn btn-primary draggable-dropzone"
 				Debug="true"
 				DataItem=@item
-				OnDragStart="@DragStarted"
-				OnDragEnd="@DragEnd"
-				OnDragDrop="@DragDrop"
-				OnDragOver="@DragEnter"
-				OnDragLeave="@DragLeave"
+				OnDragStart="DragStarted"
+				OnDragEnd="DragEnd"
+				OnDragDrop="DragDrop"
+				OnDragOver="DragEnter"
+				OnDragLeave="DragLeave"
                 @key="item">
 			<DragContent Context="dragctx">
 				<strong>@item</strong>
@@ -32,12 +32,12 @@ else
 		</Draggable>
 
 		@*<Draggable Class='@(item.Equals(dragItem) ? "btn btn-primary draggable-dragging" : item.Equals(dropItem) ? "btn btn-primary draggable-dropzone" : "btn btn-primary")'
-								 Data="@item"
+								 Data="item"
 								 Context="CItem"
-								 DragStarted="@DragStarted"
-								 DragEnter="@DragEnter"
-								 DragLeave="@DragLeave"
-								 DragEnd="@DragEnd">
+								 DragStarted="DragStarted"
+								 DragEnter="DragEnter"
+								 DragLeave="DragLeave"
+								 DragEnd="DragEnd">
 				<strong>@CItem</strong>
 			</Draggable>*@
 	}
@@ -48,7 +48,7 @@ else
 		string dragItem; // Item currently being dragged
 		string dropItem; // Item being dropped on
 
-		protected override void OnInit()
+		protected override void OnInitialized()
 		{
 			dropItem = null;
 			dragItem = null;
@@ -57,25 +57,25 @@ else
 		}
 
 
-		void DragStarted(UIDragEventArgs args, string Data)
+		void DragStarted(DragEventArgs args, string Data)
 		{
 			Console.WriteLine($"Start {Data} ");
 			dragItem = Data;
 			StateHasChanged();
 		}
 
-		void DragEnter(UIDragEventArgs args, string Data)
+		void DragEnter(DragEventArgs args, string Data)
 		{
 			dropItem = Data;
 			StateHasChanged();
 		}
 
-		void DragLeave(UIDragEventArgs args, string Data)
+		void DragLeave(DragEventArgs args, string Data)
 		{
 			StateHasChanged();
 		}
 
-		void DragEnd(UIDragEventArgs args, string Data)
+		void DragEnd(DragEventArgs args, string Data)
 		{
 			if (!string.IsNullOrWhiteSpace(dropItem ))
 			{
@@ -87,7 +87,7 @@ else
 
 		}
 
-		void DragDrop(UIDragEventArgs args, string Data)
+		void DragDrop(DragEventArgs args, string Data)
 		{
 			int first = items.FindIndex(s => s.Equals(dragItem));
 			items.RemoveAt(first);

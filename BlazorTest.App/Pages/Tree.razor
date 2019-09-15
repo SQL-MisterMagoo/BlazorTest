@@ -6,7 +6,7 @@
 
 <!-- The CascadingValue is used in the BlazorTree component to decide which ContentFragment to display -->
 <CascadingValue Value=@TreeSelection>
-    <TreeView Dependents="@People" Context="person">
+    <TreeView Dependents="People" Context="person">
         <ClosedContent>
             <span class="oi oi-plus" @onclick="()=>OnClick(person)"> @(person.Firstname) @(person.Lastname) (@(person.Age)) </span>
             <span @onclick="() => { TreeSelection.Select(person, false); StateHasChanged(); }" title="Click to like" style="opacity: 0.2; cursor:pointer">🖤</span>
@@ -32,9 +32,9 @@
   TreeSelection<Person> TreeSelection;
   int Friends;
   Random count;
-  protected override void OnInit()
+  protected override void OnInitialized()
   {
-      base.OnInit();
+      base.OnInitialized();
       count = new Random();
       Person head = new Person() { Depth = 0 };
       TreeSelection = new TreeSelection<Person>();

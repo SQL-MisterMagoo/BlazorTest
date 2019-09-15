@@ -1,5 +1,5 @@
 ﻿@inherits LayoutComponentBase
-@inject IUriHelper urihelper
+@inject NavigationManager NavigationManager
 @*@using BlazorTraffic*@
 @using BlazorClock
 @using BlazorTestApp.Components
@@ -30,7 +30,7 @@
 
 @if (_dialog)
 {
-    <div class="dialog" @onclick="@((args)=>ShowDialog(false))"><a target="_blank" href="https://github.com/sql-mistermagoo/blazortest">Would you like to subscribe to my Github?</a> </div>
+    <div class="dialog" @onclick="((args)=>ShowDialog(false))"><a target="_blank" href="https://github.com/sql-mistermagoo/blazortest">Would you like to subscribe to my Github?</a> </div>
 }
 @functions {
   bool _dialog;
@@ -41,6 +41,6 @@
   }
   void GoGoGo()
   {
-      urihelper.NavigateTo("param2/2");
+      NavigationManager.NavigateTo("param2/2");
   }
 }

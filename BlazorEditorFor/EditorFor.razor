@@ -2,41 +2,41 @@
 @using BlazorBoundComponent
 @inherits BlazorEditorFor.EditorForModel<IType>
 
-<div class="@GroupClass" style="@GroupStyle">
-    <label for="@Name"
-           class="@LabelClass"
-           style="@LabelStyle">
+<div class="GroupClass" style="GroupStyle">
+    <label for="Name"
+           class="LabelClass"
+           style="LabelStyle">
         @Name
     </label>
     @if (InputType.Equals("checkbox", StringComparison.OrdinalIgnoreCase))
     {
-        <input id="@Id"
-               name="@Name"
-               class="@InputClass"
-               style="@InputStyle"
-               type="@InputType"
-               checked="@BoundData"
-               @onchange=@ChangeData />
+        <input id="Id"
+               name="Name"
+               class="InputClass"
+               style="InputStyle"
+               type="InputType"
+               checked="BoundData"
+               @onchange=ChangeData />
     }
     else if (InputType.Equals("date", StringComparison.OrdinalIgnoreCase))
     {
-        <input id="@Id"
-               name="@Name"
-               class="@InputClass"
-               style="@InputStyle"
-               type="@InputType"
+        <input id="Id"
+               name="Name"
+               class="InputClass"
+               style="InputStyle"
+               type="InputType"
                value=@(String.Format("{0:yyyy-MM-dd}", BoundData))
-               @onchange=@ChangeData />
+               @onchange=ChangeData />
     }
     else
     {
-        <input id="@Id"
-               name="@Name"
-               class="@InputClass"
-               style="@InputStyle"
-               type="@InputType"
+        <input id="Id"
+               name="Name"
+               class="InputClass"
+               style="InputStyle"
+               type="InputType"
                value=@BoundData
-               @onchange=@ChangeData />
+               @onchange=ChangeData />
     }
 
 </div>

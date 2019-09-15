@@ -17,13 +17,13 @@ namespace BlazorTraffic
 
 		private Task monitor;
 
-		[Parameter] protected string CssClass { get; set; }
-		[Parameter] protected string DisplayFormatString { get; set; }
-		[Parameter] protected RenderFragment<TrafficDataStruct> Parts { get; set; }
+		[Parameter] public string CssClass { get; set; }
+		[Parameter] public string DisplayFormatString { get; set; }
+		[Parameter] public RenderFragment<TrafficDataStruct> Parts { get; set; }
 
 		[Inject] IHttpContextAccessor httpContextAccessor { get; set; }
 
-		protected override void OnInit()
+		protected override void OnInitialized()
 		{
 			monitor = MonitorTraffic();
 			CssClass = CssClass ?? "";

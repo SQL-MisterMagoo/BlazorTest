@@ -1,13 +1,13 @@
 ﻿@inherits BletrisGameModel
 <div>
-    <div class="bletris-game @GameOver" @onkeydown="@KeyPressed">
+    <div class="bletris-game @GameOver" @onkeydown="KeyPressed">
         @if (Pieces != null)
         {
             foreach (var item in Pieces)
             {
                 if (item.Active)
                 {
-                    <BletrisPiece Refresh="@Refresh" DeActivate="@PieceDeActivate" Piece="@item" Number="@item.Number" IsPaused="@IsPaused" @ref="ActivePiece" />
+                    <BletrisPiece Refresh="Refresh" DeActivate="PieceDeActivate" Piece="item" Number="item.Number" IsPaused="IsPaused" @ref="ActivePiece" />
                 }
             }
         }
@@ -25,10 +25,10 @@
             <h3>High @HighScore</h3>
             <h2>Next Piece</h2>
             <div>
-                <BletrisPiece Number="@NextPieceId" @ref="NextPieceRef" DisplayOnly="true" />
+                <BletrisPiece Number="NextPieceId" @ref="NextPieceRef" DisplayOnly="true" />
             </div>
-            Delay :<input id="bletris_delay" type="number" @bind-value="@InitialDelay" @bind-value:event="onchange" step="100" @onfocusin="@PauseGame" />
-            <button class="btn btn-primary" @onclick="@BtnPause" autofocus>@BtnValue</button>
+            Delay :<input id="bletris_delay" type="number" @bind-value="InitialDelay" @bind-value:event="onchange" step="100" @onfocusin="PauseGame" />
+            <button class="btn btn-primary" @onclick="BtnPause" autofocus>@BtnValue</button>
         </div>
     </div>
 </div>

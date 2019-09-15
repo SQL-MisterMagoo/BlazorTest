@@ -2,7 +2,7 @@
 @implements ITab  
 
 <div class="nav-tab">
-    <a @onclick=@Activate class="nav-link @TitleCssClass">
+    <a @onclick=Activate class="nav-link @TitleCssClass">
         @Title
     </a>
 </div>
@@ -11,34 +11,34 @@
 </div>
 
 @functions {
-  [CascadingParameter] TabSet ContainerTabSet { get; set; }
-  [Parameter] protected string Title { get; set; }
-  [Parameter] protected RenderFragment ChildContent { get; private set; }
+    [CascadingParameter] TabSet ContainerTabSet { get; set; }
+    [Parameter] public string Title { get; set; }
+    [Parameter] public RenderFragment ChildContent { get; set; }
 
-  string TitleCssClass => ContainerTabSet.ActiveTab == this ? "active" : null;
+    string TitleCssClass => ContainerTabSet.ActiveTab == this ? "active" : null;
 
-  protected override void OnInit()
-  {
-      ContainerTabSet.AddTab(this);
-  }
+    protected override void OnInitialized()
+    {
+        ContainerTabSet.AddTab(this);
+    }
 
-  public void Dispose()
-  {
-      ContainerTabSet.RemoveTab(this);
-  }
+    public void Dispose()
+    {
+        ContainerTabSet.RemoveTab(this);
+    }
 
-  protected override void OnAfterRender()
-  {
-      base.OnAfterRender();
-      if (ContainerTabSet.ActiveTab == this)
-      {
-          Activate();
-      }
-  }
-  void Activate()
-  {
-      ContainerTabSet.SetActivateTab(this);
-  }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await base.OnAfterRenderAsync(true);
+        if (ContainerTabSet.ActiveTab == this)
+        {
+            Activate();
+        }
+    }
+    void Activate()
+    {
+        ContainerTabSet.SetActivateTab(this);
+    }
 
 
 }

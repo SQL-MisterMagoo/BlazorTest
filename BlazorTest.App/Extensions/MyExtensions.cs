@@ -8,12 +8,12 @@ namespace BlazorTestApp.Extensions
 	{
 		public static void NavigateTo<T>(this IUriHelper uriHelper, string childPath="")
 		{
-			uriHelper.NavigateTo(typeof(T), childPath);
+			NavigationManager.NavigateTo(typeof(T), childPath);
 		}
 
 		public static void NavigateTo(this IUriHelper uriHelper, Type page, string childPath="")
 		{
-			uriHelper.NavigateTo($"{page.Name.ToSlug()}/{childPath?.ToSlug()}".TrimEnd('/'));
+			NavigationManager.NavigateTo($"{page.Name.ToSlug()}/{childPath?.ToSlug()}".TrimEnd('/'));
 		}
 
 		/// <summary>

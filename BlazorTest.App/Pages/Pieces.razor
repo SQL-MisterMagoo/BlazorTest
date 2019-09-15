@@ -6,10 +6,10 @@
     @foreach (Tetris tetris in Tetrii)
     {
       <span>@tetris.Name</span>
-      <svg id="@($"Bletris_{tetris.Name}")" width="@tetris.Width" height="@tetris.Height" viewBox="0 0 @tetris.Width @tetris.Height">
+      <svg id="($"Bletris_{tetris.Name}")" width="tetris.Width" height="tetris.Height" viewBox="0 0 @tetris.Width @tetris.Height">
           @foreach (var item in tetris.Geos)
           {
-              <rect stroke-width="1" stroke="#000000" id="bletrisbox" height="32" width="32" fill="@tetris.Colour" x="@(item.x * 32)" y="@(item.y * 32)" ></rect>
+              <rect stroke-width="1" stroke="#000000" id="bletrisbox" height="32" width="32" fill="tetris.Colour" x="(item.x * 32)" y="(item.y * 32)" ></rect>
           }
       </svg>
     }
@@ -46,7 +46,7 @@
 
   List<Tetris> Tetrii { get; set; }
 
-  protected override void OnInit()
+  protected override void OnInitialized()
   {
       Tetrii = new List<Tetris>()
         {

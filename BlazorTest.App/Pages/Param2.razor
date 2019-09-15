@@ -1,7 +1,7 @@
 ﻿@page "/param2"
 @page "/param2/{ID}"
 
-@inject IUriHelper UriHelper
+@inject NavigationManager NavigationManager
 
 <h1>New Counter @newID</h1>
 
@@ -10,7 +10,7 @@
 
 @functions
 {
-[Parameter] string ID { get; set; }
+[Parameter] public string ID { get; set; }
 private int newID { get; set; }
 
 protected override void OnParametersSet()
@@ -29,12 +29,12 @@ protected override void OnParametersSet()
 }
 void Save()
 {
-    UriHelper.NavigateTo<Param1>(newID.ToString());
+    NavigationManager.NavigateTo<Param1>(newID.ToString());
 }
 
 void Cancel()
 {
-    UriHelper.NavigateTo<Param1>(ID);
+    NavigationManager.NavigateTo<Param1>(ID);
 }
 
 }
