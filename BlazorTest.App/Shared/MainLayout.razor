@@ -14,34 +14,33 @@
         @*<_LoginPartial />*@
     </div>
     <div class="content px-4">
-        @*<CascadingValue Name="GlobalDialog" Value="this">
+        <CascadingValue Name="GlobalDialog" Value="this">
             @Body
-        </CascadingValue>*@
-        @Body
+        </CascadingValue>
     </div>
 </div>
-@*<div class="footer">
-    <Traffic>
+<div class="footer">
+    @*<Traffic>
         <Parts Context="traffic">
             <span>Traffic : @traffic.Bytes.ToString("N0") Bytes</span>
             <span>Speed : @traffic.BytesPerSecond.ToString("N0") B/s</span>
         </Parts>
-    </Traffic>
-</div>*@
+    </Traffic>*@
+</div>
 
-@*@if (_dialog)
+@if (_dialog)
 {
     <div class="dialog" @onclick="((args)=>ShowDialog(false))"><a target="_blank" href="https://github.com/sql-mistermagoo/blazortest">Would you like to subscribe to my Github?</a> </div>
-}*@
+}
 @code {
-    //bool _dialog;
-    //public void ShowDialog(bool value)
-    //{
-    //    _dialog = value;
-    //    StateHasChanged();
-    //}
-    //void GoGoGo()
-    //{
-    //    NavigationManager.NavigateTo("param2/2");
-    //}
+    bool _dialog;
+    public void ShowDialog(bool value)
+    {
+        _dialog = value;
+        StateHasChanged();
+    }
+    void GoGoGo()
+    {
+        NavigationManager.NavigateTo("param2/2");
+    }
 }

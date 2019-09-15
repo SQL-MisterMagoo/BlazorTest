@@ -1,5 +1,6 @@
 ﻿@implements IDisposable
 @implements ITab  
+@using Microsoft.AspNetCore.Components.Web
 
 <div class="nav-tab">
     <a @onclick=Activate class="nav-link @TitleCssClass">
@@ -39,6 +40,4 @@
     {
         ContainerTabSet.SetActivateTab(this);
     }
-
-
 }

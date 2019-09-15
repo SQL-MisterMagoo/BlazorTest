@@ -38,4 +38,13 @@
     <ProjectReference Include="..\BlazorTree\BlazorTree.csproj" />
     <ProjectReference Include="..\Bletris\Bletris.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\images\RaboC.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\images\_free____flying_cockatiel_by_leokatana-d8qvrnm.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

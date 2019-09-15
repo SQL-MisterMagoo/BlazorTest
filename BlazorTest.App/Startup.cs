@@ -25,7 +25,7 @@ namespace BlazorTestApp
 
         public void Configure(IComponentsApplicationBuilder app)
         {
-            //app.AddComponent<Title>("title");
+            app.AddComponent<Title>("title");
             app.AddComponent<App>("app");
         }
     }

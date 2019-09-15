@@ -1,4 +1,5 @@
 ﻿@inherits BletrisGameModel
+@using Microsoft.AspNetCore.Components.Web
 <div>
     <div class="bletris-game @GameOver" @onkeydown="KeyPressed">
         @if (Pieces != null)
