@@ -6,12 +6,12 @@ namespace BlazorTestApp.Extensions
 {
     public static class MyExtensions
 	{
-		public static void NavigateTo<T>(this IUriHelper uriHelper, string childPath="")
+		public static void NavigateTo<T>(this NavigationManager NavigationManager, string childPath="")
 		{
 			NavigationManager.NavigateTo(typeof(T), childPath);
 		}
 
-		public static void NavigateTo(this IUriHelper uriHelper, Type page, string childPath="")
+		public static void NavigateTo(this NavigationManager NavigationManager, Type page, string childPath="")
 		{
 			NavigationManager.NavigateTo($"{page.Name.ToSlug()}/{childPath?.ToSlug()}".TrimEnd('/'));
 		}

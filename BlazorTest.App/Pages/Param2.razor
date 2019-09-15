@@ -8,33 +8,33 @@
 <button @onclick=@Save>OK</button>
 <button @onclick=@Cancel>Cancel</button>
 
-@functions
+@code
 {
-[Parameter] public string ID { get; set; }
-private int newID { get; set; }
+    [Parameter] public string ID { get; set; }
+    private int newID { get; set; }
 
-protected override void OnParametersSet()
-{
-    base.OnParametersSet();
-    if (int.TryParse(ID, out int result))
+    protected override void OnParametersSet()
     {
-        newID = (result + 1);
+        base.OnParametersSet();
+        if (int.TryParse(ID, out int result))
+        {
+            newID = (result + 1);
+        }
+        else
+        {
+            newID = 1;
+        }
+        //StateHasChanged();
+
     }
-    else
+    void Save()
     {
-        newID = 1;
+        NavigationManager.NavigateTo<Param1>(newID.ToString());
     }
-    //StateHasChanged();
 
-}
-void Save()
-{
-    NavigationManager.NavigateTo<Param1>(newID.ToString());
-}
-
-void Cancel()
-{
-    NavigationManager.NavigateTo<Param1>(ID);
-}
+    void Cancel()
+    {
+        NavigationManager.NavigateTo<Param1>(ID);
+    }
 
 }

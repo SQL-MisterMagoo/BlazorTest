@@ -21,12 +21,12 @@ namespace BlazorSolidLogin.Services
             JSRuntime = runtime;
 		}
 
-		ValueTask UserLoggedIn()
+		Task UserLoggedIn()
 		{
 			return GetLoginSession();
 		}
 
-		ValueTask UserLoggedOut()
+		Task UserLoggedOut()
 		{
 			solidIdentity = null;
 			LoginStateChanged?.Invoke(false);

@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
 @inject NavigationManager NavigationManager
-@*@using BlazorTraffic*@
+@using BlazorTraffic
 @using BlazorClock
 @using BlazorTestApp.Components
 
@@ -14,9 +14,10 @@
         @*<_LoginPartial />*@
     </div>
     <div class="content px-4">
-        <CascadingValue Name="GlobalDialog" Value="this">
+        @*<CascadingValue Name="GlobalDialog" Value="this">
             @Body
-        </CascadingValue>
+        </CascadingValue>*@
+        @Body
     </div>
 </div>
 @*<div class="footer">
@@ -28,19 +29,19 @@
     </Traffic>
 </div>*@
 
-@if (_dialog)
+@*@if (_dialog)
 {
     <div class="dialog" @onclick="((args)=>ShowDialog(false))"><a target="_blank" href="https://github.com/sql-mistermagoo/blazortest">Would you like to subscribe to my Github?</a> </div>
-}
-@functions {
-  bool _dialog;
-  public void ShowDialog(bool value)
-  {
-      _dialog = value;
-      StateHasChanged();
-  }
-  void GoGoGo()
-  {
-      NavigationManager.NavigateTo("param2/2");
-  }
+}*@
+@code {
+    //bool _dialog;
+    //public void ShowDialog(bool value)
+    //{
+    //    _dialog = value;
+    //    StateHasChanged();
+    //}
+    //void GoGoGo()
+    //{
+    //    NavigationManager.NavigateTo("param2/2");
+    //}
 }

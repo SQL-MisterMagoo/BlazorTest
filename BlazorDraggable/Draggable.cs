@@ -77,7 +77,7 @@ namespace BlazorDraggable
             if (Debug) Console.WriteLine($"DR: {DataItem} START");
             args.DataTransfer.EffectAllowed = DragType;
             args.DataTransfer.Types = new string[] { "text/plain" };
-            args.DataTransfer.Items = new UIDataTransferItem[] { new UIDataTransferItem() { Kind = "string", Type = "text/plain" } };
+            args.DataTransfer.Items = new DataTransferItem[] { new DataTransferItem() { Kind = "string", Type = "text/plain" } };
             OnDragStart?.Invoke(args, DataItem);
         }
         void MyDragEnd(DragEventArgs args)
