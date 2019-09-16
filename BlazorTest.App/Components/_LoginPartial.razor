@@ -2,16 +2,14 @@
 @using BlazorTest.Server.Areas.Identity.Data
 @using System.Security.Claims
 @using Microsoft.Extensions.Options
-@using Microsoft.AspNetCore.Authentication.Cookies
 @using Microsoft.AspNetCore.Http
 @inject IHttpContextAccessor httpContextAccessor
-@inject SignInManager<BlazorTestServerUser> SignInManager
 @inject UserManager<BlazorTestServerUser> UserManager
 
-@if (User != null && SignInManager.IsSignedIn(User))
+@if (User != null)
 {
     <a class="ml-md-auto btn btn-primary" asp-area="Identity" asp-page="/Account/Manage/Index" href="/Identity/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-    <button class="btn ml-md-auto" @onclick="@Logout">Logout</button>
+    <button class="btn ml-md-auto" @onclick="Logout">Logout</button>
 }
 else
 {
@@ -21,14 +19,14 @@ else
 
 @functions
 {
-  [Inject] IUriHelper uriHelper { get; set; }
+  [Inject] private NavigationManager NavigationManager { get; set; }
 
   ClaimsPrincipal User;
   string PathBase;
 
-  protected override void OnInit()
+  protected override void OnInitialized()
   {
-      base.OnInit();
+      base.OnInitialized();
 
       try
       {
@@ -41,6 +39,6 @@ else
   }
   void Logout()
   {
-      uriHelper.NavigateTo($"/Identity/Account/Logout?returnUrl=~{PathBase}");
+      NavigationManager.NavigateTo($"/Identity/Account/Logout?returnUrl=~{PathBase}");
   }
 }

@@ -12,26 +12,39 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\DraggableUI.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="GenFu" Version="1.5.6" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview7.19365.7" />
-    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.0.0-preview7.19365.7" PrivateAssets="all" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="3.0.0-alpha1-35012" />
-    <PackageReference Include="Microsoft.CSharp" Version="4.6.0-preview7.19362.9" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0-preview7.19362.6" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.0.0-preview7.19365.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor" Version="3.0.0-preview9.19424.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.Build" Version="3.0.0-preview9.19424.4" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.AspNetCore.Blazor.HttpClient" Version="3.0.0-preview9.19424.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="3.0.0-preview9.19424.4" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="3.0.0-preview9.19424.4" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.6.0-preview9.19421.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0-preview9.19423.6" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="3.0.0-preview9.19424.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BlazorBoundComponent\BlazorBoundComponent.csproj" />
     <ProjectReference Include="..\BlazorClock\BlazorClock.csproj" />
-    <ProjectReference Include="..\BlazorDraggable\BlazorDraggable.csproj" />
     <ProjectReference Include="..\BlazorEditorFor\BlazorEditorFor.csproj" />
     <ProjectReference Include="..\BlazorFlying\BlazorFlying.csproj" />
     <ProjectReference Include="..\BlazorForm\BlazorForm.csproj" />
-    <ProjectReference Include="..\BlazorSolidLogin\BlazorSolidLogin.csproj" />
     <ProjectReference Include="..\BlazorTabSet\BlazorTabSet.csproj" />
     <ProjectReference Include="..\BlazorTraffic\BlazorTraffic.csproj" />
     <ProjectReference Include="..\BlazorTree\BlazorTree.csproj" />
     <ProjectReference Include="..\Bletris\Bletris.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\images\RaboC.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\images\_free____flying_cockatiel_by_leokatana-d8qvrnm.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 </Project>

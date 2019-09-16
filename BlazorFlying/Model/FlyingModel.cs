@@ -7,18 +7,12 @@ namespace BlazorFlying.Model
 {
 	public class FlyingModel : ComponentBase
 	{
-		[Parameter]
-		internal string Image { get; set; }
-		[Parameter]
-		internal bool Debug { get; set; }
-		[Parameter]
-		internal double X { get; set; }
-		[Parameter]
-		internal double Y { get; set; }
-		[Parameter]
-		internal double Speed { get; set; }
-		[Parameter]
-		internal double frameDelay { get; set; }
+		[Parameter] public string Image { get; set; }
+		[Parameter] public bool Debug { get; set; }
+		[Parameter] public double X { get; set; }
+		[Parameter] public double Y { get; set; }
+		[Parameter] public double Speed { get; set; }
+		[Parameter] public double frameDelay { get; set; }
 
 		internal (double x, double y) Position;
 		internal (double x, double y) NewPosition;
@@ -45,9 +39,9 @@ namespace BlazorFlying.Model
 			}
 		}
 
-		protected override void OnInit()
+		protected override void OnInitialized()
 		{
-			base.OnInit();
+			base.OnInitialized();
 			Position = (X, Y);
 			NewPosition = Position;
 			frameDelay = frameDelay == 0 ? 40 : frameDelay;

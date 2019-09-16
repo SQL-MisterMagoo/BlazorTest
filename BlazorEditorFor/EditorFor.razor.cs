@@ -8,19 +8,19 @@ namespace BlazorEditorFor
 	public class EditorForModel<IType> : BlazorBoundComponent<IType>
 	{
 
-		[Parameter] protected string InputType { get; set; }
-		[Parameter] protected string Id { get; set; }
-		[Parameter] protected string Class { get; set; }
-		[Parameter] protected string GroupClass { get; set; }
-		[Parameter] protected string InputClass { get; set; }
-		[Parameter] protected string LabelClass { get; set; }
-		[Parameter] protected string Style { get; set; }
-		[Parameter] protected string GroupStyle { get; set; }
-		[Parameter] protected string InputStyle { get; set; }
-		[Parameter] protected string LabelStyle { get; set; }
-		[Parameter] protected string Name { get; set; }
+		[Parameter] public string InputType { get; set; }
+		[Parameter] public string Id { get; set; }
+		[Parameter] public string Class { get; set; }
+		[Parameter] public string GroupClass { get; set; }
+		[Parameter] public string InputClass { get; set; }
+		[Parameter] public string LabelClass { get; set; }
+		[Parameter] public string Style { get; set; }
+		[Parameter] public string GroupStyle { get; set; }
+		[Parameter] public string InputStyle { get; set; }
+		[Parameter] public string LabelStyle { get; set; }
+		[Parameter] public string Name { get; set; }
 
-		protected override void OnInit()
+		protected override void OnInitialized()
 		{
 			InputType = InputType.OrDefault(GetInputType());
 			Id = string.IsNullOrWhiteSpace(Id) ? Guid.NewGuid().ToString().Substring(0, 10) : Id;
@@ -45,16 +45,16 @@ namespace BlazorEditorFor
 				default:
 					switch (Data)
 					{
-						case bool value:
+						case bool _:
 							return "checkbox";
-						case string value:
+						case string _:
 							return "text";
-						case int valueInt:
-						case double valueDouble:
-						case long valueLong:
-						case short valueShort:
+						case int _:
+						case double _:
+						case long _:
+						case short _:
 							return "numeric";
-						case DateTime valueDate:
+						case DateTime _:
 							return "date";
 						default:
 							break;

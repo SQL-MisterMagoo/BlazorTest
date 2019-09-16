@@ -1,24 +1,24 @@
 ﻿@page "/param1"
 @page "/param1/{ID}"
 @using BlazorClock
-@inject IUriHelper UriHelper
+@inject NavigationManager NavigationManager
 
 @if (!string.IsNullOrWhiteSpace(ID))
 {
     <h1>Counter @ID</h1>
 }
-<button @onclick=@IncrementCounter>Increment Counter</button>
+<button @onclick=IncrementCounter>Increment Counter</button>
 <a href="https://www.google.co.uk?q=Blazor" target="_blank">Blazor Search</a>
 
 <Clock ClockId="Param1Clock1" ShowIcon="false" AutoTitle="true" Width="300" Height="80" />
 
-@functions
+@code
 {
-[Parameter] string ID { get; set; }
+    [Parameter] public string ID { get; set; }
 
-void IncrementCounter()
-{
-    UriHelper.NavigateTo<Param2>(ID);
-}
+    void IncrementCounter()
+    {
+        NavigationManager.NavigateTo<Param2>(ID);
+    }
 
 }

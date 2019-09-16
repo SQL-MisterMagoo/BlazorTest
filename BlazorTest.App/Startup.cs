@@ -1,4 +1,4 @@
-using BlazorSolidLogin.Services;
+//using BlazorSolidLogin.Services;
 using BlazorTest.Server.Areas.Identity.Data;
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.AspNetCore.Identity;
@@ -11,13 +11,13 @@ namespace BlazorTestApp
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<UserManager<BlazorTestServerUser>, UserManager<BlazorTestServerUser>>();
-            services.AddScoped<SignInManager<BlazorTestServerUser>, SignInManager<BlazorTestServerUser>>();
-            services.AddTransient<ILoginNotifier>((a) =>
-            {
-                var JSRuntime = a.GetRequiredService<IJSRuntime>();
-                return new SolidIdentityService(JSRuntime);
-            });
+            // services.AddScoped<UserManager<BlazorTestServerUser>, UserManager<BlazorTestServerUser>>();
+            //services.AddScoped<SignInManager<BlazorTestServerUser>, SignInManager<BlazorTestServerUser>>();
+            //services.AddTransient<ILoginNotifier>((a) =>
+            //{
+            //    var JSRuntime = a.GetRequiredService<IJSRuntime>();
+            //    return new SolidIdentityService(JSRuntime);
+            //});
 
             //services.ToList().ForEach(s => Console.WriteLine($"Service: {s.ServiceType.Name} - {s.Lifetime.ToString()}"));
 

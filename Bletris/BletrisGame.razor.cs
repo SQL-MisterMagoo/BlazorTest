@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Bletris
 		 *	High Scores
 		 *	Fluxor ?
 		*/
-		[Parameter] protected int InitialDelay { get; set; }
+		[Parameter] public int InitialDelay { get; set; }
 
 		public int NextPieceId { get; set; }
 		public bool IsPaused { get; set; }
@@ -43,7 +44,7 @@ namespace Bletris
 			BtnValue = "Start";
 		}
 
-		protected override void OnInit()
+		protected override void OnInitialized()
 		{
 			if (InitialDelay < 50) InitialDelay = 200;
 			ThisDelay = InitialDelay;
@@ -114,17 +115,17 @@ namespace Bletris
 			}
 		}
 
-		public virtual void PauseGame(UIFocusEventArgs args)
+		public virtual void PauseGame(FocusEventArgs args)
 		{
 			IsPaused = true;
 		}
 
-		public virtual void ResumeGame(UIFocusEventArgs args)
+		public virtual void ResumeGame(FocusEventArgs args)
 		{
 			IsPaused = false;
 		}
 
-		public virtual void BtnPause(UIMouseEventArgs args)
+		public virtual void BtnPause(MouseEventArgs args)
 		{
 			if (IsGameOver)
 			{
@@ -149,10 +150,10 @@ namespace Bletris
 			}
 		}
 
-		protected void PieceDeActivate(Piece piece)
+		protected async void PieceDeActivate(Piece piece)
 		{
 			UpdateMap(piece);
-			ScorePoints();
+			await ScorePoints();
 			Refresh();
 		}
 
@@ -201,7 +202,7 @@ namespace Bletris
 			}
 		}
 
-		internal async Task KeyPressed(UIKeyboardEventArgs args)
+		internal async Task KeyPressed(KeyboardEventArgs args)
 		{
 			LastKeyPress = args.Code;
 			await ActivePiece.ProcessKeyEvent(args);

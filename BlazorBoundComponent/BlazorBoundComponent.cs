@@ -32,7 +32,7 @@ namespace BlazorBoundComponent
 		}
 
 		// ChangeData can be useful for binding to onchange for things that require a string, like most <input> elements
-		public void ChangeData(UIChangeEventArgs args)
+		public void ChangeData(ChangeEventArgs args)
 		{
 			try
 			{
@@ -53,11 +53,11 @@ namespace BlazorBoundComponent
 		}
 
 		// Data is the externally exposed param that the parent will bind to
-		[Parameter] protected T Data { get { return _data; } set { _data = value; StateHasChanged(); } }
+		[Parameter] public T Data { get { return _data; } set { _data = value; StateHasChanged(); } }
 
 		// DataChanged is the externally exposes param that 
 		// allows notifying the parent we changed their data.
-		[Parameter] protected Action<T> DataChanged { get; set; }
+		[Parameter] public Action<T> DataChanged { get; set; }
 
 	}
 }

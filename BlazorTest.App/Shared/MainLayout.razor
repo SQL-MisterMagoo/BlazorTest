@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
-@inject IUriHelper urihelper
-@*@using BlazorTraffic*@
+@inject NavigationManager NavigationManager
+@using BlazorTraffic
 @using BlazorClock
 @using BlazorTestApp.Components
 
@@ -19,28 +19,28 @@
         </CascadingValue>
     </div>
 </div>
-@*<div class="footer">
-    <Traffic>
+<div class="footer">
+    @*<Traffic>
         <Parts Context="traffic">
             <span>Traffic : @traffic.Bytes.ToString("N0") Bytes</span>
             <span>Speed : @traffic.BytesPerSecond.ToString("N0") B/s</span>
         </Parts>
-    </Traffic>
-</div>*@
+    </Traffic>*@
+</div>
 
 @if (_dialog)
 {
-    <div class="dialog" @onclick="@((args)=>ShowDialog(false))"><a target="_blank" href="https://github.com/sql-mistermagoo/blazortest">Would you like to subscribe to my Github?</a> </div>
+    <div class="dialog" @onclick="((args)=>ShowDialog(false))"><a target="_blank" href="https://github.com/sql-mistermagoo/blazortest">Would you like to subscribe to my Github?</a> </div>
 }
-@functions {
-  bool _dialog;
-  public void ShowDialog(bool value)
-  {
-      _dialog = value;
-      StateHasChanged();
-  }
-  void GoGoGo()
-  {
-      urihelper.NavigateTo("param2/2");
-  }
+@code {
+    bool _dialog;
+    public void ShowDialog(bool value)
+    {
+        _dialog = value;
+        StateHasChanged();
+    }
+    void GoGoGo()
+    {
+        NavigationManager.NavigateTo("param2/2");
+    }
 }

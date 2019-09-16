@@ -1,5 +1,6 @@
 ﻿using Bletris.Model;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
 using System;
 using System.Threading.Tasks;
 
@@ -8,13 +9,13 @@ namespace Bletris
     public class BletrisPieceModel : ComponentBase
 	{
 
-		[Parameter] protected int Number { get; set; }
-		[Parameter] protected Piece Piece { get; set; }
-		[Parameter] protected bool IsPaused { get; set; }
-		[Parameter] protected int LastRow { get; set; }
-		[Parameter] protected Action<Piece> DeActivate { get; set; }
-		[Parameter] protected Action Refresh { get; set; }
-		[Parameter] protected bool DisplayOnly { get; set; }
+		[Parameter] public int Number { get; set; }
+		[Parameter] public Piece Piece { get; set; }
+		[Parameter] public bool IsPaused { get; set; }
+		[Parameter] public int LastRow { get; set; }
+		[Parameter] public Action<Piece> DeActivate { get; set; }
+		[Parameter] public Action Refresh { get; set; }
+		[Parameter] public bool DisplayOnly { get; set; }
 
 		public bool IsActive => Piece?.Active ?? false;
 		public int PositionX => Piece?.Position.x ?? 0;
@@ -27,7 +28,7 @@ namespace Bletris
 		internal string Id;
 		internal Task engine;
 
-		protected override void OnInit()
+		protected override void OnInitialized()
 		{
 			Id = $"BL{DateTime.Now.Ticks}";
 
@@ -88,13 +89,13 @@ namespace Bletris
 			}
 		}
 
-		public async Task<bool> ProcessKeyEvent(UIKeyboardEventArgs args)
+		public async Task<bool> ProcessKeyEvent(KeyboardEventArgs args)
 		{
 			await KeyHandler(args);
 			return true;
 		}
 
-		protected async Task<bool> KeyHandler(UIKeyboardEventArgs args)
+		protected async Task<bool> KeyHandler(KeyboardEventArgs args)
 		{
 			try
 			{

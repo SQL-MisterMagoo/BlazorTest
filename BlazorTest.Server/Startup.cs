@@ -35,19 +35,19 @@ namespace BlazorTest.Server
                     new[] { "application/octet-stream" });
             });
 
-            services.Configure<CookiePolicyOptions>(options =>
-			{
-				// This lambda determines whether user consent for non-essential cookies is needed for a given request.
-				options.CheckConsentNeeded = context => true;
-				options.MinimumSameSitePolicy = SameSiteMode.None;
-			});
+            // services.Configure<CookiePolicyOptions>(options =>
+			//{
+			//	// This lambda determines whether user consent for non-essential cookies is needed for a given request.
+			//	options.CheckConsentNeeded = context => true;
+			//	options.MinimumSameSitePolicy = SameSiteMode.None;
+			//});
 			
-			services.AddAuthentication( ).AddMicrosoftAccount(microsoftOptions =>
-			{
-				microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ApplicationId"];
-				microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:Password"];
-				microsoftOptions.CallbackPath = "/signin-microsoft";
-			});
+			//services.AddAuthentication().AddMicrosoftAccount(microsoftOptions =>
+			//{
+			//	microsoftOptions.ClientId = Configuration["Authentication:Microsoft:ApplicationId"];
+			//	microsoftOptions.ClientSecret = Configuration["Authentication:Microsoft:Password"];
+			//	microsoftOptions.CallbackPath = "/signin-microsoft";
+			//});
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<SignInManager<BlazorTestServerUser>, SignInManager<BlazorTestServerUser>>();
@@ -73,10 +73,10 @@ namespace BlazorTest.Server
 
 			//app.UseHttpsRedirection();
 			app.UseStaticFiles();
-			app.UseCookiePolicy();
+			//app.UseCookiePolicy();
 
-			app.UseAuthentication();
-            app.UseAuthorization();
+			//app.UseAuthentication();
+            //app.UseAuthorization();
 
             app.UseClientSideBlazorFiles<BlazorTestApp.Startup>();
             app.UseRouting();

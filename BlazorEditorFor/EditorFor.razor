@@ -1,9 +1,10 @@
 ﻿@typeparam IType
 @using BlazorBoundComponent
+@using Microsoft.AspNetCore.Components.Web
 @inherits BlazorEditorFor.EditorForModel<IType>
 
 <div class="@GroupClass" style="@GroupStyle">
-    <label for="@Name"
+    <label for="@Id"
            class="@LabelClass"
            style="@LabelStyle">
         @Name
@@ -16,7 +17,7 @@
                style="@InputStyle"
                type="@InputType"
                checked="@BoundData"
-               @onchange=@ChangeData />
+               @onchange="ChangeData" />
     }
     else if (InputType.Equals("date", StringComparison.OrdinalIgnoreCase))
     {
@@ -26,7 +27,7 @@
                style="@InputStyle"
                type="@InputType"
                value=@(String.Format("{0:yyyy-MM-dd}", BoundData))
-               @onchange=@ChangeData />
+               @onchange="ChangeData" />
     }
     else
     {
@@ -36,7 +37,7 @@
                style="@InputStyle"
                type="@InputType"
                value=@BoundData
-               @onchange=@ChangeData />
+               @onchange="ChangeData" />
     }
 
 </div>

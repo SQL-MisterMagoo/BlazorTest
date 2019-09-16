@@ -9,18 +9,18 @@ namespace BlazorClock
 {
 	public class ClockModel : ComponentBase
 	{
-		[Parameter] internal string Title { get; set; }
-		[Parameter] internal double OffsetHours { get; set; }
-		[Parameter] internal double OffsetMinutes { get; set; }
-		[Parameter] internal string TimeZoneId { get; set; }
-		[Parameter] internal bool AutoTitle { get; set; }
-		[Parameter] internal bool ShowIcon { get; set; }
-		[Parameter] internal double Width { get; set; }
-		[Parameter] internal double Height { get; set; }
-		[Parameter] internal string ClockId { get; set; }
-		[Parameter] protected bool AlwaysActive { get; set; }
+		[Parameter] public string Title { get; set; }
+		[Parameter] public double OffsetHours { get; set; }
+		[Parameter] public double OffsetMinutes { get; set; }
+		[Parameter] public string TimeZoneId { get; set; }
+		[Parameter] public bool AutoTitle { get; set; }
+		[Parameter] public bool ShowIcon { get; set; }
+		[Parameter] public double Width { get; set; }
+		[Parameter] public double Height { get; set; }
+		[Parameter] public string ClockId { get; set; }
+		[Parameter] public bool AlwaysActive { get; set; }
 
-		[Inject] private IUriHelper UriHelper { get; set; }
+		[Inject] private NavigationManager NavigationManager { get; set; }
         [Inject] private IJSRuntime JSRuntime { get; set; }
 
 		internal string Data;
@@ -33,11 +33,11 @@ namespace BlazorClock
 		private string ThisURI;
 		private bool ShouldBeActiveNow;
 
-		protected override void OnInit()
+		protected override void OnInitialized()
 		{
 			ShouldBeActiveNow = true;
-			ThisURI = UriHelper.GetAbsoluteUri();
-			UriHelper.OnLocationChanged += UriHelper_OnLocationChanged;
+			ThisURI = NavigationManager.BaseUri;
+            NavigationManager.LocationChanged += UriHelper_OnLocationChanged;
 
 			if (!string.IsNullOrWhiteSpace(TimeZoneId))
 			{
@@ -71,7 +71,7 @@ namespace BlazorClock
 			{
 				return;
 			}
-			ShouldBeActiveNow = ShouldMatch(UriHelper.GetAbsoluteUri());
+			ShouldBeActiveNow = ShouldMatch(NavigationManager.BaseUri);
 			if (ShouldBeActiveNow)
 			{				
 				ClockTask = RunClock(TokenSource.Token);

@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
 
-using Microsoft.AspNetCore.Components.Layouts;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,9 +15,9 @@ namespace BlazorTestApp.Pages
 
 		Timer timer;
 
-		protected override void OnInit()
+		protected override void OnInitialized()
 		{
-			base.OnInit();
+			base.OnInitialized();
 			timer = new Timer(2000);
 			timer.Elapsed += AnnoyPeople;
 			timer.Start();

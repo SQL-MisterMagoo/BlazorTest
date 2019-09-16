@@ -6,11 +6,11 @@ namespace Bletris
     public class BletrisPointModel : ComponentBase
 	{
 
-		[Parameter] protected Point Point { get; set; }
+		[Parameter] public Point Point { get; set; }
 
 		internal string Id;
 
-		protected override void OnInit()
+		protected override void OnInitialized()
 		{
 			Id = $"BL{DateTime.Now.Ticks}";
 		}
