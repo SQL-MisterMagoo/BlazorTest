@@ -45,16 +45,16 @@ namespace BlazorEditorFor
 				default:
 					switch (Data)
 					{
-						case bool value:
+						case bool _:
 							return "checkbox";
-						case string value:
+						case string _:
 							return "text";
-						case int valueInt:
-						case double valueDouble:
-						case long valueLong:
-						case short valueShort:
+						case int _:
+						case double _:
+						case long _:
+						case short _:
 							return "numeric";
-						case DateTime valueDate:
+						case DateTime _:
 							return "date";
 						default:
 							break;
